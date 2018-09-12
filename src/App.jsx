@@ -75,7 +75,7 @@ class App extends Component {
 	componentDidMount() {
 		axios.get('/auth/user').then(response => {
 			console.log(response.data);
-			console.log("Change has been pushed");
+			console.log("Change has been pushed!!!!!");
 			if (!!response.data.user) {
 				console.log('THERE IS A USER')
 				this.setState({
