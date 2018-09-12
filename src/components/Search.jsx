@@ -25,7 +25,7 @@ class Search extends Component {
     }
     
     handleSearch(event) {
-        let queryUrl = `http://www.omdbapi.com/?t=${this.state.movie}&y=${this.state.year}&plot=short&apikey=trilogy`;
+        let queryUrl = `https://www.omdbapi.com/?t=${this.state.movie}&y=${this.state.year}&plot=short&apikey=trilogy`;
 
         let image = `https://api.themoviedb.org/3/search/movie?api_key=8fa64e2647c4daa2d8b345906657ce66&query=${this.state.movie}`
 
