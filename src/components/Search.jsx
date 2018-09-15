@@ -16,6 +16,9 @@ class Search extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleAdd = this.handleAdd.bind(this);
+        console.log("user");
+        console.log(props);
     }
 
     handleChange(event) {
@@ -47,13 +50,112 @@ class Search extends Component {
             });
         });
 
-        console.log('props');
-        console.log(this.props.user.local.username);
+    
         
     }
 
+    handleAdd(event) {
+        console.log("props");
+        console.log(this.props.user._id);
+        axios.post("/add/", {
+            user: this.props.user._id,
+            movieId: this.state.search.data.imdbID
+        }).then((res) => {
+            console.log("add result");
+            console.log(res);
+            return axios.post("/movie/", {
+                movieId: this.state.search.data.imdbID,
+                title: this.state.search.data.Title,
+                release: this.state.search.data.Released,
+                rating: this.state.search.data.Rated,
+                runtime: this.state.search.data.Runtime,
+                directed: this.state.search.data.Director,
+                actors: this.state.search.data.Actors,
+                plot: this.state.search.data.Plot,
+                awards: this.state.search.data.Awards,
+                metaScore: this.state.search.data.Metascore,
+                imdbRating: this.state.search.data.imdbRating,
+                poster: this.state.search.data.Poster,
+                genre: this.state.search.data.Genre,
+            }).then((res) => {
+                console.log(res);
+            }).catch((err) => {
+                console.log(err);
+            });
+        });
+    }
+
     render() {
-        if (this.state.search) {
+        if (!this.state.search && !this.props.user) {
+            return (
+                <div className="Search">
+                    <form>
+                    <input
+                    type="text"
+                    name="movie"
+                    value={this.state.movie}
+                    onChange={this.handleChange}
+                    />
+                    {" "}
+                    <FontAwesomeIcon icon="search" onClick={this.handleSearch} />
+                </form>
+                              
+                </div>
+                
+            )
+        } 
+        else if(!this.state.search && this.props.user){
+            return (
+                <div className="Search">
+                    <form>
+                    <input
+                    type="text"
+                    name="movie"
+                    value={this.state.movie}
+                    onChange={this.handleChange}
+                    />
+                    {" "}
+                    <FontAwesomeIcon icon="search" onClick={this.handleSearch} />
+                </form>
+                              
+                </div>
+                
+            )
+        }
+        else if(this.state.search && !this.props.user) {
+            return (
+                <div className="Search">
+                    {/* <p>Current User:</p>
+                    <p>{this.props.user.local.username}</p> */}
+                <form>
+                    <input
+                    type="text"
+                    name="movie"
+                    value={this.state.movie}
+                    onChange={this.handleChange}
+                    />
+                    {" "}
+                    <FontAwesomeIcon icon="search" onClick={this.handleSearch} />
+                </form>
+                <br/>
+                <div id="movie-display">
+                    <img src={this.state.search.data.Poster}/>
+                    <h1>Title: {this.state.search.data.Title}</h1>
+                    <p>Date of Release: {this.state.search.data.Released}</p>
+                    <p>Rated: {this.state.search.data.Rated}</p>
+                    <p>Runtime: {this.state.search.data.Runtime}</p>
+                    <p>Directed by: {this.state.search.data.Director}</p>
+                    <p>Actors: {this.state.search.data.Actors}</p>
+                    <p>Plot: {this.state.search.data.Plot}</p>
+                    <p>Awards: {this.state.search.data.Awards}</p>
+                    <p>MetaScore: {this.state.search.data.Metascore}</p>
+                    <p>Imdb Rating: {this.state.search.data.imdbRating}</p>
+                </div>
+                
+                </div>
+            )
+        }
+         else {
             return (
                 <div className="Search">
                     {/* <p>Current User:</p>
@@ -82,58 +184,9 @@ class Search extends Component {
                     <p>MetaScore: {this.state.search.data.Metascore}</p>
                     <p>Imdb Rating: {this.state.search.data.imdbRating}</p>
                     <br />
-                    <button>Add to list</button> {" "} <button>Want to see</button>
+                    <button onClick={this.handleAdd}>Add to list</button> {" "} <button>Want to see</button>
                 </div>
                 
-                </div>
-            )
-        } 
-        else if(this.state.search && this.props.user.local.username) {
-            return (
-                <div className="Search">
-                    {/* <p>Current User:</p>
-                    <p>{this.props.user.local.username}</p> */}
-                <form>
-                    <input
-                    type="text"
-                    name="movie"
-                    value={this.state.movie}
-                    onChange={this.handleChange}
-                    />
-                    {" "}
-                    <FontAwesomeIcon icon="search" onClick={this.handleSearch} />
-                </form>
-                <br/>
-                <div id="movie-display">
-                    <img src={this.state.search.data.Poster}/>
-                    <h1>Title: {this.state.search.data.Title}</h1>
-                    <p>Date of Release: {this.state.search.data.Released}</p>
-                    <p>Rated: {this.state.search.data.Rated}</p>
-                    <p>Runtime: {this.state.search.data.Runtime}</p>
-                    <p>Directed by: {this.state.search.data.Director}</p>
-                    <p>Actors: {this.state.search.data.Actors}</p>
-                    <p>Plot: {this.state.search.data.Plot}</p>
-                    <p>Awards: {this.state.search.data.Awards}</p>
-                    <p>MetaScore: {this.state.search.data.Metascore}</p>
-                    <p>Imdb Rating: {this.state.search.data.imdbRating}</p>
-                </div>
-                
-                </div>
-            )
-        } else {
-            return (
-                <div className="Search">
-                    <form>
-                    <input
-                    type="text"
-                    name="movie"
-                    value={this.state.movie}
-                    onChange={this.handleChange}
-                    />
-                    {" "}
-                    <FontAwesomeIcon icon="search" onClick={this.handleSearch} />
-                </form>
-                              
                 </div>
             )
         }

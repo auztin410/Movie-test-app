@@ -7,6 +7,7 @@ import SignupForm from './components/SignupForm';
 import Header from './components/Header';
 import Home from './components/Home';
 import Search from './components/Search';
+import UserPage from './components/UserPage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -22,14 +23,17 @@ const DisplayLinks = props => {
 							<FontAwesomeIcon icon="home" />
 						</Link>
 					</li>
+					<li className="nav-item">
+						<Link to="/userpage" className="nav-link">
+							<FontAwesomeIcon icon="user-circle" />
+						</Link>
+					</li>
 					<li>
 						<Link to="#" className="nav-link" onClick={props._logout}>
 						<FontAwesomeIcon icon="sign-out-alt" />
 						</Link>
 					</li>
-					<li className="nav-item">
-						{/* <Search user={props} /> */}
-					</li>
+					
 				</ul>
 			</nav>
 		)
@@ -52,9 +56,7 @@ const DisplayLinks = props => {
 							<FontAwesomeIcon icon="user-plus" />
 						</Link>
 					</li>
-					<li className="nav-item">
-						{/* <Search user={props}/> */}
-					</li>
+					
 				</ul>
 			</nav>
 		)
@@ -74,8 +76,6 @@ class App extends Component {
 	}
 	componentDidMount() {
 		axios.get('/auth/user').then(response => {
-			console.log(response.data);
-			console.log("Change has been pushed!!!!!");
 			if (!!response.data.user) {
 				console.log('THERE IS A USER')
 				this.setState({
@@ -146,10 +146,11 @@ class App extends Component {
 				/>
 				<Route exact path="/signup" component={SignupForm} />
 				{/* <LoginForm _login={this._login} /> */}	
+				<Route exact path="/userpage"render={() => <UserPage user={this.state.user} />} />
 				<Search user={this.state.user} />
 			</div>
 		)
 	}
 }
 
-export default App
+export default App;

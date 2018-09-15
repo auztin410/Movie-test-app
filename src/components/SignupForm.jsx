@@ -28,12 +28,17 @@ class SignupForm extends Component {
 				password: this.state.password
 			})
 			.then(response => {
-				console.log(response)
+				console.log("looking for user id");
+				console.log(response);
+				console.log(response.data._id);
 				if (!response.data.errmsg) {
 					console.log('youre good')
 					this.setState({
 						redirectTo: '/login'
-					})
+					});
+					return axios.post("/userlistcreate", {
+						userId: response.data._id
+					}).then((res) => console.log(res)).catch((err) => console.log(err));
 				} else {
 					console.log('duplicate')
 				}

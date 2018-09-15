@@ -14,7 +14,7 @@ const userSchema = new Schema({
 	// google: {
 	// 	googleId: { type: String, required: false }
 	// },
-	photos: []
+	movieId: { type: Array},
 	// local: {
 	// 	email: { type: String, unique: true },
 	// 	password: { type: String }

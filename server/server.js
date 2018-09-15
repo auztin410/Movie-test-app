@@ -10,6 +10,7 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
+const mongoose = require("mongoose");
 const dbConnection = require('./db') // loads our connection to the mongo database
 const passport = require('./passport')
 const app = express()
@@ -31,6 +32,8 @@ app.use(
 		saveUninitialized: false
 	})
 )
+
+// mongoose.connect("mongodb://localhost/movietestapp");
 
 // ===== Passport ====
 app.use(passport.initialize())
@@ -77,6 +80,70 @@ app.use(function(err, req, res, next) {
 	console.error(err.stack)
 	res.status(500)
 })
+
+
+var MovieList = require("./db/models/movielist");
+var List = require("./db/models/list");
+// Routes
+app.post("/add", function (req, res) {
+	console.log("req body user");
+	console.log(req.body);
+	List.findOneAndUpdate(
+		{userId: req.body.user},
+		{$addToSet: {list: req.body.movieId} }
+	).then(function(result) {
+		res.json(result);
+	}).catch(function(err) {
+		res.json(err);
+	});
+});
+
+app.post("/movie", function (req, res) {
+	console.log(req.body);
+	MovieList.create(
+		{
+			movieId: req.body.movieId,
+			title: req.body.title,
+			release: req.body.release,
+			rating: req.body.rating,
+			runtime: req.body.runtime,
+			directed: req.body.directed,
+			actors: req.body.actors,
+			plot: req.body.plot,
+			awards: req.body.awards,
+			metaScore: req.body.metaScore,
+			imdbRating: req.body.imdbRating,
+			poster: req.body.poster,
+			genre: req.body.genre
+		}
+
+	).then(function(result) {
+		res.json(result);
+	}).catch(function(err) {
+		res.json(err);
+	});
+});
+
+app.get("/userlist/:userId", function (req, res) {
+	List.find(
+		{_id: req.params.userId}
+	).then((res) => {
+		console.log("user results");
+		console.log(res);
+	}).catch((err) => console.log(err));
+});
+
+app.post("/userlistcreate", function (req, res) {
+	List.create(
+		{
+			userId: req.body.userId
+		}
+	).then(function(result) {
+		res.json(result);
+	}).catch(function(err) {
+		res.json(err);
+	});
+});
 
 // ==== Starting Server =====
 app.listen(PORT, () => {

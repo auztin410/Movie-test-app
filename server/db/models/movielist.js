@@ -2,9 +2,10 @@ var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
 
-var MovieList = new Schema({
-    user: {
-        type: String
+var MovieListSchema = new Schema({
+    movieId: {
+        type: String,
+        unique: true
     },
     title: {
         type: String
@@ -16,13 +17,13 @@ var MovieList = new Schema({
         type: String
     },
     runtime: {
-        type: Number
+        type: String
     },
     directed: {
         type: String
     },
     actors: {
-        type: Array
+        type: String
     },
     plot: {
         type: String
@@ -40,7 +41,7 @@ var MovieList = new Schema({
         type: String
     },
     genre: {
-        type: Array
+        type: String
     }
 
 });
