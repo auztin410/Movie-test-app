@@ -126,12 +126,12 @@ app.post("/movie", function (req, res) {
 
 app.get("/userlist/:userId", function (req, res) {
 	List.find(
-		{_id: req.params.userId}
-	).then((res) => {
-		console.log("user results");
-		console.log(res);
-	}).catch((err) => console.log(err));
+		{userId: req.params.userId}
+	).then(dbItem => res.json(dbItem))
+	.catch((err) => console.log(err));
 });
+
+
 
 app.post("/userlistcreate", function (req, res) {
 	List.create(

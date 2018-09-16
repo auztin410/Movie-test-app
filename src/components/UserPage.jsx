@@ -16,8 +16,9 @@ class UserPage extends Component {
             console.log("No User");
         }
         else{
-            axios.get("/userlist/:userId").then((res) => {
-                console.log(res);
+            axios.get(`/userlist/${this.props.user._id}`).then((res) => {
+                console.log("list of movie id's from user list");
+                console.log(res.data[0].list);
             }).catch((err) => (console.log(err)));
         }
     }
