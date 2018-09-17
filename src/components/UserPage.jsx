@@ -19,8 +19,16 @@ class UserPage extends Component {
             axios.get(`/userlist/${this.props.user._id}`).then((res) => {
                 console.log("list of movie id's from user list");
                 console.log(res.data[0].list);
+                this.setState({
+                    list: res.data[0].list,
+                });
             }).catch((err) => (console.log(err)));
         }
+    };
+
+    handleList(event) {
+        console.log(event.target.innerHTML);
+        
     }
 
     render() {
@@ -34,7 +42,12 @@ class UserPage extends Component {
         else {
             return(
                 <div>
-
+                    <ul>
+                        {this.state.list.map(item => (
+                            <button value={item} key={item} onClick={this.handleList}><li>{item}</li></button>
+                        ))}
+                    </ul>
+                                       
                 </div>
             )
         }
