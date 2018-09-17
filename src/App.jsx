@@ -16,20 +16,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const DisplayLinks = props => {
 	if (props.loggedIn) {
 		return (
-			<nav className="navbar">
-				<ul className="nav">
-					<li className="nav-item">
-						<Link to="/" className="nav-link">
+			<nav>
+				<ul>
+					<li>
+						<Link to="/">
 							<FontAwesomeIcon icon="home" />
 						</Link>
 					</li>
-					<li className="nav-item">
-						<Link to="/userpage" className="nav-link">
+					<li>
+						<Link to="/userpage">
 							<FontAwesomeIcon icon="user-circle" />
 						</Link>
 					</li>
 					<li>
-						<Link to="#" className="nav-link" onClick={props._logout}>
+						<Link to="#" onClick={props._logout}>
 						<FontAwesomeIcon icon="sign-out-alt" />
 						</Link>
 					</li>
@@ -39,20 +39,20 @@ const DisplayLinks = props => {
 		)
 	} else {
 		return (
-			<nav className="navbar">
-				<ul className="nav">
-					<li className="nav-item">
-						<Link to="/" className="nav-link">
+			<nav >
+				<ul >
+					<li >
+						<Link to="/">
 						<FontAwesomeIcon icon="home" />
 						</Link>
 					</li>
-					<li className="nav-item">
-						<Link to="/login" className="nav-link">
+					<li >
+						<Link to="/login">
 							<FontAwesomeIcon icon="user" />
 						</Link>
 					</li>
-					<li className="nav-item">
-						<Link to="/signup" className="nav-link">
+					<li >
+						<Link to="/signup">
 							<FontAwesomeIcon icon="user-plus" />
 						</Link>
 					</li>
@@ -127,7 +127,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<Header user={this.state.user} />
+				{/* <Header user={this.state.user} /> */}
 				{/* LINKS to our different 'pages' */}
 				<DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} />
 				{/*  ROUTES */}

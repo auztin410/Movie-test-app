@@ -98,6 +98,19 @@ app.post("/add", function (req, res) {
 	});
 });
 
+app.post("/wanttosee", function (req, res) {
+	console.log("req body");
+	console.log(req.body)
+	List.findOneAndUpdate(
+		{userId: req.body.user},
+		{$addToSet: {wantToSee: req.body.wantToSee}}
+	).then(function(result) {
+		res.json(result);
+	}).catch(function(err) {
+		res.json(err);
+	});
+});
+
 app.post("/movie", function (req, res) {
 	console.log(req.body);
 	MovieList.create(

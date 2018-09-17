@@ -9,7 +9,10 @@ var ListSchema = new Schema({
     },
     list: {
         type: Array
-    }
+    },
+    wantToSee: {
+        type: Array
+    },
 });
 
 var List = mongoose.model("List", ListSchema);
