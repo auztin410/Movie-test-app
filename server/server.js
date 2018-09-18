@@ -144,6 +144,13 @@ app.post("/movie", function (req, res) {
 	});
 });
 
+app.get("/movie/:movieId", function (req, res) {
+	MovieList.find(
+		{movieId: req.params.movieId}
+	).then(dbItem => res.json(dbItem))
+	.catch((err) => console.log(err));
+});
+
 app.get("/userlist/:userId", function (req, res) {
 	List.find(
 		{userId: req.params.userId}

@@ -17,47 +17,35 @@ const DisplayLinks = props => {
 	if (props.loggedIn) {
 		return (
 			<nav>
-				<ul>
-					<li>
+				<br/>
 						<Link to="/">
 							<FontAwesomeIcon icon="home" />
 						</Link>
-					</li>
-					<li>
+					{" "}
 						<Link to="/userpage">
 							<FontAwesomeIcon icon="user-circle" />
 						</Link>
-					</li>
-					<li>
+					{" "}
 						<Link to="#" onClick={props._logout}>
 						<FontAwesomeIcon icon="sign-out-alt" />
 						</Link>
-					</li>
-					
-				</ul>
 			</nav>
 		)
 	} else {
 		return (
 			<nav >
-				<ul >
-					<li >
+				<br/>
 						<Link to="/">
 						<FontAwesomeIcon icon="home" />
 						</Link>
-					</li>
-					<li >
+					{" "}
 						<Link to="/login">
 							<FontAwesomeIcon icon="user" />
 						</Link>
-					</li>
-					<li >
+					{" "}
 						<Link to="/signup">
 							<FontAwesomeIcon icon="user-plus" />
 						</Link>
-					</li>
-					
-				</ul>
 			</nav>
 		)
 	}
@@ -147,6 +135,7 @@ class App extends Component {
 				<Route exact path="/signup" component={SignupForm} />
 				{/* <LoginForm _login={this._login} /> */}	
 				<Route exact path="/userpage"render={() => <UserPage user={this.state.user} />} />
+				<br/>
 				<Search user={this.state.user} />
 			</div>
 		)
