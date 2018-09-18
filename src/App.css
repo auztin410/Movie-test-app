@@ -14,8 +14,20 @@
   color: white;
 }
 
+.Header {
+  animation: Header .8s forwards 0s ease-in;
+  color: whitesmoke;
+  text-shadow: 1px 1px rgba(143, 153, 247, 0.253);
+}
+
+.poster {
+  animation: yourAnimation .8s forwards 0s ease-out;
+  box-shadow: 6px 6px 5px 2px black;
+  opacity: .8;
+}
+
 .App-intro {
-  font-size: large;
+  font-size: large; 
 }
 
 .navbar {
@@ -36,4 +48,30 @@ body {
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@keyframes Header{
+  0%{
+      transform: rotate(0) translateY(-150%);
+      opacity: 0;
+      }
+  37%{
+      transform: rotate(0) translateY(-150%);
+      }
+  100%{
+      transform: rotate(0) scale(2.5) translateY(20%);
+      opacity: 1;
+      }
+}
+
+@keyframes yourAnimation{
+  0%{
+      transform: rotate(0) translateX(-420%) skewX(50deg);
+      transform-origin: 50% 50%;
+      opacity: 0.75;
+      box-shadow: 6px 6px 5px 2px black;
+      }
+  100%{
+      transform: rotate(0) skewX(0deg);
+      }
 }

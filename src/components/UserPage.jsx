@@ -78,7 +78,7 @@ class UserPage extends Component {
                     
                     <div id="movie-display">
                         <br/>
-                    <img src={this.state.movie.poster} />
+                    <img className="poster" src={this.state.movie.poster} />
                         <h1>Title: {this.state.movie.title}</h1>
                         <p>Date of Release: {this.state.movie.release}</p>
                         <p>Rated: {this.state.movie.rating}</p>

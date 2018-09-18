@@ -171,7 +171,7 @@ class Search extends Component {
                     </form>
                     <br />
                     <div id="movie-display">
-                        <img src={this.state.search.data.Poster} />
+                        <img className="poster" src={this.state.search.data.Poster} />
                         <h1>Title: {this.state.search.data.Title}</h1>
                         <p>Date of Release: {this.state.search.data.Released}</p>
                         <p>Rated: {this.state.search.data.Rated}</p>
@@ -204,7 +204,7 @@ class Search extends Component {
                     </form>
                     <br />
                     <div id="movie-display">
-                        <img src={this.state.search.data.Poster} />
+                        <img className="poster" src={this.state.search.data.Poster} />
                         <h1>Title: {this.state.search.data.Title}</h1>
                         <p>Date of Release: {this.state.search.data.Released}</p>
                         <p>Rated: {this.state.search.data.Rated}</p>
