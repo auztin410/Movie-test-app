@@ -19,15 +19,15 @@ const DisplayLinks = props => {
 			<nav>
 				<br/>
 						<Link to="/">
-							<FontAwesomeIcon icon="home" />
+							<FontAwesomeIcon icon="home" className="icon" />
 						</Link>
 					{" "}
 						<Link to="/userpage">
-							<FontAwesomeIcon icon="user-circle" />
+							<FontAwesomeIcon icon="user-circle" className="icon" />
 						</Link>
 					{" "}
 						<Link to="#" onClick={props._logout}>
-						<FontAwesomeIcon icon="sign-out-alt" />
+						<FontAwesomeIcon icon="sign-out-alt" className="icon" />
 						</Link>
 			</nav>
 		)
@@ -36,15 +36,15 @@ const DisplayLinks = props => {
 			<nav >
 				<br/>
 						<Link to="/">
-						<FontAwesomeIcon icon="home" />
+						<FontAwesomeIcon icon="home" className="icon" />
 						</Link>
 					{" "}
 						<Link to="/login">
-							<FontAwesomeIcon icon="user" />
+							<FontAwesomeIcon icon="user" className="icon" />
 						</Link>
 					{" "}
 						<Link to="/signup">
-							<FontAwesomeIcon icon="user-plus" />
+							<FontAwesomeIcon icon="user-plus" className="icon" />
 						</Link>
 			</nav>
 		)

@@ -31,6 +31,9 @@ class UserPage extends Component {
 
     handleList(movieId) {
         console.log(movieId);
+        this.setState({
+            movie: '',
+        });
         axios.get(`/movie/${movieId}`).then((res) => {
             console.log("Get movie from click");
             console.log(res.data);
@@ -55,11 +58,11 @@ class UserPage extends Component {
                 <div>
                     <h3>Movie List</h3>                  
                         {this.state.list.map(item => (
-                            <button value={item.movieId} key={item.movieId} onClick={this.handleList.bind(this, item.movieId)}>{item.title}</button>
+                            <span className="buttons" value={item.movieId} key={item.movieId} onClick={this.handleList.bind(this, item.movieId)}>{item.title}</span>
                         ))}
                     <h3>Want to see</h3>
                     {this.state.wantToSee.map(item => (
-                        <button value={item.movideId} key={item.movideId} onClick={this.handleList.bind(this, item.movieId)}>{item.title}</button>
+                        <span className="buttons" value={item.movideId} key={item.movideId} onClick={this.handleList.bind(this, item.movieId)}>{item.title}</span>
                     ))}  
             </div> 
             )                       
@@ -69,11 +72,11 @@ class UserPage extends Component {
                 <div>
                     <h3>Movie List</h3>
                         {this.state.list.map(item => (
-                            <button value={item.movieId} key={item.movieId} onClick={this.handleList.bind(this, item.movieId)}>{item.title}</button>
+                            <span className="buttons" value={item.movieId} key={item.movieId} onClick={this.handleList.bind(this, item.movieId)}>{item.title}</span>
                         ))}
                          <h3>Want to see</h3>
                     {this.state.wantToSee.map(item => (
-                        <button value={item.movideId} key={item.movideId} onClick={this.handleList.bind(this, item.movieId)}>{item.title}</button>
+                        <span className="buttons" value={item.movideId} key={item.movideId} onClick={this.handleList.bind(this, item.movieId)}>{item.title}</span>
                     ))}
                     
                     <div id="movie-display">

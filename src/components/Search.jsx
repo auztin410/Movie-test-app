@@ -81,10 +81,14 @@ class Search extends Component {
                 genre: this.state.search.data.Genre,
             }).then((res) => {
                 console.log(res);
+                this.setState({
+                    search: '',
+                }); 
             }).catch((err) => {
                 console.log(err);
             });
-        });    
+        });
+           
     }
 
     handleWantToSee(event) {
@@ -111,10 +115,14 @@ class Search extends Component {
                 genre: this.state.search.data.Genre,    
             }).then((res) => {
                 console.log(res);
+                this.setState({
+                    search: '',
+                });
             }).catch((err) => {
                 console.log(err);
             });
         });
+        
     }
 
     render() {

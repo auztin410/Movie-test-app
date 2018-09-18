@@ -45,6 +45,26 @@ body {
   text-shadow: 2px 2px black;
 }
 
+.buttons {
+  margin: 5px;
+  padding: 8px;
+  color: whitesmoke;
+}
+
+.buttons:hover {
+  color: black;
+  background-image: radial-gradient(yellow, rgba(197, 197, 31, 0.596), rgba(168, 180, 62, 0.37));
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.icon {
+  font-size: 20px;
+  margin: 5px;
+  color: whitesmoke;
+  text-shadow: 2px 2px black;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
