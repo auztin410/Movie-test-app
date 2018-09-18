@@ -90,7 +90,10 @@ app.post("/add", function (req, res) {
 	console.log(req.body);
 	List.findOneAndUpdate(
 		{userId: req.body.user},
-		{$addToSet: {list: req.body.movieId} }
+		{$addToSet: {list: {
+			movieId: req.body.movieId,
+			title: req.body.title,
+		}}}
 	).then(function(result) {
 		res.json(result);
 	}).catch(function(err) {
@@ -103,7 +106,11 @@ app.post("/wanttosee", function (req, res) {
 	console.log(req.body)
 	List.findOneAndUpdate(
 		{userId: req.body.user},
-		{$addToSet: {wantToSee: req.body.wantToSee}}
+		{$addToSet: {
+			wantToSee: {
+				movieId: req.body.wantToSee,
+				title: req.body.title
+		}}}
 	).then(function(result) {
 		res.json(result);
 	}).catch(function(err) {

@@ -60,7 +60,8 @@ class Search extends Component {
         console.log(this.props.user._id);
         axios.post("/add/", {
             user: this.props.user._id,
-            movieId: this.state.search.data.imdbID
+            movieId: this.state.search.data.imdbID,
+            title: this.state.search.data.Title
         }).then((res) => {
             console.log("add result");
             console.log(res);
@@ -89,7 +90,8 @@ class Search extends Component {
     handleWantToSee(event) {
         axios.post("/wanttosee/", {
             user: this.props.user._id,
-            wantToSee: this.state.search.data.imdbID
+            wantToSee: this.state.search.data.imdbID,
+            title: this.state.search.data.Title
         }).then((res) => {
             console.log("add to want to see");
             console.log(res);

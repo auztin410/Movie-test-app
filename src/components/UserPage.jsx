@@ -26,8 +26,8 @@ class UserPage extends Component {
         }
     };
 
-    handleList(event) {
-        console.log(event.target.innerHTML);
+    handleList(movieId) {
+        console.log(movieId);
         
     }
 
@@ -44,7 +44,7 @@ class UserPage extends Component {
                 <div>
                     <ul>
                         {this.state.list.map(item => (
-                            <button value={item} key={item} onClick={this.handleList}><li>{item}</li></button>
+                            <button value={item.movieId} key={item.movieId} onClick={this.handleList.bind(this, item.movieId)}><li>{item.title}</li></button>
                         ))}
                     </ul>
                                        
