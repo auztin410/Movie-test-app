@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  width: 100%vw;
 }
 
 .App-logo {
@@ -14,6 +15,15 @@
   color: white;
 }
 
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+
 .Header {
   animation: Header .8s forwards 0s ease-in;
   color: whitesmoke;
@@ -21,7 +31,7 @@
 }
 
 .poster {
-  animation: yourAnimation .8s forwards 0s ease-out;
+  animation: Poster .8s forwards 0s ease-out;
   box-shadow: 6px 6px 5px 2px black;
   opacity: .8;
 }
@@ -38,6 +48,14 @@ body {
   background-image: url("../src/movietheaterblur.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.search {
+  margin-top: 5vh;
+}
+
+.searchButton {
+  border-radius: 10px; 
 }
 
 #movie-display {
@@ -65,6 +83,44 @@ body {
   text-shadow: 2px 2px black;
 }
 
+.home:hover ~ #home{
+  opacity: 1;
+}
+
+.search:hover ~ #search{
+  opacity: 1;
+}
+
+.userPage:hover ~ #userPage{
+  opacity: 1;
+}
+
+.upcoming:hover ~ #upcoming{
+  opacity: 1;
+}
+
+.logout:hover ~ #logout{
+  opacity: 1;
+}
+
+.login:hover ~ #login{
+  opacity: 1;
+}
+
+.register:hover ~ #register{
+  opacity: 1;
+}
+
+.iconText {
+  display: block;
+  color: whitesmoke;
+  margin-top: .5em;
+  float: left;
+  position: absolute;
+  margin-left: 48vw;
+  opacity: 0;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -84,7 +140,7 @@ body {
       }
 }
 
-@keyframes yourAnimation{
+@keyframes Poster{
   0%{
       transform: rotate(0) translateX(-420%) skewX(50deg);
       transform-origin: 50% 50%;

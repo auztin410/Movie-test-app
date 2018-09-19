@@ -17,44 +17,63 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const DisplayLinks = props => {
 	if (props.loggedIn) {
 		return (
-			<nav>
+			<nav className="navigationBar">
 				<br/>
-						<Link to="/">
-							<FontAwesomeIcon icon="home" className="icon" />
+						<Link to="/" className="home">
+							<FontAwesomeIcon icon="home" className="icon" />	
 						</Link>
+						<span className="iconText" id="home">Home</span>
 					{" "}
-						<Link to="/userpage">
+						<Link to="/search" className="search">
+							<FontAwesomeIcon icon="search" className="icon" />	
+						</Link>
+						<span className="iconText" id="search">Search</span>
+					{" "}	
+						<Link to="/userpage" className="userPage">
 							<FontAwesomeIcon icon="user-circle" className="icon" />
 						</Link>
+						<span className="iconText" id="userPage">User Page</span>
 					{" "}
-						<Link to="upcoming">
+						<Link to="upcoming" className="upcoming">
 							<FontAwesomeIcon icon="video" className="icon" />
 						</Link>
+						<span className="iconText" id="upcoming">Upcoming Movies</span>
 					{" "}	
-						<Link to="#" onClick={props._logout}>
-						<FontAwesomeIcon icon="sign-out-alt" className="icon" />
+						<Link to="#" onClick={props._logout} className="logout">
+							<FontAwesomeIcon icon="sign-out-alt" className="icon" />
 						</Link>
+						<span className="iconText" id="logout">Logout</span>
 			</nav>
 		)
 	} else {
 		return (
 			<nav >
 				<br/>
-						<Link to="/">
-						<FontAwesomeIcon icon="home" className="icon" />
+						<Link to="/" className="home">
+							<FontAwesomeIcon icon="home" className="icon" />
 						</Link>
+						<span className="iconText" id="home">Home</span>
 					{" "}
-						<Link to="/login">
+						<Link to="/search" className="search">
+							<FontAwesomeIcon icon="search" className="icon" />
+						</Link>
+						<span className="iconText" id="search">Search</span>
+					{" "}
+						<Link to="/upcoming" className="upcoming">
+							<FontAwesomeIcon icon="video" className="icon" />
+						</Link>
+						<span className="iconText" id="upcoming">Upcoming Movies</span>
+					{" "}
+						<Link to="/login" className="login">
 							<FontAwesomeIcon icon="user" className="icon" />
 						</Link>
+						<span className="iconText" id="login">Login</span>
 					{" "}
-						<Link to="/signup">
+						<Link to="/signup" className="register">
 							<FontAwesomeIcon icon="user-plus" className="icon" />
 						</Link>
-					{" "}
-						<Link to="/upcoming">
-							<FontAwesomeIcon icon="video" className="icon" />
-						</Link>					
+						<span className="iconText" id="register">Register</span>
+										
 			</nav>
 		)
 	}
@@ -147,7 +166,7 @@ class App extends Component {
 
 				<Route exact path="/upcoming" render={() => <Upcoming user={this.state.user} />} />
 				<br/>
-				<Search user={this.state.user} />
+				{/* <Search user={this.state.user} /> */}
 			</div>
 		)
 	}

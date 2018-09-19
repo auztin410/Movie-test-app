@@ -29,6 +29,10 @@ class Search extends Component {
     }
 
     handleSearch(event) {
+        event.preventDefault();
+        this.setState({
+            search: '',
+        });
         let queryUrl = `https://www.omdbapi.com/?t=${this.state.movie}&y=${this.state.year}&plot=short&apikey=trilogy`;
         console.log("HTTPS is now active!");
 
@@ -128,7 +132,7 @@ class Search extends Component {
     render() {
         if (!this.state.search && !this.props.user) {
             return (
-                <div className="Search">
+                <div className="search">
                     <form>
                         <input
                             type="text"
@@ -137,7 +141,7 @@ class Search extends Component {
                             onChange={this.handleChange}
                         />
                         {" "}
-                        <FontAwesomeIcon icon="search" onClick={this.handleSearch} />
+                        <button className="searchButton" onClick={this.handleSearch}><FontAwesomeIcon icon="search" /></button>
                     </form>
 
                 </div>
@@ -146,7 +150,7 @@ class Search extends Component {
         }
         else if (!this.state.search && this.props.user) {
             return (
-                <div className="Search">
+                <div className="search">
                     <form>
                         <input
                             type="text"
@@ -155,7 +159,7 @@ class Search extends Component {
                             onChange={this.handleChange}
                         />
                         {" "}
-                        <FontAwesomeIcon icon="search" onClick={this.handleSearch} />
+                        <button className="searchButton" onClick={this.handleSearch}><FontAwesomeIcon icon="search" /></button>
                     </form>
 
                 </div>
@@ -164,7 +168,7 @@ class Search extends Component {
         }
         else if (this.state.search && !this.props.user) {
             return (
-                <div className="Search">
+                <div className="search">
                     {/* <p>Current User:</p>
                     <p>{this.props.user.local.username}</p> */}
                     <form>
@@ -175,7 +179,7 @@ class Search extends Component {
                             onChange={this.handleChange}
                         />
                         {" "}
-                        <FontAwesomeIcon icon="search" onClick={this.handleSearch} />
+                        <button className="searchButton" onClick={this.handleSearch}><FontAwesomeIcon icon="search" /></button>
                     </form>
                     <br />
                     <div id="movie-display">
@@ -197,7 +201,7 @@ class Search extends Component {
         }
         else {
             return (
-                <div className="Search">
+                <div className="search">
                     {/* <p>Current User:</p>
                     <p>{this.props.user.local.username}</p> */}
                     <form>
@@ -208,7 +212,7 @@ class Search extends Component {
                             onChange={this.handleChange}
                         />
                         {" "}
-                        <FontAwesomeIcon icon="search" onClick={this.handleSearch} />
+                        <button className="searchButton" onClick={this.handleSearch}><FontAwesomeIcon icon="search" /></button>
                     </form>
                     <br />
                     <div id="movie-display">
