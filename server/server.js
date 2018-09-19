@@ -9,10 +9,12 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const session = require('express-session')
+const cheerio = require('cheerio');
+const axios = require('axios');
 const MongoStore = require('connect-mongo')(session)
 const mongoose = require("mongoose");
 const dbConnection = require('./db') // loads our connection to the mongo database
-const passport = require('./passport')
+const passport = require('./passport');
 const app = express()
 const PORT = process.env.PORT || 8080
 
@@ -84,6 +86,8 @@ app.use(function(err, req, res, next) {
 
 var MovieList = require("./db/models/movielist");
 var List = require("./db/models/list");
+var Upcoming = require('./db/models/upcoming');
+
 // Routes
 app.post("/add", function (req, res) {
 	console.log("req body user");
@@ -158,6 +162,33 @@ app.get("/userlist/:userId", function (req, res) {
 	.catch((err) => console.log(err));
 });
 
+app.get("/scrape", function (req, res) {
+	axios.get("https://www.imdb.com/movies-coming-soon/?ref_=nv_mv_cs").then( function (result) {
+		var $ = cheerio.load(result.data);
+		$("td.overview-top").each(function (i, element) {
+			var result = {};
+
+			result.title = $(this)
+			.children("h4")
+			.text();
+			result.link = $(this)
+			.children("h4")
+        	.children("a")
+			.attr("href");
+			
+			console.log(result.title);
+			console.log(result.link);
+
+			Upcoming.create(result)
+			.then(function (upcomingMovie) {
+				console.log(upcomingMovie);
+			})
+			.catch(function (err) {
+				console.log(err);
+			});
+		});
+	});
+});
 
 
 app.post("/userlistcreate", function (req, res) {

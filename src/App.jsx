@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Home from './components/Home';
 import Search from './components/Search';
 import UserPage from './components/UserPage';
+import Upcoming from './components/Upcoming';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -26,6 +27,10 @@ const DisplayLinks = props => {
 							<FontAwesomeIcon icon="user-circle" className="icon" />
 						</Link>
 					{" "}
+						<Link to="upcoming">
+							<FontAwesomeIcon icon="video" className="icon" />
+						</Link>
+					{" "}	
 						<Link to="#" onClick={props._logout}>
 						<FontAwesomeIcon icon="sign-out-alt" className="icon" />
 						</Link>
@@ -46,6 +51,10 @@ const DisplayLinks = props => {
 						<Link to="/signup">
 							<FontAwesomeIcon icon="user-plus" className="icon" />
 						</Link>
+					{" "}
+						<Link to="/upcoming">
+							<FontAwesomeIcon icon="video" className="icon" />
+						</Link>					
 			</nav>
 		)
 	}
@@ -134,7 +143,9 @@ class App extends Component {
 				/>
 				<Route exact path="/signup" component={SignupForm} />
 				{/* <LoginForm _login={this._login} /> */}	
-				<Route exact path="/userpage"render={() => <UserPage user={this.state.user} />} />
+				<Route exact path="/userpage" render={() => <UserPage user={this.state.user} />} />
+
+				<Route exact path="/upcoming" render={() => <Upcoming user={this.state.user} />} />
 				<br/>
 				<Search user={this.state.user} />
 			</div>

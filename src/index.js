@@ -5,10 +5,10 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faSignOutAlt, faUserPlus, faSearch, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUser, faSignOutAlt, faUserPlus, faSearch, faUserCircle, faVideo } from '@fortawesome/free-solid-svg-icons';
 
 
-library.add(faHome, faUser, faSignOutAlt, faUserPlus, faSearch, faUserCircle);
+library.add(faHome, faUser, faSignOutAlt, faUserPlus, faSearch, faUserCircle, faVideo);
 
 ReactDOM.render(
 	<BrowserRouter>
