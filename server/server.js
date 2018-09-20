@@ -184,16 +184,16 @@ app.get("/scrape", function (req, res) {
 				console.log(upcomingMovie);
 			})
 			.catch(function (err) {
-				console.log(err);
+				console.log("error");
 			});
 		});
 	});
 });
 
-app.get("/upcoming/lost", function (req, res) {
+app.get("/upcoming/list", function (req, res) {
 	Upcoming.find({})
-	.then(function(res) {
-		res.json(res);
+	.then(function(result) {
+		res.json(result);
 	})
 	.catch(function(err) {
 		res.json(err);

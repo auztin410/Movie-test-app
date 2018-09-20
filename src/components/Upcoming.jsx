@@ -15,12 +15,16 @@ class Upcoming extends Component {
         axios.get("/scrape/").then((res) => {
             console.log("scrape results");
             console.log(res.data);
-            return( axios.get("/upcoming/list").then((res) => {
+            return axios.get("/upcoming/list").then((res) => {
                 console.log("upcoming movie list");
                 console.log(res.data);
-            })).catch((err) => console.log(err))
-        }).catch((err) => console.log(err));
+            }).catch((err) => console.log(err));
+        });
         
+        // axios.get("/upcoming/list").then((res) => {
+        //     console.log("upcoming movie list");
+        //     console.log(res.data);
+        // }).catch((err) => console.log(err));
     }
     
     render() {
