@@ -190,6 +190,16 @@ app.get("/scrape", function (req, res) {
 	});
 });
 
+app.get("/upcoming/lost", function (req, res) {
+	Upcoming.find({})
+	.then(function(res) {
+		res.json(res);
+	})
+	.catch(function(err) {
+		res.json(err);
+	});
+});
+
 
 app.post("/userlistcreate", function (req, res) {
 	List.create(
