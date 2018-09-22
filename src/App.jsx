@@ -9,6 +9,7 @@ import Home from './components/Home';
 import Search from './components/Search';
 import UserPage from './components/UserPage';
 import Upcoming from './components/Upcoming';
+import List from './components/List';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -34,10 +35,14 @@ const DisplayLinks = props => {
 						</Link>
 						<span className="iconText" id="userPage">User Page</span>
 					{" "}
-						<Link to="upcoming" className="upcoming">
+						<Link to="/upcoming" className="upcoming">
 							<FontAwesomeIcon icon="video" className="icon" />
 						</Link>
 						<span className="iconText" id="upcoming">Upcoming Movies</span>
+					{" "}
+						<Link to="/list" className="list">
+							List
+						</Link>
 					{" "}	
 						<Link to="#" onClick={props._logout} className="logout">
 							<FontAwesomeIcon icon="sign-out-alt" className="icon" />
@@ -165,6 +170,8 @@ class App extends Component {
 				<Route exact path="/userpage" render={() => <UserPage user={this.state.user} />} />
 
 				<Route exact path="/upcoming" render={() => <Upcoming user={this.state.user} />} />
+
+				<Route exact path="/list" render={() => <List user={this.state.user} />} />
 				<br/>
 				{/* <Search user={this.state.user} /> */}
 			</div>
