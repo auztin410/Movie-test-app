@@ -65,7 +65,9 @@ class Search extends Component {
         axios.post("/add/", {
             user: this.props.user._id,
             movieId: this.state.search.data.imdbID,
-            title: this.state.search.data.Title
+            title: this.state.search.data.Title,
+            runtime: this.state.search.data.Runtime,
+            rated: this.state.search.data.Rated
         }).then((res) => {
             console.log("add result");
             console.log(res);

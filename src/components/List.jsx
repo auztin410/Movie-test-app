@@ -11,7 +11,10 @@ class List extends React.Component {
     this.state = {
       list: '',
       wantToSee: '',
+      showList: false,
     };
+
+    this.handleShowList = this.handleShowList.bind(this);
   }
 
   componentDidMount() {
@@ -30,13 +33,30 @@ class List extends React.Component {
     }
 };
 
+handleShowList(event) {
+    this.setState({
+        showList: true,
+    });
+}
+
 
   render() {
-    const data  = [{
-        title: "Test Movie",
-        runtime: "140 mins",
-        rated: "PG-13"
-    }];
+    // const data  = [{
+    //     title: "Test Movie",
+    //     runtime: "140 mins",
+    //     rated: "PG-13"
+    // },
+    // {
+    //     title: "Avatar",
+    //     runtime: "128 mins",
+    //     rated: "PG-13"
+    // }    
+    // ];
+
+    const data = this.state.list
+
+    console.log("state list");
+    console.log(this.state.list)
 
     const columns=[{
         
@@ -57,16 +77,39 @@ class List extends React.Component {
           ]
         
       }]
-    return (
-      <div>
-        <ReactTable
-          data={data}
-          columns={columns}
-        />
-        <br />
+
+      if(this.state.showList === false) {
+          return (
+            <div>
+                <br/>
+                <br/>
+            <button onClick={this.handleShowList}>Show List</button>
+        </div>
+          );
+          
+      }
+
+      else if(this.state.showList === true) {
+        return (
+            <div>
+              <ReactTable
+                data={data}
+                columns={columns}
+              />
+              <br />
+          
+            </div>
+          );
+      }
+
+      else {
+          return(
+              <div>
+                  You dun broke it.
+              </div>
+          )
+      }
     
-      </div>
-    );
   }
 }
 
