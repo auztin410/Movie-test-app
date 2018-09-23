@@ -97,6 +97,8 @@ app.post("/add", function (req, res) {
 		{$addToSet: {list: {
 			movieId: req.body.movieId,
 			title: req.body.title,
+			runtime: req.body.runtime,
+			rated: req.body.rated
 		}}}
 	).then(function(result) {
 		res.json(result);
