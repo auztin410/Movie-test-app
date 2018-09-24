@@ -48,14 +48,14 @@ class UserPage extends Component {
     render() {
         if(!this.props.user) {
             return(
-                <div>
+                <div className="userDisplay">
                     No user logged in!
                 </div>
             )
         }
         else if(!this.state.movie){
             return(
-                <div>
+                <div className="userDisplay">
                     <h3>Movie List</h3>                  
                         {this.state.list.map(item => (
                             <span className="buttons" value={item.movieId} key={item.movieId} onClick={this.handleList.bind(this, item.movieId)}>{item.title}</span>
@@ -69,7 +69,7 @@ class UserPage extends Component {
         }
         else {
             return(
-                <div>
+                <div className="userDisplay">
                     <h3>Movie List</h3>
                         {this.state.list.map(item => (
                             <span className="buttons" value={item.movieId} key={item.movieId} onClick={this.handleList.bind(this, item.movieId)}>{item.title}</span>

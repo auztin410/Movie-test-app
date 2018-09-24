@@ -85,6 +85,15 @@ body {
 
 .ReactTable {
   background-color: whitesmoke;
+  margin-top: 5vh;
+}
+
+.userDisplay {
+  margin-top: 5vh;
+}
+
+.upcomingDisplay {
+  margin-top: 5vh;
 }
 
 .home:hover ~ #home{
@@ -127,6 +136,10 @@ body {
   position: absolute;
   margin-left: 48vw;
   opacity: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .Header {font-size: 8px;}
 }
 
 @keyframes App-logo-spin {

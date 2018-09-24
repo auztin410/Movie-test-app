@@ -15,35 +15,30 @@ class Upcoming extends Component {
         axios.get("/scrape/").then((res) => {
             console.log("scrape results");
             console.log(res.data);
-            return axios.get("/upcoming/list").then((res) => {
-                console.log("upcoming movie list");
-                console.log(res.data);
             }).catch((err) => console.log(err));
-        });
+        };
+       
         
-        // axios.get("/upcoming/list").then((res) => {
-        //     console.log("upcoming movie list");
-        //     console.log(res.data);
-        // }).catch((err) => console.log(err));
+        render() {
+            if(!this.props.user) {
+                return(
+                    <div className="upcomingDisplay">
+                        No user so no adding to want to see.
+                    </div>
+                )
+            }
+            else {
+                return(
+                    <div className="upcomingDisplay">
+                        User detected so allow adding to want to see list.
+                    </div>
+                )
+            }
+        }
     }
     
-    render() {
-        if(!this.props.user) {
-            return(
-                <div>
-                    No user so no adding to want to see.
-                </div>
-            )
-        }
-        else {
-            return(
-                <div>
-                    User detected so allow adding to want to see list.
-                </div>
-            )
-        }
-    }
-}
+    
+
 
 
 
