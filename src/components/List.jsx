@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import '../App.css';
 
 // Import React Table
 import ReactTable from "react-table";
@@ -41,17 +42,6 @@ handleShowList(event) {
 
 
   render() {
-    // const data  = [{
-    //     title: "Test Movie",
-    //     runtime: "140 mins",
-    //     rated: "PG-13"
-    // },
-    // {
-    //     title: "Avatar",
-    //     runtime: "128 mins",
-    //     rated: "PG-13"
-    // }    
-    // ];
 
     const data = this.state.list
 

@@ -83,6 +83,10 @@ body {
   text-shadow: 2px 2px black;
 }
 
+.ReactTable {
+  background-color: whitesmoke;
+}
+
 .home:hover ~ #home{
   opacity: 1;
 }
@@ -108,6 +112,10 @@ body {
 }
 
 .register:hover ~ #register{
+  opacity: 1;
+}
+
+.list:hover ~ #list{
   opacity: 1;
 }
 

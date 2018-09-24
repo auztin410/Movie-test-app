@@ -41,8 +41,9 @@ const DisplayLinks = props => {
 						<span className="iconText" id="upcoming">Upcoming Movies</span>
 					{" "}
 						<Link to="/list" className="list">
-							List
+							<FontAwesomeIcon icon="table" className="icon" />
 						</Link>
+						<span className="iconText" id="list">List</span>
 					{" "}	
 						<Link to="#" onClick={props._logout} className="logout">
 							<FontAwesomeIcon icon="sign-out-alt" className="icon" />
