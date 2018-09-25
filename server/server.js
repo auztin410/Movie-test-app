@@ -98,7 +98,9 @@ app.post("/add", function (req, res) {
 			movieId: req.body.movieId,
 			title: req.body.title,
 			runtime: req.body.runtime,
-			rated: req.body.rated
+			rated: req.body.rated,
+			directed: req.body.directed,
+			genre: req.body.genre
 		}}}
 	).then(function(result) {
 		res.json(result);

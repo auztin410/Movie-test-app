@@ -67,7 +67,9 @@ class Search extends Component {
             movieId: this.state.search.data.imdbID,
             title: this.state.search.data.Title,
             runtime: this.state.search.data.Runtime,
-            rated: this.state.search.data.Rated
+            rated: this.state.search.data.Rated,
+            directed: this.state.search.data.Director,
+            genre: this.state.search.data.Genre
         }).then((res) => {
             console.log("add result");
             console.log(res);

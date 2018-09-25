@@ -63,6 +63,14 @@ handleShowList(event) {
             {
                 Header: "Rating",
                 accessor: "rated"
+            },
+            {
+                Header: "Directed by",
+                accessor: "directed"
+            },
+            {
+                Header: "Genres",
+                accessor: "genre"
             }
           ]
         
