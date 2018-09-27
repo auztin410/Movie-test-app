@@ -34,17 +34,7 @@ class Search extends Component {
             search: '',
         });
         let queryUrl = `https://www.omdbapi.com/?t=${this.state.movie}&y=${this.state.year}&plot=short&apikey=trilogy`;
-        console.log("HTTPS is now active!");
-
-        let image = `https://api.themoviedb.org/3/search/movie?api_key=8fa64e2647c4daa2d8b345906657ce66&query=${this.state.movie}`
-
-        // axios.get(image).then((res) => {
-        //     console.log("image");
-        //     console.log(res);
-        //     document.body.style.backgroundRepeat = "no-repeat";
-        //     document.body.style.backgroundSize= "cover";
-        //     document.body.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${res.data.results[0].poster_path})`
-        // });
+        console.log("HTTPS is now active!");    
 
         axios.get(queryUrl).then((res) => {
             console.log(res);
@@ -54,10 +44,7 @@ class Search extends Component {
                 search: res,
             });
         });
-
-
-
-    }
+    };
 
     handleAdd(event) {
         console.log("props");
@@ -168,6 +155,27 @@ class Search extends Component {
 
                 </div>
 
+            )
+        }
+        else if (this.state.search.data.Response === "False") {
+            return (
+                <div className="search">
+                    <form>
+                        <input
+                            type="text"
+                            name="movie"
+                            value={this.state.movie}
+                            onChange={this.handleChange}
+                        />
+                        {" "}
+                        <button className="searchButton" onClick={this.handleSearch}><FontAwesomeIcon icon="search" /></button>
+                    </form>
+                    <div>
+                        <h3>
+                            {this.state.search.data.Error}
+                        </h3>
+                    </div>
+                </div>
             )
         }
         else if (this.state.search && !this.props.user) {

@@ -48,6 +48,7 @@ class Vote extends Component {
         event.preventDefault();
         this.setState({
             search: '',
+            searched: false,
         });
         let queryUrl = `https://www.omdbapi.com/?t=${this.state.movie}&y=${this.state.year}&plot=short&apikey=trilogy`;
         console.log("HTTPS is now active!");    
@@ -276,6 +277,25 @@ class Vote extends Component {
                     </form>
                 </div>
             )
+        }
+        else if (this.state.searched === true && this.state.search.data.Response === "False") {
+            return(
+                <div className="search">
+                <form>
+                        <input
+                            type="text"
+                            name="movie"
+                            value={this.state.movie}
+                            onChange={this.handleChange}
+                        />
+                        {" "}
+                        <button className="searchButton" onClick={this.handleSearch}><FontAwesomeIcon icon="search" /></button>
+                    </form>
+                    <div>
+                        <h3>{this.state.search.data.Error}</h3>
+                    </div>
+            </div>
+            )            
         }
         else if (this.state.searched === true) {
             return (
