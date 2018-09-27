@@ -145,7 +145,7 @@ body {
 .grid {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  grid-gap: 5em;
+  grid-gap: 2vw;
   margin-top: 3em;
 }
 
@@ -167,6 +167,7 @@ body {
 
 @media screen and (max-width: 600px) {
   .Header {font-size: 8px;}
+  .optionPoster {height: 75px; width: 50px;}
 }
 
 @keyframes App-logo-spin {
