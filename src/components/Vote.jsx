@@ -169,7 +169,7 @@ class Vote extends Component {
             Winner = (
                 <div>
                     <img src={this.state.choice1.data.Poster} alt={this.state.choice1.data.Title} />
-                    <h4>{this.state.choice1.data.Title}</h4>
+                    <h1>{this.state.choice1.data.Title}</h1>
                 </div>
             )
         }
@@ -177,7 +177,7 @@ class Vote extends Component {
             Winner = (
                 <div>
                     <img src={this.state.choice2.data.Poster} alt={this.state.choice2.data.Title} />
-                    <h4>{this.state.choice2.data.Title}</h4>
+                    <h1>{this.state.choice2.data.Title}</h1>
                 </div>
             )
         }
@@ -185,7 +185,7 @@ class Vote extends Component {
             Winner = (
                 <div>
                     <img src={this.state.choice3.data.Poster} alt={this.state.choice3.data.Title} />
-                    <h4>{this.state.choice3.data.Title}</h4>
+                    <h1>{this.state.choice3.data.Title}</h1>
                 </div>
             )
         }
@@ -193,7 +193,7 @@ class Vote extends Component {
             Winner = (
                 <div>
                     <img src={this.state.choice4.data.Poster} alt={this.state.choice4.data.Title} />
-                    <h4>{this.state.choice4.data.Title}</h4>
+                    <h1>{this.state.choice4.data.Title}</h1>
                 </div>
             )
         }
@@ -207,8 +207,8 @@ class Vote extends Component {
         }
         if(this.state.votingComplete === true) {
             return(
-                <div>
-                    <h1>Winner!</h1>
+                <div id="movie-display">
+                    <h1>The Winner Is!</h1>
                         {Winner}
                 </div>
             )
