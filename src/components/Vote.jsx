@@ -11,6 +11,7 @@ class Vote extends Component {
             searched: false,
             ready: false,
             viewers: '',
+            savedViewers: '',
             voting: false,
             search: '',
             year: '',
@@ -19,11 +20,22 @@ class Vote extends Component {
             choice2: '',
             choice3: '',
             choice4: '',
+            voteChoice1: 0,
+            voteChoice2: 0,
+            voteChoice3: 0,
+            voteChoice4: 0,
+            votingComplete: false,
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
+        this.handleVote = this.handleVote.bind(this);
+        this.handleCastVote1 = this.handleCastVote1.bind(this);
+        this.handleCastVote2 = this.handleCastVote2.bind(this);
+        this.handleCastVote3 = this.handleCastVote3.bind(this);
+        this.handleCastVote4 = this.handleCastVote4.bind(this);
+        this.handleRecastVote = this.handleRecastVote.bind(this);
     }
 
     handleChange(event) {
@@ -84,13 +96,124 @@ class Vote extends Component {
     };
 
     handleVote(event) {
+        event.preventDefault();
         this.setState({
-            voting: true
+            voting: true,
+            ready: false,
+            savedViewers: this.state.viewers,
+        });
+    };
+
+    handleCastVote1(event) {
+        this.setState({
+            viewers: this.state.viewers -1,
+            voteChoice1: this.state.voteChoice1 +1
+        });
+        if(this.state.viewers === 1) {
+            this.setState({
+                votingComplete: true
+            });
+        }
+    };
+
+    handleCastVote2(event) {
+        this.setState({
+            viewers: this.state.viewers -1,
+            voteChoice2: this.state.voteChoice2 +1
+        });
+        if(this.state.viewers === 1) {
+            this.setState({
+                votingComplete: true
+            });
+        }
+    };
+
+    handleCastVote3(event) {
+        this.setState({
+            viewers: this.state.viewers -1,
+            voteChoice3: this.state.voteChoice3 +1
+        });
+        if(this.state.viewers === 1) {
+            this.setState({
+                votingComplete: true
+            });
+        }
+    };
+
+    handleCastVote4(event) {
+        this.setState({
+            viewers: this.state.viewers -1,
+            voteChoice4: this.state.voteChoice4 +1
+        });
+        if(this.state.viewers === 1) {
+            this.setState({
+                votingComplete: true
+            });
+        }
+    };
+
+    handleRecastVote(event) {
+        this.setState({
+            votingComplete: false,
+            viewers: this.state.savedViewers,
+            voteChoice1: 0,
+            voteChoice2: 0,
+            voteChoice3: 0,
+            voteChoice4: 0,
         });
     };
 
     render() {
-        if(this.state.ready === true){
+        let Winner
+        if( this.state.voteChoice1 > this.state.voteChoice2 && this.state.voteChoice1 > this.state.voteChoice3 && this.state.voteChoice1 > this.state.voteChoice4) {
+            Winner = (
+                <div>
+                    <img src={this.state.choice1.data.Poster} alt={this.state.choice1.data.Title} />
+                    <h4>{this.state.choice1.data.Title}</h4>
+                </div>
+            )
+        }
+        else if( this.state.voteChoice2 > this.state.voteChoice1 && this.state.voteChoice2 > this.state.voteChoice3 && this.state.voteChoice2 > this.state.voteChoice4){
+            Winner = (
+                <div>
+                    <img src={this.state.choice2.data.Poster} alt={this.state.choice2.data.Title} />
+                    <h4>{this.state.choice2.data.Title}</h4>
+                </div>
+            )
+        }
+        else if( this.state.voteChoice3 > this.state.voteChoice1 && this.state.voteChoice3 > this.state.voteChoice2 && this.state.voteChoice3 > this.state.voteChoice4){
+            Winner = (
+                <div>
+                    <img src={this.state.choice3.data.Poster} alt={this.state.choice3.data.Title} />
+                    <h4>{this.state.choice3.data.Title}</h4>
+                </div>
+            )
+        }
+        else if( this.state.voteChoice4 > this.state.voteChoice1 && this.state.voteChoice4 > this.state.voteChoice2 && this.state.voteChoice4 > this.state.voteChoice3){
+            Winner = (
+                <div>
+                    <img src={this.state.choice4.data.Poster} alt={this.state.choice4.data.Title} />
+                    <h4>{this.state.choice4.data.Title}</h4>
+                </div>
+            )
+        }
+        else{
+            Winner = (
+                <div>
+                    <h4>There was a tie!</h4>
+                    <button onClick={this.handleRecastVote}>Recast Vote!</button>
+                </div>
+            )
+        }
+        if(this.state.votingComplete === true) {
+            return(
+                <div>
+                    <h1>Winner!</h1>
+                        {Winner}
+                </div>
+            )
+        }
+        else if (this.state.ready === true){
             return(
                 <div>
                     <form>
@@ -104,7 +227,7 @@ class Vote extends Component {
                         <button
                         onClick={this.handleVote}
                         disabled={!(this.state.viewers)}
-                        >Vote!</button>
+                        >Start Voting!</button>
                     </form>
                 </div>
             )
@@ -113,27 +236,27 @@ class Vote extends Component {
             return(
                 <div className="grid">
                     <div className="option1">
-                        <img className="optionPoster" src={this.state.choice1.data.Poster}/>
+                        <img className="optionPoster" src={this.state.choice1.data.Poster} alt={this.state.choice1.data.Title}/>
                         <h4>{this.state.choice1.data.Title}</h4>
-                        <button onClick={this.handleCastVote}>Cast Vote</button>
+                        <button onClick={this.handleCastVote1}>Cast Vote</button>
                     </div>
 
                     <div className="option2">
-                    <img className="optionPoster" src={this.state.choice2.data.Poster}/>
+                    <img className="optionPoster" src={this.state.choice2.data.Poster} alt={this.state.choice2.data.Title}/>
                         <h4>{this.state.choice2.data.Title}</h4>
-                        <button onClick={this.handleCastVote}>Cast Vote</button>
+                        <button onClick={this.handleCastVote2}>Cast Vote</button>
                     </div>
 
                     <div className="option3">
-                    <img className="optionPoster" src={this.state.choice3.data.Poster}/>
+                    <img className="optionPoster" src={this.state.choice3.data.Poster} alt={this.state.choice3.data.Title}/>
                         <h4>{this.state.choice3.data.Title}</h4>
-                        <button onClick={this.handleCastVote}>Cast Vote</button>
+                        <button onClick={this.handleCastVote3}>Cast Vote</button>
                     </div>
 
                     <div className="option4">
-                    <img className="optionPoster" src={this.state.choice4.data.Poster}/>
+                    <img className="optionPoster" src={this.state.choice4.data.Poster} alt={this.state.choice4.data.Title}/>
                         <h4>{this.state.choice4.data.Title}</h4>
-                        <button onClick={this.handleCastVote}>Cast Vote</button>
+                        <button onClick={this.handleCastVote4}>Cast Vote</button>
                     </div>
                 </div>
             )
