@@ -187,8 +187,7 @@ class App extends Component {
 
 				<Route exact path="/list" render={() => <List user={this.state.user} />} />
 
-				<Route exact path="/vote" render={() => <Vote user={this.state.user} />} />
-				<Route exact path="/vote" component={Vote} />
+				<Route exact path="/#/vote" render={() => <Vote user={this.state.user} />} />
 				<br/>
 				
 			</div>
