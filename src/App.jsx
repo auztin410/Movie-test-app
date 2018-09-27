@@ -10,6 +10,7 @@ import Search from './components/Search';
 import UserPage from './components/UserPage';
 import Upcoming from './components/Upcoming';
 import List from './components/List';
+import Vote from './components/Vote';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -44,11 +45,18 @@ const DisplayLinks = props => {
 							<FontAwesomeIcon icon="table" className="icon" />
 						</Link>
 						<span className="iconText" id="list">List</span>
-					{" "}	
+					{" "}
+					<Link to ="/vote" className="vote">
+							<FontAwesomeIcon icon="grip-vertical" className="icon" />
+						</Link>
+						<span className="iconText" id="vote">Vote for movies</span>
+					{" "}
 						<Link to="#" onClick={props._logout} className="logout">
 							<FontAwesomeIcon icon="sign-out-alt" className="icon" />
 						</Link>
 						<span className="iconText" id="logout">Logout</span>
+					
+						
 			</nav>
 		)
 	} else {
@@ -173,6 +181,8 @@ class App extends Component {
 				<Route exact path="/upcoming" render={() => <Upcoming user={this.state.user} />} />
 
 				<Route exact path="/list" render={() => <List user={this.state.user} />} />
+
+				<Route exact path="/vote" render={() => <Vote user={this.state.user} />} />
 				<br/>
 				{/* <Search user={this.state.user} /> */}
 			</div>
