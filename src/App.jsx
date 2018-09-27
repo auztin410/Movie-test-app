@@ -46,7 +46,7 @@ const DisplayLinks = props => {
 						</Link>
 						<span className="iconText" id="list">List</span>
 					{" "}
-					<Link to ="/vote" className="vote">
+					<Link to ="/#/vote" className="vote">
 							<FontAwesomeIcon icon="balance-scale" className="icon" />
 						</Link>
 						<span className="iconText" id="vote">Vote for movies</span>
@@ -78,7 +78,7 @@ const DisplayLinks = props => {
 						</Link>
 						<span className="iconText" id="upcoming">Upcoming Movies</span>
 					{" "}
-						<Link to ="/vote" className="vote">
+						<Link to ="/#/vote" className="vote">
 							<FontAwesomeIcon icon="balance-scale" className="icon" />
 						</Link>
 						<span className="iconText" id="vote">Vote for movies</span>
