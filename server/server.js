@@ -15,7 +15,7 @@ const MongoStore = require('connect-mongo')(session)
 const mongoose = require("mongoose");
 const dbConnection = require('./db') // loads our connection to the mongo database
 const passport = require('./passport');
-const app = express()
+const app = express();
 const PORT = process.env.PORT || 8080
 
 // ===== Middleware ====
@@ -219,12 +219,12 @@ app.post("/userlistcreate", function (req, res) {
 
 // Testing for react route not loading on heroku side.
 app.get('/*', function(req, res) {
-	res.sendFile(path.join(__dirname, 'path/to/your/index.html'), function(err) {
+	res.sendFile(path.join(__dirname, "../src/index.js"), function(err) {
 	  if (err) {
 		res.status(500).send(err)
 	  }
 	})
-  })
+  });
 
 // ==== Starting Server =====
 app.listen(PORT, () => {
