@@ -184,6 +184,10 @@ button:active {
   transform: translateY(4px);
 }
 
+.winnerPoster {
+  animation: WinningMovie 1.5s forwards .2s ease-in;
+}
+
 @media screen and (max-width: 600px) {
   .Header {font-size: 8px;}
   .optionPoster {height: 75px; width: 50px;}
@@ -217,5 +221,16 @@ button:active {
       }
   100%{
       transform: rotate(0) skewX(0deg);
+      }
+}
+
+@keyframes WinningMovie{
+  0%{
+      transform: rotate(xx);
+      }
+  100%{
+      transform: rotate(0);
+      transform-origin: 50% 50%;
+      box-shadow: 10px 10px 5px 2px black;
       }
 }

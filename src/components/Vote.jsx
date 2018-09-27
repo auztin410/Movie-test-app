@@ -169,7 +169,7 @@ class Vote extends Component {
         if( this.state.voteChoice1 > this.state.voteChoice2 && this.state.voteChoice1 > this.state.voteChoice3 && this.state.voteChoice1 > this.state.voteChoice4) {
             Winner = (
                 <div>
-                    <img src={this.state.choice1.data.Poster} alt={this.state.choice1.data.Title} />
+                    <img className="winnerPoster" src={this.state.choice1.data.Poster} alt={this.state.choice1.data.Title} />
                     <h1>{this.state.choice1.data.Title}</h1>
                 </div>
             )
@@ -177,7 +177,7 @@ class Vote extends Component {
         else if( this.state.voteChoice2 > this.state.voteChoice1 && this.state.voteChoice2 > this.state.voteChoice3 && this.state.voteChoice2 > this.state.voteChoice4){
             Winner = (
                 <div>
-                    <img src={this.state.choice2.data.Poster} alt={this.state.choice2.data.Title} />
+                    <img className="winnerPoster" src={this.state.choice2.data.Poster} alt={this.state.choice2.data.Title} />
                     <h1>{this.state.choice2.data.Title}</h1>
                 </div>
             )
@@ -185,7 +185,7 @@ class Vote extends Component {
         else if( this.state.voteChoice3 > this.state.voteChoice1 && this.state.voteChoice3 > this.state.voteChoice2 && this.state.voteChoice3 > this.state.voteChoice4){
             Winner = (
                 <div>
-                    <img src={this.state.choice3.data.Poster} alt={this.state.choice3.data.Title} />
+                    <img className="winnerPoster" src={this.state.choice3.data.Poster} alt={this.state.choice3.data.Title} />
                     <h1>{this.state.choice3.data.Title}</h1>
                 </div>
             )
@@ -193,7 +193,7 @@ class Vote extends Component {
         else if( this.state.voteChoice4 > this.state.voteChoice1 && this.state.voteChoice4 > this.state.voteChoice2 && this.state.voteChoice4 > this.state.voteChoice3){
             Winner = (
                 <div>
-                    <img src={this.state.choice4.data.Poster} alt={this.state.choice4.data.Title} />
+                    <img className="winnerPoster" src={this.state.choice4.data.Poster} alt={this.state.choice4.data.Title} />
                     <h1>{this.state.choice4.data.Title}</h1>
                 </div>
             )
