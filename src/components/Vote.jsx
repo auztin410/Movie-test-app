@@ -215,7 +215,7 @@ class Vote extends Component {
         }
         else if (this.state.ready === true){
             return(
-                <div>
+                <div className="search">
                     <form>
                         <input
                         type="text"
@@ -238,25 +238,25 @@ class Vote extends Component {
                     <div className="option1">
                         <img className="optionPoster" src={this.state.choice1.data.Poster} alt={this.state.choice1.data.Title}/>
                         <h4>{this.state.choice1.data.Title}</h4>
-                        <button onClick={this.handleCastVote1}>Cast Vote</button>
+                        <button className="castVote" onClick={this.handleCastVote1}>Cast Vote</button>
                     </div>
 
                     <div className="option2">
                     <img className="optionPoster" src={this.state.choice2.data.Poster} alt={this.state.choice2.data.Title}/>
                         <h4>{this.state.choice2.data.Title}</h4>
-                        <button onClick={this.handleCastVote2}>Cast Vote</button>
+                        <button className="castVote" onClick={this.handleCastVote2}>Cast Vote</button>
                     </div>
 
                     <div className="option3">
                     <img className="optionPoster" src={this.state.choice3.data.Poster} alt={this.state.choice3.data.Title}/>
                         <h4>{this.state.choice3.data.Title}</h4>
-                        <button onClick={this.handleCastVote3}>Cast Vote</button>
+                        <button className="castVote" onClick={this.handleCastVote3}>Cast Vote</button>
                     </div>
 
                     <div className="option4">
                     <img className="optionPoster" src={this.state.choice4.data.Poster} alt={this.state.choice4.data.Title}/>
                         <h4>{this.state.choice4.data.Title}</h4>
-                        <button onClick={this.handleCastVote4}>Cast Vote</button>
+                        <button className="castVote" onClick={this.handleCastVote4}>Cast Vote</button>
                     </div>
                 </div>
             )

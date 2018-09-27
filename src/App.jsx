@@ -47,7 +47,7 @@ const DisplayLinks = props => {
 						<span className="iconText" id="list">List</span>
 					{" "}
 					<Link to ="/vote" className="vote">
-							<FontAwesomeIcon icon="grip-vertical" className="icon" />
+							<FontAwesomeIcon icon="balance-scale" className="icon" />
 						</Link>
 						<span className="iconText" id="vote">Vote for movies</span>
 					{" "}
@@ -77,6 +77,11 @@ const DisplayLinks = props => {
 							<FontAwesomeIcon icon="video" className="icon" />
 						</Link>
 						<span className="iconText" id="upcoming">Upcoming Movies</span>
+					{" "}
+						<Link to ="/vote" className="vote">
+							<FontAwesomeIcon icon="balance-scale" className="icon" />
+						</Link>
+						<span className="iconText" id="vote">Vote for movies</span>
 					{" "}
 						<Link to="/login" className="login">
 							<FontAwesomeIcon icon="user" className="icon" />
@@ -184,7 +189,7 @@ class App extends Component {
 
 				<Route exact path="/vote" render={() => <Vote user={this.state.user} />} />
 				<br/>
-				{/* <Search user={this.state.user} /> */}
+				
 			</div>
 		)
 	}
