@@ -218,13 +218,10 @@ app.post("/userlistcreate", function (req, res) {
 });
 
 // Testing for react route not loading on heroku side.
-app.get('/*', function(req, res) {
-	res.sendFile(path.join(__dirname, "../src/index.js"), function(err) {
-	  if (err) {
-		res.status(500).send(err)
-	  }
-	})
-  });
+app.use(express.static(__dirname + '/'));
+app.get('*', function (request, response){
+    response.sendFile(path.resolve(__dirname, "./client/src/index.js"))
+});
 
 // ==== Starting Server =====
 app.listen(PORT, () => {
