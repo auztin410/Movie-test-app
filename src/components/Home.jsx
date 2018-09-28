@@ -37,14 +37,11 @@ class Home extends Component {
 							<img className="poster" alt={this.state.search.title} src={this.state.search.poster} />
 							<h1>Title: {this.state.search.title}</h1>
 							<p>Date of Release: {this.state.search.release}</p>
-							<p>Rated: {this.state.search.rating}</p>
-							<p>Runtime: {this.state.search.runtime}</p>
-							<p>Directed by: {this.state.search.directed}</p>
-							<p>Actors: {this.state.search.actors}</p>
+							<p>Rated: {this.state.search.rating} {" "} || {" "}  Runtime: {this.state.search.runtime}</p>
+							<p>Directed by: {this.state.search.directed} {" "} || {" "} Actors: {this.state.search.actors}</p>
 							<p>Plot: {this.state.search.plot}</p>
 							<p>Awards: {this.state.search.awards}</p>
-							<p>MetaScore: {this.state.search.metaScore}</p>
-							<p>Imdb Rating: {this.state.search.imdbRating}</p>
+							<p>MetaScore: {this.state.search.metaScore} {" "} || {" "} Imdb Rating: {this.state.search.imdbRating}</p>
 						</div>
 				</div>
 			)
