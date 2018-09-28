@@ -159,6 +159,12 @@ app.get("/movie/:movieId", function (req, res) {
 	.catch((err) => console.log(err));
 });
 
+app.get("/random", function (req, res) {
+	MovieList.find({})
+	.then(dbItem => res.json(dbItem))
+	.catch((err) => console.log(err));
+});
+
 app.get("/userlist/:userId", function (req, res) {
 	List.find(
 		{userId: req.params.userId}
@@ -215,12 +221,6 @@ app.post("/userlistcreate", function (req, res) {
 	}).catch(function(err) {
 		res.json(err);
 	});
-});
-
-// Testing for react route not loading on heroku side.
-app.use(express.static(__dirname + '/'));
-app.get('*', function (request, response){
-    response.sendFile(path.resolve(__dirname, "./client/src/index.js"))
 });
 
 // ==== Starting Server =====

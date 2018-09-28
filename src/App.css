@@ -50,8 +50,12 @@ body {
   background-size: cover;
 }
 
+.random {
+  margin-top: 7vh;
+}
+
 .search {
-  margin-top: 5vh;
+  margin-top: 7vh;
 }
 
 .searchButton {
@@ -81,6 +85,11 @@ body {
   margin: 5px;
   color: whitesmoke;
   text-shadow: 2px 2px black;
+}
+
+.hamster {
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px black;
 }
 
 .ReactTable {
