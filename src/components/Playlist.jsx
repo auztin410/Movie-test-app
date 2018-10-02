@@ -1,4 +1,4 @@
-import React from  'react';
+import React, { Component } from  'react';
 import axios from 'axios';
 import '../App.css';
 
@@ -6,16 +6,21 @@ import '../App.css';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
-class Playlist extends React.Component {
-constructor() {
-    super();
+class Playlist extends Component {
+constructor(props) {
+    super(props);
     this.state = {
         playlists: '',
         display: '',
-        array: [],
+        newPlaylist: '',
+        props: '',
     };
 
     this.handlePlaylist = this.handlePlaylist.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleNewPlaylist = this.handleNewPlaylist.bind(this);
+    console.log("user");
+    console.log(props);
 }
 
 componentDidMount() {
@@ -44,13 +49,30 @@ handlePlaylist(playlistId) {
         res.data.map(item => (
             array.push(item.movie)
         ));
+        console.log(array);
         this.setState({
             display: array,
-        });
-        console.log("movie only in display");
-        console.log(this.state.display);
-        
+        });  
     }).catch((err) => (console.log(err)));
+};
+
+handleChange(event) {
+    this.setState({
+        [event.target.name]: event.target.value
+    });
+};
+
+handleNewPlaylist(event) {
+    event.preventDefault();
+    console.log("props user");
+    console.log(this.props.user._id);
+    axios.post("/playlist/", {
+        user: this.props.user._id,
+        name: this.state.newPlaylist,
+    }).then((res) => {
+        console.log(res);
+    }).catch((err) => console.log(err));
+    
 };
 
 
@@ -101,8 +123,19 @@ render() {
         return(
             <div>
                 {this.state.playlists.map(item => (
-                    <span className="buttons" value={item._id} key={item._id} onClick={this.handlePlaylist.bind(this, item._id)}>{item.name}</span>
+                    <button value={item._id} key={item._id} onClick={this.handlePlaylist.bind(this, item._id)}>{item.name}</button>
                 ))}
+                <form>
+                        <p>Create a new playlist</p>
+                        <input
+                        type="text"
+                        name="newPlaylist"
+                        value={this.state.newPlaylist}
+                        onChange={this.handleChange}
+                        />
+                        {" "}
+                        <button onClick={this.handleNewPlaylist}>Create New Playlist</button>
+                    </form>
             </div>
         )
     }

@@ -176,10 +176,38 @@ app.post("/wanttosee", function (req, res) {
 	});
 });
 
+// app.post("/movie", function (req, res) {
+// 	console.log(req.body);
+// 	MovieList.create(
+// 		{
+// 			movieId: req.body.movieId,
+// 			title: req.body.title,
+// 			release: req.body.release,
+// 			rating: req.body.rating,
+// 			runtime: req.body.runtime,
+// 			directed: req.body.directed,
+// 			actors: req.body.actors,
+// 			plot: req.body.plot,
+// 			awards: req.body.awards,
+// 			metaScore: req.body.metaScore,
+// 			imdbRating: req.body.imdbRating,
+// 			poster: req.body.poster,
+// 			genre: req.body.genre
+// 		}
+
+// 	).then(function(result) {
+// 		res.json(result);
+// 	}).catch(function(err) {
+// 		res.json(err);
+// 	});
+// });
+
+// testing findone and update for adding movie to database.
 app.post("/movie", function (req, res) {
 	console.log(req.body);
-	MovieList.create(
-		{
+	MovieList.findOneAndUpdate(
+		{movieId: req.body.movieId},
+		{$set:{
 			movieId: req.body.movieId,
 			title: req.body.title,
 			release: req.body.release,
@@ -193,7 +221,9 @@ app.post("/movie", function (req, res) {
 			imdbRating: req.body.imdbRating,
 			poster: req.body.poster,
 			genre: req.body.genre
-		}
+		}},
+		options = { upsert: true, new: true, setDefaultsOnInsert: true },
+		
 
 	).then(function(result) {
 		res.json(result);

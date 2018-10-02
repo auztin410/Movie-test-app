@@ -32,10 +32,10 @@ var MovieListSchema = new Schema({
         type: String
     },
     metaScore: {
-        type: Number
+        type: String
     },
     imdbRating: {
-        type: Number
+        type: String
     },
     poster: {
         type: String

@@ -12,21 +12,36 @@ class Search extends Component {
             year: '',
             props: '',
             search: '',
+            playlists: '',
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
         this.handleWantToSee = this.handleWantToSee.bind(this);
+        this.handleAddToPlaylist = this.handleAddToPlaylist.bind(this);
         console.log("user");
         console.log(props);
+    }
+
+    componentDidMount() {
+        if(!this.props.user){
+            console.log("No User!");
+        }
+        else {
+            axios.get(`/playlists/${this.props.user._id}`).then((res) => {
+                this.setState({
+                    playlists: res.data,
+                });
+            }).catch((err) => (console.log(err)));
+        }
     }
 
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value
-        })
-    }
+        });
+    };
 
     handleSearch(event) {
         event.preventDefault();
@@ -118,6 +133,36 @@ class Search extends Component {
             });
         });
 
+    };
+
+    handleAddToPlaylist(playlistName) {
+        console.log("playlist id");
+        console.log(playlistName);
+        axios.post("/movie/", {
+            movieId: this.state.search.data.imdbID,
+            title: this.state.search.data.Title,
+            release: this.state.search.data.Released,
+            rating: this.state.search.data.Rated,
+            runtime: this.state.search.data.Runtime,
+            directed: this.state.search.data.Director,
+            actors: this.state.search.data.Actors,
+            plot: this.state.search.data.Plot,
+            awards: this.state.search.data.Awards,
+            metaScore: this.state.search.data.Metascore,
+            imdbRating: this.state.search.data.imdbRating,
+            poster: this.state.search.data.Poster,
+            genre: this.state.search.data.Genre,
+        }).then((res) => {
+            console.log("results from findoneandupdate")
+            console.log(res);
+                return axios.post("/playlist/add", {
+                    playlist: playlistName,
+                    movie: res.data._id,
+                }).then((res) => {
+                    console.log(res)
+                }).catch((err) => console.log(err));
+            
+        }).catch((err) => console.log(err));
     }
 
     render() {
@@ -826,6 +871,10 @@ class Search extends Component {
                         <p>Imdb Rating: {this.state.search.data.imdbRating}</p>
                         <br />
                         <button onClick={this.handleAdd}>Add to list</button> {" "} <button onClick={this.handleWantToSee}>Want to see</button>
+
+                        {this.state.playlists.map(item => (
+                            <button value={item._id} key={item._id} onClick={this.handleAddToPlaylist.bind(this, item._id)}>{item.name}</button>
+                        ))}
                     </div>
 
                 </div>
