@@ -120,12 +120,20 @@ app.post("/playlist/add", function (req, res) {
 	});
 });
 
-// Pulling playlist
+// Pulling movies from specific playlist
 app.get("/playlist/:playlist", function (req, res) {
 	PlaylistMovies.find(
 		{playlist: req.params.playlist}
 	).populate('movie')
 	.then(dbItem => res.json(dbItem))
+	.catch((err) => res.json(err));
+});
+
+// Get all playlist for user
+app.get("/playlists/:user", function (req, res) {
+	Playlist.find(
+		{user: req.params.user}
+	).then(dbItem => res.json(dbItem))
 	.catch((err) => res.json(err));
 });
 
