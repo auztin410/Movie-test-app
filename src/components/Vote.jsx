@@ -12,6 +12,7 @@ class Vote extends Component {
             ready: false,
             viewers: '',
             viewer: 1,
+            moviesToSelect: 4,
             savedViewers: '',
             voting: false,
             search: '',
@@ -70,21 +71,24 @@ class Vote extends Component {
             this.setState({
                 choice1: this.state.search,
                 search: '',
-                searched: false
+                searched: false,
+                moviesToSelect: this.state.moviesToSelect -1,
             });
         }
         else if(!this.state.choice2) {
             this.setState({
                 choice2: this.state.search,
                 search: '',
-                searched: false
+                searched: false,
+                moviesToSelect: this.state.moviesToSelect -1,
             });
         }
         else if(!this.state.choice3) {
             this.setState({
                 choice3: this.state.search,
                 search: '',
-                searched: false
+                searched: false,
+                moviesToSelect: this.state.moviesToSelect -1,
             });
         }
         else{
@@ -92,7 +96,8 @@ class Vote extends Component {
                 choice4: this.state.search,
                 search: '',
                 searched: false,
-                ready: true
+                ready: true,
+                moviesToSelect: 4,
             });
         }
     };
@@ -175,6 +180,7 @@ class Vote extends Component {
         if( this.state.voteChoice1 > this.state.voteChoice2 && this.state.voteChoice1 > this.state.voteChoice3 && this.state.voteChoice1 > this.state.voteChoice4) {
             Winner = (
                 <div>
+                    <h1>The Winner Is!</h1>
                     <img className="winnerPoster" src={this.state.choice1.data.Poster} alt={this.state.choice1.data.Title} />
                     <h1>{this.state.choice1.data.Title}</h1>
                 </div>
@@ -183,6 +189,7 @@ class Vote extends Component {
         else if( this.state.voteChoice2 > this.state.voteChoice1 && this.state.voteChoice2 > this.state.voteChoice3 && this.state.voteChoice2 > this.state.voteChoice4){
             Winner = (
                 <div>
+                    <h1>The Winner Is!</h1>
                     <img className="winnerPoster" src={this.state.choice2.data.Poster} alt={this.state.choice2.data.Title} />
                     <h1>{this.state.choice2.data.Title}</h1>
                 </div>
@@ -191,6 +198,7 @@ class Vote extends Component {
         else if( this.state.voteChoice3 > this.state.voteChoice1 && this.state.voteChoice3 > this.state.voteChoice2 && this.state.voteChoice3 > this.state.voteChoice4){
             Winner = (
                 <div>
+                    <h1>The Winner Is!</h1>
                     <img className="winnerPoster" src={this.state.choice3.data.Poster} alt={this.state.choice3.data.Title} />
                     <h1>{this.state.choice3.data.Title}</h1>
                 </div>
@@ -199,6 +207,7 @@ class Vote extends Component {
         else if( this.state.voteChoice4 > this.state.voteChoice1 && this.state.voteChoice4 > this.state.voteChoice2 && this.state.voteChoice4 > this.state.voteChoice3){
             Winner = (
                 <div>
+                    <h1>The Winner Is!</h1>
                     <img className="winnerPoster" src={this.state.choice4.data.Poster} alt={this.state.choice4.data.Title} />
                     <h1>{this.state.choice4.data.Title}</h1>
                 </div>
@@ -207,7 +216,7 @@ class Vote extends Component {
         else{
             Winner = (
                 <div>
-                    <h4>There was a tie!</h4>
+                    <h1>There was a tie!</h1>
                     <button onClick={this.handleRecastVote}>Recast Vote!</button>
                 </div>
             )
@@ -215,7 +224,7 @@ class Vote extends Component {
         if(this.state.votingComplete === true) {
             return(
                 <div id="movie-display">
-                    <h1>The Winner Is!</h1>
+                    {/* <h1>The Winner Is!</h1> */}
                         {Winner}
                 </div>
             )
@@ -224,12 +233,6 @@ class Vote extends Component {
             return(
                 <div className="search">
                     <form>
-                        {/* <input
-                        type="text"
-                        name="viewers"
-                        value={this.state.viewers}
-                        onChange={this.handleChange}
-                        /> */}
                         <select name="viewers" onChange={this.handleChange}>
                             <option value="">None Selected</option>
                             <option value="3">3</option>
@@ -283,6 +286,8 @@ class Vote extends Component {
         else if (this.state.searched === false) {
             return (
                 <div className="search">
+                        <h1 className="voteHeader">Select Movies To Vote For</h1>
+                        <h2 className="voteHeader">{this.state.moviesToSelect} Left To Go</h2>
                     <form>
                         <input
                             type="text"
@@ -552,6 +557,8 @@ class Vote extends Component {
         else if (this.state.searched === true) {
             return (
                 <div className="search">
+                    <h1 className="voteHeader">Select Movies To Vote For</h1>
+                        <h2 className="voteHeader">{this.state.moviesToSelect} Left To Go</h2>
                     <form>
                         <input
                             type="text"

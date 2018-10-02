@@ -151,15 +151,21 @@ body {
   opacity: 0;
 }
 
+.voteHeader {
+  color: whitesmoke;
+  text-shadow: 2px 2px black;
+}
+
 .grid {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  grid-gap: 2vw;
-  margin-top: 3em;
+  grid-gap: 1vw;
 }
 
 .viewers {
   grid-area: 1 / 1 / span 1 / span 4;
+  color: whitesmoke;
+  text-shadow: 2px 2px black;
 }
 
 .option1 {
