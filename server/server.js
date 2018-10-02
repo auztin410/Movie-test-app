@@ -87,6 +87,48 @@ app.use(function(err, req, res, next) {
 var MovieList = require("./db/models/movielist");
 var List = require("./db/models/list");
 var Upcoming = require('./db/models/upcoming');
+var Playlist = require('./db/models/playlist');
+var PlaylistMovies = require('./db/models/playlist-movies');
+
+// Testing update playlist routes.
+
+// Creating new playlist
+app.post("/playlist", function (req, res) {
+	Playlist.create(
+		{
+		user: req.body.user,
+		name: req.body.name
+		}
+	).then(function(result) {
+		res.json(result);
+	}).catch(function(err) {
+		res.json(err);
+	});
+});
+
+// Adding movie to playlist
+app.post("/playlist/add", function (req, res) {
+	PlaylistMovies.create(
+		{
+		playlist: req.body.playlist,
+		movie: req.body.movie
+		}
+	).then(function(result) {
+		res.json(result);
+	}).catch(function(err) {
+		res.json(err);
+	});
+});
+
+// Pulling playlist
+app.get("/playlist/:playlist", function (req, res) {
+	PlaylistMovies.find(
+		{playlist: req.params.playlist}
+	).populate('movie')
+	.then(dbItem => res.json(dbItem))
+	.catch((err) => res.json(err));
+});
+
 
 // Routes
 app.post("/add", function (req, res) {

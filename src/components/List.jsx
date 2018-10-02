@@ -48,6 +48,7 @@ handleShowList(event) {
 
     console.log("state list");
     console.log(this.state.list)
+    
 
     const columns=[{
         
