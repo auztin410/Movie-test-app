@@ -70,7 +70,13 @@ handleNewPlaylist(event) {
         user: this.props.user._id,
         name: this.state.newPlaylist,
     }).then((res) => {
-        console.log(res);
+        axios.get(`/playlists/${this.props.user._id}`)
+        .then((res) => {
+            this.setState({
+                playlists: res.data,
+                newPlaylist: '',
+            });
+        }).catch((err) => (console.log(err)));
     }).catch((err) => console.log(err));
     
 };
