@@ -114,14 +114,14 @@ render() {
 
     if(!this.state.display && !this.state.playlists) {
         return(
-            <div>
+            <div className="playlist">
                 Loading...
             </div>
         )
     }
     else if(!this.state.display) {
         return(
-            <div>
+            <div className="playlist">
                 {this.state.playlists.map(item => (
                     <button value={item._id} key={item._id} onClick={this.handlePlaylist.bind(this, item._id)}>{item.name}</button>
                 ))}
@@ -141,7 +141,7 @@ render() {
     }
     else if(this.state.display) {
         return (
-            <div>
+            <div className="playlist">
                 <ReactTable
                 data={data}
                 columns={columns}
@@ -151,7 +151,7 @@ render() {
     }
     else {
         return (
-            <div>
+            <div className="playlist">
                 You dun broke it.
             </div>
         )

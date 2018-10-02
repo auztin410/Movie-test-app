@@ -160,6 +160,9 @@ class Search extends Component {
                     movie: res.data._id,
                 }).then((res) => {
                     console.log(res)
+                    this.setState({
+                        search: '',
+                    })
                 }).catch((err) => console.log(err));
             
         }).catch((err) => console.log(err));
@@ -870,8 +873,6 @@ class Search extends Component {
                         <p>MetaScore: {this.state.search.data.Metascore}</p>
                         <p>Imdb Rating: {this.state.search.data.imdbRating}</p>
                         <br />
-                        <button onClick={this.handleAdd}>Add to list</button> {" "} <button onClick={this.handleWantToSee}>Want to see</button>
-
                         {this.state.playlists.map(item => (
                             <button value={item._id} key={item._id} onClick={this.handleAddToPlaylist.bind(this, item._id)}>{item.name}</button>
                         ))}
