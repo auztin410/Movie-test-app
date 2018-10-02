@@ -85,12 +85,11 @@ app.use(function(err, req, res, next) {
 
 
 var MovieList = require("./db/models/movielist");
-var List = require("./db/models/list");
 var Upcoming = require('./db/models/upcoming');
 var Playlist = require('./db/models/playlist');
 var PlaylistMovies = require('./db/models/playlist-movies');
 
-// Testing update playlist routes.
+// Routes
 
 // Creating new playlist
 app.post("/playlist", function (req, res) {
@@ -137,72 +136,7 @@ app.get("/playlists/:user", function (req, res) {
 	.catch((err) => res.json(err));
 });
 
-
-// Routes
-app.post("/add", function (req, res) {
-	console.log("req body user");
-	console.log(req.body);
-	List.findOneAndUpdate(
-		{userId: req.body.user},
-		{$addToSet: {list: {
-			movieId: req.body.movieId,
-			title: req.body.title,
-			runtime: req.body.runtime,
-			rated: req.body.rated,
-			directed: req.body.directed,
-			genre: req.body.genre
-		}}}
-	).then(function(result) {
-		res.json(result);
-	}).catch(function(err) {
-		res.json(err);
-	});
-});
-
-app.post("/wanttosee", function (req, res) {
-	console.log("req body");
-	console.log(req.body)
-	List.findOneAndUpdate(
-		{userId: req.body.user},
-		{$addToSet: {
-			wantToSee: {
-				movieId: req.body.wantToSee,
-				title: req.body.title
-		}}}
-	).then(function(result) {
-		res.json(result);
-	}).catch(function(err) {
-		res.json(err);
-	});
-});
-
-// app.post("/movie", function (req, res) {
-// 	console.log(req.body);
-// 	MovieList.create(
-// 		{
-// 			movieId: req.body.movieId,
-// 			title: req.body.title,
-// 			release: req.body.release,
-// 			rating: req.body.rating,
-// 			runtime: req.body.runtime,
-// 			directed: req.body.directed,
-// 			actors: req.body.actors,
-// 			plot: req.body.plot,
-// 			awards: req.body.awards,
-// 			metaScore: req.body.metaScore,
-// 			imdbRating: req.body.imdbRating,
-// 			poster: req.body.poster,
-// 			genre: req.body.genre
-// 		}
-
-// 	).then(function(result) {
-// 		res.json(result);
-// 	}).catch(function(err) {
-// 		res.json(err);
-// 	});
-// });
-
-// testing findone and update for adding movie to database.
+// Findoneandupdate for movielist.
 app.post("/movie", function (req, res) {
 	console.log(req.body);
 	MovieList.findOneAndUpdate(
