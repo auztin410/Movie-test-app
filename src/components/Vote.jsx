@@ -11,6 +11,7 @@ class Vote extends Component {
             searched: false,
             ready: false,
             viewers: '',
+            viewer: 1,
             savedViewers: '',
             voting: false,
             search: '',
@@ -108,6 +109,7 @@ class Vote extends Component {
     handleCastVote1(event) {
         this.setState({
             viewers: this.state.viewers -1,
+            viewer: this.state.viewer +1,
             voteChoice1: this.state.voteChoice1 +1
         });
         if(this.state.viewers === 1) {
@@ -120,6 +122,7 @@ class Vote extends Component {
     handleCastVote2(event) {
         this.setState({
             viewers: this.state.viewers -1,
+            viewer: this.state.viewer +1,
             voteChoice2: this.state.voteChoice2 +1
         });
         if(this.state.viewers === 1) {
@@ -132,6 +135,7 @@ class Vote extends Component {
     handleCastVote3(event) {
         this.setState({
             viewers: this.state.viewers -1,
+            viewer: this.state.viewer +1,
             voteChoice3: this.state.voteChoice3 +1
         });
         if(this.state.viewers === 1) {
@@ -144,6 +148,7 @@ class Vote extends Component {
     handleCastVote4(event) {
         this.setState({
             viewers: this.state.viewers -1,
+            viewer: this.state.viewer +1,
             voteChoice4: this.state.voteChoice4 +1
         });
         if(this.state.viewers === 1) {
@@ -161,6 +166,7 @@ class Vote extends Component {
             voteChoice2: 0,
             voteChoice3: 0,
             voteChoice4: 0,
+            viewer: 1,
         });
     };
 
@@ -247,6 +253,7 @@ class Vote extends Component {
         else if (this.state.voting === true) {
             return(
                 <div className="grid">
+                    <h1 className="viewers">Your turn to vote viewer {this.state.viewer}</h1>
                     <div className="option1">
                         <img className="optionPoster" src={this.state.choice1.data.Poster} alt={this.state.choice1.data.Title}/>
                         <h4>{this.state.choice1.data.Title}</h4>
