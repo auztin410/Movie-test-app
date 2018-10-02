@@ -10,6 +10,7 @@ import Search from './components/Search';
 import UserPage from './components/UserPage';
 import Upcoming from './components/Upcoming';
 import List from './components/List';
+import Playlist from './components/Playlist';
 import Vote from './components/Vote';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -185,7 +186,7 @@ class App extends Component {
 
 				<Route exact path="/upcoming" render={() => <Upcoming user={this.state.user} />} />
 
-				<Route exact path="/list" render={() => <List user={this.state.user} />} />
+				<Route exact path="/list" render={() => <Playlist user={this.state.user} />} />
 
 				<Route exact path="/vote" render={() => <Vote user={this.state.user} />} />
 				<br/>
