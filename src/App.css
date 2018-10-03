@@ -58,6 +58,10 @@ body {
   margin-top: 7vh;
 }
 
+.playlist-buttons {
+  margin: .2em;
+}
+
 .search {
   margin-top: 7vh;
 }

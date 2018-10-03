@@ -121,7 +121,7 @@ render() {
     if(!this.state.display && !this.state.playlists) {
         return(
             <div className="playlist">
-                Loading...
+                <p id="movie-display">Loading...</p>
             </div>
         )
     }
@@ -129,10 +129,10 @@ render() {
         return(
             <div className="playlist">
                 {this.state.playlists.map(item => (
-                    <button value={item._id} key={item._id} onClick={this.handlePlaylist.bind(this, item._id)}>{item.name}</button>
+                    <button className="playlist-buttons" value={item._id} key={item._id} onClick={this.handlePlaylist.bind(this, item._id)}>{item.name}</button>
                 ))}
                 <form>
-                        <p>Create a new playlist</p>
+                        <p id="movie-display">Create a new playlist</p>
                         <input
                         type="text"
                         name="newPlaylist"

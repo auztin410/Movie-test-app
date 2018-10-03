@@ -874,7 +874,7 @@ class Search extends Component {
                         <p>Imdb Rating: {this.state.search.data.imdbRating}</p>
                         <br />
                         {this.state.playlists.map(item => (
-                            <button value={item._id} key={item._id} onClick={this.handleAddToPlaylist.bind(this, item._id)}>{item.name}</button>
+                            <button className="playlist-buttons" value={item._id} key={item._id} onClick={this.handleAddToPlaylist.bind(this, item._id)}>{item.name}</button>
                         ))}
                     </div>
 

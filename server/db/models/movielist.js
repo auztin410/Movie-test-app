@@ -11,7 +11,7 @@ var MovieListSchema = new Schema({
         type: String
     },
     release: {
-        type: Date
+        type: String
     },
     rating: {
         type: String
