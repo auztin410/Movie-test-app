@@ -14,6 +14,10 @@ constructor(props) {
         display: '',
         newPlaylist: '',
         props: '',
+        runTimes: [],
+        ratings: [],
+        directors: [],
+        genres: [],
     };
 
     this.handlePlaylist = this.handlePlaylist.bind(this);
@@ -46,13 +50,25 @@ handlePlaylist(playlistId) {
         console.log("getting all movies from specific playlist");
         console.log(res.data);
         let array = [];
+        let directorsArray = [];
+        let genresArray = [];
+        let runTimesArray = [];
+        let ratingsArray = [];
         res.data.map(item => (
-            array.push(item.movie)
+            array.push(item.movie),
+            directorsArray.push(item.movie.directed),
+            genresArray.push(item.movie.genre),
+            runTimesArray.push(item.movie.runtime),
+            ratingsArray.push(item.movie.rating)            
         ));
         console.log(array);
         this.setState({
             display: array,
-        });  
+            directors: directorsArray,
+            genres: genresArray,
+            runTimes: runTimesArray,
+            ratings: ratingsArray,
+        });
     }).catch((err) => (console.log(err)));
 };
 
