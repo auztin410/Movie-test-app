@@ -14,10 +14,10 @@ constructor(props) {
         display: '',
         newPlaylist: '',
         props: '',
-        runTimes: [],
-        ratings: [],
-        directors: [],
-        genres: [],
+        runTimes: {},
+        ratings: {},
+        directors: {},
+        genres: {},
     };
 
     this.handlePlaylist = this.handlePlaylist.bind(this);
@@ -61,13 +61,30 @@ handlePlaylist(playlistId) {
             runTimesArray.push(item.movie.runtime),
             ratingsArray.push(item.movie.rating)            
         ));
-        console.log(array);
+
+        let countDirectors = {};
+        for (var i = 0; i < directorsArray.length; i++) {
+        countDirectors[directorsArray[i]] = 1 + (countDirectors[directorsArray[i]] || 0);}
+
+        let countGenres = {};
+        for (var i = 0; i < genresArray.length; i++) {
+        countGenres[genresArray[i]] = 1 + (countGenres[genresArray[i]] || 0);}
+
+        let countRunTimes = {};
+        for (var i = 0; i < runTimesArray.length; i++) {
+        countRunTimes[runTimesArray[i]] = 1 + (countRunTimes[runTimesArray[i]] || 0);}
+
+        let countRatings = {};
+        for (var i = 0; i < ratingsArray.length; i++) {
+        countRatings[ratingsArray[i]] = 1 + (countRatings[ratingsArray[i]] || 0);}      
+
+    
         this.setState({
             display: array,
-            directors: directorsArray,
-            genres: genresArray,
-            runTimes: runTimesArray,
-            ratings: ratingsArray,
+            directors: countDirectors,
+            genres: countGenres,
+            runTimes: countRunTimes,
+            ratings: countRatings,
         });
     }).catch((err) => (console.log(err)));
 };
