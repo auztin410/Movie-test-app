@@ -10,3 +10,4 @@ List of features:
 * Search for movies.
 * Random movie button.
 * Graphing movie break down.
+* Movie voting section.
