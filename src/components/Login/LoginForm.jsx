@@ -37,22 +37,27 @@ class LoginForm extends Component {
 		} else {
 			return (
 				<div className="LoginForm">
-					<h1>Login form</h1>
+					<h1 id="movie-display" >Login form</h1>
 					<form>
-						<label htmlFor="username">Username: </label>
+						<label id="movie-display" htmlFor="username">Username: </label>
 						<input
 							type="text"
 							name="username"
 							value={this.state.username}
 							onChange={this.handleChange}
 						/>
-						<label htmlFor="password">Password: </label>
+
+						<br />
+						<br />
+						<label id="movie-display" htmlFor="password">Password: </label>
 						<input
 							type="password"
 							name="password"
 							value={this.state.password}
 							onChange={this.handleChange}
 						/>
+						<br />
+						<br />
 						<button onClick={this.handleSubmit}>Login</button>
 					</form>
 					{/* <a href="/auth/google"> */}

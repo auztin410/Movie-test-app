@@ -26,7 +26,8 @@
 		"react": "^15.5.4",
 		"react-dom": "^15.5.4",
 		"react-router-dom": "^4.1.2",
-		"react-table": "^6.8.6"
+		"react-table": "^6.8.6",
+		"victory": "^30.5.0"
 	},
 	"devDependencies": {
 		"concurrently": "^3.5.0",

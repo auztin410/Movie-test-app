@@ -1,6 +1,7 @@
 import React, { Component } from  'react';
 import axios from 'axios';
 import '../App.css';
+import { VictoryPie } from 'victory';
 
 // Import React Table
 import ReactTable from 'react-table';
@@ -18,6 +19,7 @@ constructor(props) {
         ratings: {},
         directors: {},
         genres: {},
+        result: '',
     };
 
     this.handlePlaylist = this.handlePlaylist.bind(this);
@@ -76,9 +78,11 @@ handlePlaylist(playlistId) {
 
         let countRatings = {};
         for (var i = 0; i < ratingsArray.length; i++) {
-        countRatings[ratingsArray[i]] = 1 + (countRatings[ratingsArray[i]] || 0);}      
+        countRatings[ratingsArray[i]] = 1 + (countRatings[ratingsArray[i]] || 0);}
+          
+        console.log("count ratings properties");
+        console.log(Object.getOwnPropertyNames(countRatings));
 
-    
         this.setState({
             display: array,
             directors: countDirectors,
@@ -184,6 +188,15 @@ render() {
                 <ReactTable
                 data={data}
                 columns={columns}
+                />
+                <br />
+                <VictoryPie
+                data={[
+                    {x: "Dogs", y: 50},
+                    {x: "Cats", y:12},
+                    {x: "Ferrets", y: 30},
+                    {x: "Snakes", y: 8}
+                ]}
                 />
             </div>
         )
