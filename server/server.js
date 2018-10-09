@@ -35,33 +35,13 @@ app.use(
 	})
 )
 
-// mongoose.connect("mongodb://localhost/movietestapp");
+;
 
 // ===== Passport ====
 app.use(passport.initialize())
 app.use(passport.session()) // will call the deserializeUser
 
-// ===== testing middleware =====
-// app.use(function(req, res, next) {
-// 	console.log('===== passport user =======')
-// 	console.log(req.session)
-// 	console.log(req.user)
-// 	console.log('===== END =======')
-// 	next()
-// })
-// testing
-// app.get(
-// 	'/auth/google/callback',
-// 	(req, res, next) => {
-// 		console.log(`req.user: ${req.user}`)
-// 		console.log('======= /auth/google/callback was called! =====')
-// 		next()
-// 	},
-// 	passport.authenticate('google', { failureRedirect: '/login' }),
-// 	(req, res) => {
-// 		res.redirect('/')
-// 	}
-// )
+
 
 // ==== if its production environment!
 if (process.env.NODE_ENV === 'production') {
@@ -90,14 +70,7 @@ var Playlist = require('./db/models/playlist');
 var PlaylistMovies = require('./db/models/playlist-movies');
 var Autocomplete = require('./db/models/autocomplete');
 
-// Catch All
-app.get('/*', function(req, res) {
-	res.sendFile(path.join(__dirname, '../public/index.html'), function(err) {
-	  if (err) {
-		res.status(500).send(err)
-	  }
-	});
-  });
+
 
 // Routes
 
@@ -272,7 +245,14 @@ app.post("/userlistcreate", function (req, res) {
 	});
 });
 
-
+// Catch All
+app.get('/*', function(req, res) {
+	res.sendFile(path.join(__dirname, '../build/'), function(err) {
+	  if (err) {
+		res.status(500).send(err)
+	  }
+	});
+  });
 
 // ==== Starting Server =====
 app.listen(PORT, () => {
