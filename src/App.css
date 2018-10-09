@@ -75,6 +75,11 @@ body {
   text-shadow: 2px 2px black;
 }
 
+.contain-pie {
+  height: 100vh;
+  width: 100vw;
+}
+
 .buttons {
   margin: 5px;
   padding: 8px;

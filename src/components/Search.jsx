@@ -25,7 +25,7 @@ class Search extends Component {
     }
 
     componentDidMount() {
-        if(!this.props.user){
+        if (!this.props.user) {
             console.log("No User!");
         }
         else {
@@ -155,16 +155,16 @@ class Search extends Component {
         }).then((res) => {
             console.log("results from findoneandupdate")
             console.log(res);
-                return axios.post("/playlist/add", {
-                    playlist: playlistName,
-                    movie: res.data._id,
-                }).then((res) => {
-                    console.log(res)
-                    this.setState({
-                        search: '',
-                    })
-                }).catch((err) => console.log(err));
-            
+            return axios.post("/playlist/add", {
+                playlist: playlistName,
+                movie: res.data._id,
+            }).then((res) => {
+                console.log(res)
+                this.setState({
+                    search: '',
+                })
+            }).catch((err) => console.log(err));
+
         }).catch((err) => console.log(err));
     }
 
