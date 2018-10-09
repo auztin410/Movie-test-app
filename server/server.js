@@ -5,6 +5,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 require('dotenv').config()
 
+const test = require("../src/index.js");
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
@@ -264,12 +266,12 @@ app.post("/userlistcreate", function (req, res) {
 });
 
 app.get('/*', function(req, res) {
-	res.sendFile(path.join(__dirname, '../public'), function(err) {
+	res.sendFile(path.join(__dirname, '../src/index.js'), function(err) {
 	  if (err) {
 		res.status(500).send(err)
 	  }
-	})
-  })
+	});
+  });
 
 // ==== Starting Server =====
 app.listen(PORT, () => {
