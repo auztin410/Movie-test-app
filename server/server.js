@@ -77,7 +77,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/auth', require('./auth'))
 
 // ====== Error handler ====
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
 	console.log('====== ERROR =======')
 	console.error(err.stack)
 	res.status(500)
@@ -88,19 +88,43 @@ var MovieList = require("./db/models/movielist");
 var Upcoming = require('./db/models/upcoming');
 var Playlist = require('./db/models/playlist');
 var PlaylistMovies = require('./db/models/playlist-movies');
+var Autocomplete = require('./db/models/autocomplete');
 
 // Routes
+
+// Adding Movie to Autocomplete
+app.post("/autocomplete", function (req, res) {
+	Autocomplete.create(
+		{
+			movieId: req.body.movieId,
+			title: req.body.title,
+			year: req.body.year
+		}
+
+	).then(function (result) {
+		res.json(result);
+	}).catch(function (err) {
+		res.json(err);
+	});
+});
+
+// Getting all autocomplete suggestions
+app.get("/autocomplete", function (req, res) {
+	Autocomplete.find({})
+		.then(dbItem => res.json(dbItem))
+		.catch((err) => res.json(err));
+});
 
 // Creating new playlist
 app.post("/playlist", function (req, res) {
 	Playlist.create(
 		{
-		user: req.body.user,
-		name: req.body.name
+			user: req.body.user,
+			name: req.body.name
 		}
-	).then(function(result) {
+	).then(function (result) {
 		res.json(result);
-	}).catch(function(err) {
+	}).catch(function (err) {
 		res.json(err);
 	});
 });
@@ -109,12 +133,12 @@ app.post("/playlist", function (req, res) {
 app.post("/playlist/add", function (req, res) {
 	PlaylistMovies.create(
 		{
-		playlist: req.body.playlist,
-		movie: req.body.movie
+			playlist: req.body.playlist,
+			movie: req.body.movie
 		}
-	).then(function(result) {
+	).then(function (result) {
 		res.json(result);
-	}).catch(function(err) {
+	}).catch(function (err) {
 		res.json(err);
 	});
 });
@@ -122,106 +146,108 @@ app.post("/playlist/add", function (req, res) {
 // Pulling movies from specific playlist
 app.get("/playlist/:playlist", function (req, res) {
 	PlaylistMovies.find(
-		{playlist: req.params.playlist}
+		{ playlist: req.params.playlist }
 	).populate('movie')
-	.then(dbItem => res.json(dbItem))
-	.catch((err) => res.json(err));
+		.then(dbItem => res.json(dbItem))
+		.catch((err) => res.json(err));
 });
 
 // Get all playlist for user
 app.get("/playlists/:user", function (req, res) {
 	Playlist.find(
-		{user: req.params.user}
+		{ user: req.params.user }
 	).then(dbItem => res.json(dbItem))
-	.catch((err) => res.json(err));
+		.catch((err) => res.json(err));
 });
 
 // Findoneandupdate for movielist.
 app.post("/movie", function (req, res) {
 	console.log(req.body);
 	MovieList.findOneAndUpdate(
-		{movieId: req.body.movieId},
-		{$set:{
-			movieId: req.body.movieId,
-			title: req.body.title,
-			release: req.body.release,
-			rating: req.body.rating,
-			runtime: req.body.runtime,
-			directed: req.body.directed,
-			actors: req.body.actors,
-			plot: req.body.plot,
-			awards: req.body.awards,
-			metaScore: req.body.metaScore,
-			imdbRating: req.body.imdbRating,
-			poster: req.body.poster,
-			genre: req.body.genre
-		}},
+		{ movieId: req.body.movieId },
+		{
+			$set: {
+				movieId: req.body.movieId,
+				title: req.body.title,
+				release: req.body.release,
+				rating: req.body.rating,
+				runtime: req.body.runtime,
+				directed: req.body.directed,
+				actors: req.body.actors,
+				plot: req.body.plot,
+				awards: req.body.awards,
+				metaScore: req.body.metaScore,
+				imdbRating: req.body.imdbRating,
+				poster: req.body.poster,
+				genre: req.body.genre
+			}
+		},
 		options = { upsert: true, new: true, setDefaultsOnInsert: true },
-		
 
-	).then(function(result) {
+
+	).then(function (result) {
 		res.json(result);
-	}).catch(function(err) {
+	}).catch(function (err) {
 		res.json(err);
 	});
 });
 
 app.get("/movie/:movieId", function (req, res) {
 	MovieList.find(
-		{movieId: req.params.movieId}
+		{ movieId: req.params.movieId }
 	).then(dbItem => res.json(dbItem))
-	.catch((err) => console.log(err));
+		.catch((err) => console.log(err));
 });
 
 app.get("/random", function (req, res) {
 	MovieList.find({})
-	.then(dbItem => res.json(dbItem))
-	.catch((err) => console.log(err));
+		.then(dbItem => res.json(dbItem))
+		.catch((err) => console.log(err));
 });
 
 app.get("/userlist/:userId", function (req, res) {
 	List.find(
-		{userId: req.params.userId}
+		{ userId: req.params.userId }
 	).then(dbItem => res.json(dbItem))
-	.catch((err) => console.log(err));
+		.catch((err) => console.log(err));
 });
 
 app.get("/scrape", function (req, res) {
-	axios.get("https://www.imdb.com/movies-coming-soon/?ref_=nv_mv_cs").then( function (result) {
+	axios.get("https://www.imdb.com/movies-coming-soon/?ref_=nv_mv_cs").then(function (result) {
 		var $ = cheerio.load(result.data);
 		$("td.overview-top").each(function (i, element) {
 			var result = {};
 
 			result.title = $(this)
-			.children("h4")
-			.text();
+				.children("h4")
+				.text();
 			result.link = $(this)
-			.children("h4")
-        	.children("a")
-			.attr("href");
-			
+				.children("h4")
+				.children("a")
+				.attr("href");
+
 			console.log(result.title);
 			console.log(result.link);
 
 			Upcoming.create(result)
-			.then(function (upcomingMovie) {
-				console.log(upcomingMovie);
-			})
-			.catch(function (err) {
-				console.log("error");
-			});
+				.then(function (upcomingMovie) {
+					console.log(upcomingMovie);
+				})
+				.catch(function (err) {
+					console.log("error");
+				});
 		});
 	});
 });
 
 app.get("/upcoming/list", function (req, res) {
 	Upcoming.find({})
-	.then(function(result) {
-		res.json(result);
-	})
-	.catch(function(err) {
-		res.json(err);
-	});
+		.then(function (result) {
+			res.json(result);
+		})
+		.catch(function (err) {
+			res.json(err);
+		});
 });
 
 
@@ -230,9 +256,9 @@ app.post("/userlistcreate", function (req, res) {
 		{
 			userId: req.body.userId
 		}
-	).then(function(result) {
+	).then(function (result) {
 		res.json(result);
-	}).catch(function(err) {
+	}).catch(function (err) {
 		res.json(err);
 	});
 });

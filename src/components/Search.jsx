@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from "axios";
 import '../App.css';
+import ReactAutocomplete from 'react-autocomplete';
 
 class Search extends Component {
 
@@ -13,12 +14,15 @@ class Search extends Component {
             props: '',
             search: '',
             playlists: '',
+            value: '',
+            suggestions: [],
+            ready: false,
+            selected: '',
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
-        this.handleWantToSee = this.handleWantToSee.bind(this);
         this.handleAddToPlaylist = this.handleAddToPlaylist.bind(this);
         console.log("user");
         console.log(props);
@@ -27,11 +31,23 @@ class Search extends Component {
     componentDidMount() {
         if (!this.props.user) {
             console.log("No User!");
+            axios.get("/autocomplete/").then((res) => {
+                this.setState({
+                    suggestions: res.data,
+                    ready: true,
+                });
+            });
         }
         else {
             axios.get(`/playlists/${this.props.user._id}`).then((res) => {
                 this.setState({
                     playlists: res.data,
+                });
+                return axios.get("/autocomplete/").then((res) => {
+                    this.setState({
+                        suggestions: res.data,
+                        ready: true,
+                    });
                 });
             }).catch((err) => (console.log(err)));
         }
@@ -46,9 +62,9 @@ class Search extends Component {
     handleSearch(event) {
         event.preventDefault();
         this.setState({
-            search: '',
+            value: '',
         });
-        let queryUrl = `https://www.omdbapi.com/?t=${this.state.movie}&y=${this.state.year}&plot=short&apikey=trilogy`;
+        let queryUrl = `https://www.omdbapi.com/?t=${this.state.value}&y=${this.state.year}&plot=short&apikey=trilogy`;
         console.log("HTTPS is now active!");
 
         axios.get(queryUrl).then((res) => {
@@ -58,6 +74,21 @@ class Search extends Component {
                 year: '',
                 search: res,
             });
+            if (this.state.search.data.Response === "False") {
+                console.log("no movie found, will not add to autocomplete");
+            }
+            else {
+                axios.post("/autocomplete/", {
+                    movieId: this.state.search.data.imdbID,
+                    title: this.state.search.data.Title,
+                    year: this.state.search.data.Released
+                }).then((res) => {
+                    console.log("autocomplete add");
+                    console.log(res);
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
         });
     };
 
@@ -101,43 +132,9 @@ class Search extends Component {
 
     }
 
-    handleWantToSee(event) {
-        axios.post("/wanttosee/", {
-            user: this.props.user._id,
-            wantToSee: this.state.search.data.imdbID,
-            title: this.state.search.data.Title
-        }).then((res) => {
-            console.log("add to want to see");
-            console.log(res);
-            return axios.post("/movie/", {
-                movieId: this.state.search.data.imdbID,
-                title: this.state.search.data.Title,
-                release: this.state.search.data.Released,
-                rating: this.state.search.data.Rated,
-                runtime: this.state.search.data.Runtime,
-                directed: this.state.search.data.Director,
-                actors: this.state.search.data.Actors,
-                plot: this.state.search.data.Plot,
-                awards: this.state.search.data.Awards,
-                metaScore: this.state.search.data.Metascore,
-                imdbRating: this.state.search.data.imdbRating,
-                poster: this.state.search.data.Poster,
-                genre: this.state.search.data.Genre,
-            }).then((res) => {
-                console.log(res);
-                this.setState({
-                    search: '',
-                });
-            }).catch((err) => {
-                console.log(err);
-            });
-        });
-
-    };
-
-    handleAddToPlaylist(playlistName) {
+    handleAddToPlaylist(event) {
+        event.preventDefault();
         console.log("playlist id");
-        console.log(playlistName);
         axios.post("/movie/", {
             movieId: this.state.search.data.imdbID,
             title: this.state.search.data.Title,
@@ -156,7 +153,7 @@ class Search extends Component {
             console.log("results from findoneandupdate")
             console.log(res);
             return axios.post("/playlist/add", {
-                playlist: playlistName,
+                playlist: this.state.selected,
                 movie: res.data._id,
             }).then((res) => {
                 console.log(res)
@@ -169,16 +166,45 @@ class Search extends Component {
     }
 
     render() {
-        if (!this.state.search && !this.props.user) {
+        
+
+        if (!this.state.ready)
+            return(
+                <div>
+                    Loading...
+                </div>
+            )
+        else if (!this.state.search && !this.props.user && this.state.suggestions) {
             return (
                 <div className="search">
                     <form>
-                        <input
+                    <ReactAutocomplete
+                            items={
+                                this.state.suggestions.map(item =>(
+                                    { id: item.title, label: item.title}
+                                ))
+                            }
+                            shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+                            getItemValue={item => item.label}
+                            renderItem={(item, highlighted) =>
+                                <div
+                                    key={item.id}
+                                    style={{ backgroundColor: highlighted ? '#eee' : 'transparent' }}
+                                >
+                                    {item.label}
+                                </div>
+                            }
+                            value={this.state.value}
+                            onChange={e => this.setState({ value: e.target.value })}
+                            onSelect={value => this.setState({ value })}
+                        />
+                        {/* <input
                             type="text"
                             name="movie"
                             value={this.state.movie}
                             onChange={this.handleChange}
-                        />
+                        /> */}
+                        
                         <select name="year" onChange={this.handleChange}>
                             <option value="">N/A</option>
                             <option value="2018">2018</option>
@@ -308,12 +334,32 @@ class Search extends Component {
             return (
                 <div className="search">
                     <form>
-                        <input
+                    <ReactAutocomplete
+                            items={
+                                this.state.suggestions.map(item =>(
+                                    { id: item.title, label: item.title}
+                                ))
+                            }
+                            shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+                            getItemValue={item => item.label}
+                            renderItem={(item, highlighted) =>
+                                <div
+                                    key={item.id}
+                                    style={{ backgroundColor: highlighted ? '#eee' : 'transparent' }}
+                                >
+                                    {item.label}
+                                </div>
+                            }
+                            value={this.state.value}
+                            onChange={e => this.setState({ value: e.target.value })}
+                            onSelect={value => this.setState({ value })}
+                        />
+                        {/* <input
                             type="text"
                             name="movie"
                             value={this.state.movie}
                             onChange={this.handleChange}
-                        />
+                        /> */}
                         <select name="year" onChange={this.handleChange}>
                             <option value="">N/A</option>
                             <option value="2018">2018</option>
@@ -443,12 +489,32 @@ class Search extends Component {
             return (
                 <div className="search">
                     <form>
-                        <input
+                    <ReactAutocomplete
+                            items={
+                                this.state.suggestions.map(item =>(
+                                    { id: item.title, label: item.title}
+                                ))
+                            }
+                            shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+                            getItemValue={item => item.label}
+                            renderItem={(item, highlighted) =>
+                                <div
+                                    key={item.id}
+                                    style={{ backgroundColor: highlighted ? '#eee' : 'transparent' }}
+                                >
+                                    {item.label}
+                                </div>
+                            }
+                            value={this.state.value}
+                            onChange={e => this.setState({ value: e.target.value })}
+                            onSelect={value => this.setState({ value })}
+                        />
+                        {/* <input
                             type="text"
                             name="movie"
                             value={this.state.movie}
                             onChange={this.handleChange}
-                        />
+                        /> */}
                         <select name="year" onChange={this.handleChange}>
                             <option value="">N/A</option>
                             <option value="2018">2018</option>
@@ -583,12 +649,32 @@ class Search extends Component {
                     {/* <p>Current User:</p>
                     <p>{this.props.user.local.username}</p> */}
                     <form>
-                        <input
+                    <ReactAutocomplete
+                            items={
+                                this.state.suggestions.map(item =>(
+                                    { id: item.title, label: item.title}
+                                ))
+                            }
+                            shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+                            getItemValue={item => item.label}
+                            renderItem={(item, highlighted) =>
+                                <div
+                                    key={item.id}
+                                    style={{ backgroundColor: highlighted ? '#eee' : 'transparent' }}
+                                >
+                                    {item.label}
+                                </div>
+                            }
+                            value={this.state.value}
+                            onChange={e => this.setState({ value: e.target.value })}
+                            onSelect={value => this.setState({ value })}
+                        />
+                        {/* <input
                             type="text"
                             name="movie"
                             value={this.state.movie}
                             onChange={this.handleChange}
-                        />
+                        /> */}
                         <select name="year" onChange={this.handleChange}>
                             <option value="">N/A</option>
                             <option value="2018">2018</option>
@@ -733,12 +819,32 @@ class Search extends Component {
                     {/* <p>Current User:</p>
                     <p>{this.props.user.local.username}</p> */}
                     <form>
-                        <input
+                    <ReactAutocomplete
+                            items={
+                                this.state.suggestions.map(item =>(
+                                    { id: item.title, label: item.title}
+                                ))
+                            }
+                            shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+                            getItemValue={item => item.label}
+                            renderItem={(item, highlighted) =>
+                                <div
+                                    key={item.id}
+                                    style={{ backgroundColor: highlighted ? '#eee' : 'transparent' }}
+                                >
+                                    {item.label}
+                                </div>
+                            }
+                            value={this.state.value}
+                            onChange={e => this.setState({ value: e.target.value })}
+                            onSelect={value => this.setState({ value })}
+                        />
+                        {/* <input
                             type="text"
                             name="movie"
                             value={this.state.movie}
                             onChange={this.handleChange}
-                        />
+                        /> */}
                         <select name="year" onChange={this.handleChange}>
                             <option value="">N/A</option>
                             <option value="2018">2018</option>
@@ -873,9 +979,17 @@ class Search extends Component {
                         <p>MetaScore: {this.state.search.data.Metascore}</p>
                         <p>Imdb Rating: {this.state.search.data.imdbRating}</p>
                         <br />
-                        {this.state.playlists.map(item => (
-                            <button className="playlist-buttons" value={item._id} key={item._id} onClick={this.handleAddToPlaylist.bind(this, item._id)}>{item.name}</button>
-                        ))}
+                        <form>
+                        <select name="selected" onChange={this.handleChange}>
+                        <option value="">None Selected</option>
+                    {this.state.playlists.map(item => (
+                        <option value={item._id}>{item.name}</option>
+                    ))}
+                    </select>
+                    {" "}
+                    <button onClick={this.handleAddToPlaylist}>Add to Playlist</button>
+                    </form>
+
                     </div>
 
                 </div>
