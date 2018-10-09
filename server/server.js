@@ -90,6 +90,15 @@ var Playlist = require('./db/models/playlist');
 var PlaylistMovies = require('./db/models/playlist-movies');
 var Autocomplete = require('./db/models/autocomplete');
 
+// Catch All
+app.get('/*', function(req, res) {
+	res.sendFile(path.join(__dirname, '../public/index.html'), function(err) {
+	  if (err) {
+		res.status(500).send(err)
+	  }
+	});
+  });
+
 // Routes
 
 // Adding Movie to Autocomplete
@@ -263,13 +272,7 @@ app.post("/userlistcreate", function (req, res) {
 	});
 });
 
-app.get('/*', function(req, res) {
-	res.sendFile(path.join(__dirname, '../public/index.html'), function(err) {
-	  if (err) {
-		res.status(500).send(err)
-	  }
-	});
-  });
+
 
 // ==== Starting Server =====
 app.listen(PORT, () => {
