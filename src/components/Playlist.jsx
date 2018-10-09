@@ -20,6 +20,7 @@ class Playlist extends Component {
             directors: {},
             genres: {},
             result: '',
+            selected: '',
         };
 
         this.handlePlaylist = this.handlePlaylist.bind(this);
@@ -43,12 +44,12 @@ class Playlist extends Component {
         }
     };
 
-    handlePlaylist(playlistId) {
-        console.log(playlistId);
+    handlePlaylist(event) {
+        event.preventDefault();
         this.setState({
             display: '',
         });
-        axios.get(`/playlist/${playlistId}`).then((res) => {
+        axios.get(`/playlist/${this.state.selected}`).then((res) => {
             console.log("getting all movies from specific playlist");
             console.log(res.data);
             let array = [];
@@ -59,10 +60,15 @@ class Playlist extends Component {
             res.data.map(item => (
                 array.push(item.movie),
                 directorsArray.push(item.movie.directed),
-                genresArray.push(item.movie.genre),
+                genresArray.push(item.movie.genre.split(",")),
                 runTimesArray.push(item.movie.runtime),
                 ratingsArray.push(item.movie.rating)
             ));
+
+            const genresSplitArray = [].concat(...genresArray);
+
+            console.log("genre split");
+            console.log(genresSplitArray);
 
             const countDirectors = directorsArray.reduce((forGraph, directorsArray) => {
                 const current = forGraph.find(item => item.x === directorsArray);
@@ -77,13 +83,13 @@ class Playlist extends Component {
                 return forGraph
             }, []);
 
-            const countGenres = genresArray.reduce((forGraph, genresArray) => {
-                const current = forGraph.find(item => item.x === genresArray);
+            const countGenres = genresSplitArray.reduce((forGraph, genresSplitArray) => {
+                const current = forGraph.find(item => item.x === genresSplitArray);
                 if (current) {
                     current.y += 1
                 } else {
                     forGraph.push({
-                        x: genresArray,
+                        x: genresSplitArray,
                         y: 1
                     })
                 }
@@ -118,10 +124,7 @@ class Playlist extends Component {
                 return forGraph
             }, []);
 
-            // let countRatings = {};
-            // for (var i = 0; i < ratingsArray.length; i++) {
-            //     countRatings[ratingsArray[i]] = 1 + (countRatings[ratingsArray[i]] || 0);
-            // }
+        
 
 
             this.setState({
@@ -208,9 +211,16 @@ class Playlist extends Component {
         else if (!this.state.display) {
             return (
                 <div className="playlist">
+                    <form>
+                        <select name="selected" onChange={this.handleChange}>
+                        <option value="">None Selected</option>
                     {this.state.playlists.map(item => (
-                        <button className="playlist-buttons" value={item._id} key={item._id} onClick={this.handlePlaylist.bind(this, item._id)}>{item.name}</button>
+                        <option value={item._id}>{item.name}</option>
                     ))}
+                    </select>
+                    {" "}
+                    <button onClick={this.handlePlaylist}>Load Playlist</button>
+                    </form>
                     <form>
                         <p id="movie-display">Create a new playlist</p>
                         <input
@@ -228,6 +238,27 @@ class Playlist extends Component {
         else if (this.state.display) {
             return (
                 <div className="playlist">
+                    <form>
+                        <select name="selected" onChange={this.handleChange}>
+                        <option value="">None Selected</option>
+                    {this.state.playlists.map(item => (
+                        <option value={item._id}>{item.name}</option>
+                    ))}
+                    </select>
+                    {" "}
+                    <button onClick={this.handlePlaylist}>Load Playlist</button>
+                    </form>
+                    <form>
+                        <p id="movie-display">Create a new playlist</p>
+                        <input
+                            type="text"
+                            name="newPlaylist"
+                            value={this.state.newPlaylist}
+                            onChange={this.handleChange}
+                        />
+                        {" "}
+                        <button onClick={this.handleNewPlaylist}>Create New Playlist</button>
+                    </form>
                     <ReactTable
                         data={data}
                         columns={columns}
