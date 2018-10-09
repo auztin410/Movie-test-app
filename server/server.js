@@ -246,13 +246,13 @@ app.post("/userlistcreate", function (req, res) {
 });
 
 // Catch All
-app.get('/*', function(req, res) {
-	res.sendFile(path.join(__dirname, '../build/'), function(err) {
-	  if (err) {
-		res.status(500).send(err)
-	  }
-	});
-  });
+// app.get('/*', function(req, res) {
+// 	res.sendFile(path.join(__dirname, '../build/'), function(err) {
+// 	  if (err) {
+// 		res.status(500).send(err)
+// 	  }
+// 	});
+//   });
 
 // ==== Starting Server =====
 app.listen(PORT, () => {
