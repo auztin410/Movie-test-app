@@ -164,7 +164,7 @@ app.post("/movie", function (req, res) {
 				genre: req.body.genre
 			}
 		},
-		
+		options = { upsert: true, new: true, setDefaultsOnInsert: true },
 
 
 	).then(function (result) {
