@@ -164,7 +164,7 @@ app.post("/movie", function (req, res) {
 				genre: req.body.genre
 			}
 		},
-		options = { upsert: true, new: true, setDefaultsOnInsert: true },
+		
 
 
 	).then(function (result) {
@@ -203,22 +203,51 @@ app.get("/scrape", function (req, res) {
 			result.title = $(this)
 				.children("h4")
 				.text();
-			result.link = $(this)
-				.children("h4")
-				.children("a")
-				.attr("href");
 
-			console.log(result.title);
-			console.log(result.link);
+			// console.log(result.title);
 
-			Upcoming.create(result)
-				.then(function (upcomingMovie) {
-					console.log(upcomingMovie);
-				})
-				.catch(function (err) {
-					console.log("error");
-				});
+			movie = result.title.replace(")", "").split(" (");
+
+			console.log(movie);
+
+			let queryUrl = `https://www.omdbapi.com/?t=${movie[0]}&y=${movie[1]}&plot=short&apikey=trilogy`;
+        	console.log("HTTPS is now active!");
+
+			axios.get(queryUrl).then((res) => {
+				if( res.data.Response == "True") {
+					if (res.data.Title == "N/A"){}
+					else if (res.data.Poster == "N/A"){}
+					else {
+						console.log(res.data.Title);
+						console.log(res.data.Poster);
+						var result = {title: res.data.Title, link: res.data.Poster}
+						Upcoming.findOneAndUpdate(
+							{title: result.title},
+							{
+								$set: {
+									title: result.title,
+									link: result.link,
+								}
+							},
+							options = { upsert: true, new: true, setDefaultsOnInsert: true },
+						)
+						.then(function (upcomingMovie) {
+							console.log(upcomingMovie);
+						})
+						.catch(function (err) {
+							console.log("error");
+							console.log(err) ;
+						});
+					}
+					
+				}
+				
+			});
+
+			
 		});
+
+		
 	});
 });
 

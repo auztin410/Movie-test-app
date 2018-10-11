@@ -8,14 +8,27 @@ class Upcoming extends Component {
         super(props)
         this.state = {
             upcoming: [],
+            ready: false,
         }
     }
 
     componentDidMount() {
-        axios.get("/scrape/").then((res) => {
-            console.log("scrape results");
-            console.log(res.data);
-            }).catch((err) => console.log(err));
+        // axios.get("/scrape/").then((res) => {
+        //     console.log("scrape results");
+        //     console.log(res.data);
+        //     this.setState({
+        //         ready: true,
+        //     });
+        //     }).catch((err) => console.log(err));
+
+            // if(this.state.ready === true) {
+                axios.get("/upcoming/list").then((res) => {
+                    this.setState({ upcoming: [...res.data]});
+                });
+            // }
+            // else {
+            //     console.log("loading...");
+            // }
         };
        
         
