@@ -10,7 +10,14 @@ class Upcoming extends Component {
             upcoming: [],
             ready: false,
         }
+
+        this.Shuffle = this.Shuffle.bind(this);
     }
+
+    Shuffle(o) {
+        for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+        return o;
+    };
 
     componentDidMount() {
         // axios.get("/scrape/").then((res) => {
@@ -21,36 +28,73 @@ class Upcoming extends Component {
         //     });
         //     }).catch((err) => console.log(err));
 
-            // if(this.state.ready === true) {
-                axios.get("/upcoming/list").then((res) => {
-                    this.setState({ upcoming: [...res.data]});
-                });
-            // }
-            // else {
-            //     console.log("loading...");
-            // }
-        };
-       
+        // if(this.state.ready === true) {
+        axios.get("/upcoming/list").then((res) => {
+            this.setState({
+                upcoming: [...res.data]
+             });
+            this.Shuffle(this.state.upcoming);
+            this.setState({
+                ready: true,
+            });
+        });
+        // }
+        // else {
+        //     console.log("loading...");
+        // }
+    };
+
+
+    render() {
         
-        render() {
-            if(!this.props.user) {
-                return(
-                    <div className="upcomingDisplay">
-                        No user so no adding to want to see.
+        if (!this.props.user) {
+            return (
+                <div className="upcomingDisplay">
+                    No user so no adding to want to see.
                     </div>
-                )
-            }
-            else {
-                return(
-                    <div className="upcomingDisplay">
-                        User detected so allow adding to want to see list.
+            )
+        }
+        else if (this.state.ready === false) {
+            return (
+                <div>
+                    Loading...
                     </div>
-                )
-            }
+            )
+        }
+        else if (this.state.ready === true) {
+            return (
+                <div className="upcomingDisplay">
+                    <div className="upcoming0">
+                        <img className="poster" src={this.state.upcoming[0].link} alt={this.state.upcoming[0].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[0].title}</h1>
+                    </div>
+                    <div className="upcoming1">
+                        <img className="poster" src={this.state.upcoming[1].link} alt={this.state.upcoming[1].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[1].title}</h1>
+                    </div>
+                    <div className="upcoming2">
+                        <img className="poster" src={this.state.upcoming[2].link} alt={this.state.upcoming[2].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[2].title}</h1>
+                    </div>
+                    <div className="upcoming3">
+                        <img className="poster" src={this.state.upcoming[3].link} alt={this.state.upcoming[3].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[3].title}</h1>
+                    </div>
+                </div>
+            )
+
+        }
+        else {
+            return (
+                <div>
+                    You dun broke it again...
+                    </div>
+            )
         }
     }
-    
-    
+}
+
+
 
 
 
