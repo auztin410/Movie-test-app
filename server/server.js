@@ -251,6 +251,16 @@ app.get("/scrape", function (req, res) {
 	});
 });
 
+app.post("/empty", function (req, res) {
+	Upcoming.remove({})
+	.then(function (result) {
+		res.json(result);
+	})
+	.catch(function (err) {
+		res.json(err);
+	});
+});
+
 app.get("/upcoming/list", function (req, res) {
 	Upcoming.find({})
 		.then(function (result) {

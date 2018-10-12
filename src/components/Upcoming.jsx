@@ -13,6 +13,7 @@ class Upcoming extends Component {
 
         this.Shuffle = this.Shuffle.bind(this);
         this.handleScrape = this.handleScrape.bind(this);
+        this.handleEmpty = this.handleEmpty.bind(this);
     }
 
     Shuffle(o) {
@@ -37,6 +38,12 @@ class Upcoming extends Component {
             console.log("scrape results");
             console.log(res.data);
             }).catch((err) => console.log(err));
+    }
+
+    handleEmpty(event) {
+        axios.post("/empty/").then((res) => {
+            console.log("emptying upcoming movies DB");
+        }).catch((err) => console.log(err));
     }
 
 
@@ -77,6 +84,8 @@ class Upcoming extends Component {
                 <div className="upcomingDisplay">
                 <br />
                 <button onClick={this.handleScrape}>Scrape</button>
+                {" "}
+                <button onClick={this.handleEmpty}>Empty</button>
                     <div className="upcoming0">
                         <img className="poster" src={this.state.upcoming[0].link} alt={this.state.upcoming[0].title}/>
                         <h1 className="upcomingTitle">{this.state.upcoming[0].title}</h1>
