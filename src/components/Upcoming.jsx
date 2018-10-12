@@ -50,11 +50,22 @@ class Upcoming extends Component {
     render() {
         
         
-        if (this.state.ready === false) {
+        if (this.state.ready === false && this.props.user._id === "5ba3e0f075e8890015c869ad") {
             return (
                 <div>
                     Loading...
+                    <br />
+                <button onClick={this.handleScrape}>Scrape</button>
+                {" "}
+                <button onClick={this.handleEmpty}>Empty</button>
                     </div>
+            )
+        }
+        else if (this.state.ready === false) {
+            return (
+                <div>
+                    Loading...
+                </div>
             )
         }
         else if (!this.props.user && this.state.ready === true) {
