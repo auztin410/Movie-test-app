@@ -12,6 +12,7 @@ class Upcoming extends Component {
         }
 
         this.Shuffle = this.Shuffle.bind(this);
+        this.handleScrape = this.handleScrape.bind(this);
     }
 
     Shuffle(o) {
@@ -20,15 +21,6 @@ class Upcoming extends Component {
     };
 
     componentDidMount() {
-        // axios.get("/scrape/").then((res) => {
-        //     console.log("scrape results");
-        //     console.log(res.data);
-        //     this.setState({
-        //         ready: true,
-        //     });
-        //     }).catch((err) => console.log(err));
-
-        // if(this.state.ready === true) {
         axios.get("/upcoming/list").then((res) => {
             this.setState({
                 upcoming: [...res.data]
@@ -38,28 +30,72 @@ class Upcoming extends Component {
                 ready: true,
             });
         });
-        // }
-        // else {
-        //     console.log("loading...");
-        // }
     };
+
+    handleScrape(event) {
+        axios.get("/scrape/").then((res) => {
+            console.log("scrape results");
+            console.log(res.data);
+            }).catch((err) => console.log(err));
+    }
 
 
     render() {
         
-        if (!this.props.user) {
-            return (
-                <div className="upcomingDisplay">
-                    No user so no adding to want to see.
-                    </div>
-            )
-        }
-        else if (this.state.ready === false) {
+        
+        if (this.state.ready === false) {
             return (
                 <div>
                     Loading...
                     </div>
             )
+        }
+        else if (!this.props.user && this.state.ready === true) {
+            return (
+                <div className="upcomingDisplay">
+                    <div className="upcoming0">
+                        <img className="poster" src={this.state.upcoming[0].link} alt={this.state.upcoming[0].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[0].title}</h1>
+                    </div>
+                    <div className="upcoming1">
+                        <img className="poster" src={this.state.upcoming[1].link} alt={this.state.upcoming[1].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[1].title}</h1>
+                    </div>
+                    <div className="upcoming2">
+                        <img className="poster" src={this.state.upcoming[2].link} alt={this.state.upcoming[2].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[2].title}</h1>
+                    </div>
+                    <div className="upcoming3">
+                        <img className="poster" src={this.state.upcoming[3].link} alt={this.state.upcoming[3].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[3].title}</h1>
+                    </div>
+                </div>
+            )
+        }
+        else if (this.state.ready === true && this.props.user._id === "5ba9fc0013637124f0fe1b27") {
+            return (
+                <div className="upcomingDisplay">
+                <br />
+                <button onClick={this.handleScrape}>Scrape</button>
+                    <div className="upcoming0">
+                        <img className="poster" src={this.state.upcoming[0].link} alt={this.state.upcoming[0].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[0].title}</h1>
+                    </div>
+                    <div className="upcoming1">
+                        <img className="poster" src={this.state.upcoming[1].link} alt={this.state.upcoming[1].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[1].title}</h1>
+                    </div>
+                    <div className="upcoming2">
+                        <img className="poster" src={this.state.upcoming[2].link} alt={this.state.upcoming[2].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[2].title}</h1>
+                    </div>
+                    <div className="upcoming3">
+                        <img className="poster" src={this.state.upcoming[3].link} alt={this.state.upcoming[3].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[3].title}</h1>
+                    </div>
+                </div>
+            )
+
         }
         else if (this.state.ready === true) {
             return (
@@ -82,7 +118,6 @@ class Upcoming extends Component {
                     </div>
                 </div>
             )
-
         }
         else {
             return (

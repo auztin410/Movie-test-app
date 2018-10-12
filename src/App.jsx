@@ -7,9 +7,7 @@ import SignupForm from './components/SignupForm';
 import Header from './components/Header';
 import Home from './components/Home';
 import Search from './components/Search';
-import UserPage from './components/UserPage';
 import Upcoming from './components/Upcoming';
-import List from './components/List';
 import Playlist from './components/Playlist';
 import Vote from './components/Vote';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -31,11 +29,6 @@ const DisplayLinks = props => {
 							<FontAwesomeIcon icon="search" className="icon" />	
 						</Link>
 						<span className="iconText" id="search">Search</span>
-					{" "}	
-						<Link to="/userpage" className="userPage">
-							<FontAwesomeIcon icon="user-circle" className="icon" />
-						</Link>
-						<span className="iconText" id="userPage">User Page</span>
 					{" "}
 						<Link to="/upcoming" className="upcoming">
 							<FontAwesomeIcon icon="video" className="icon" />
@@ -181,8 +174,7 @@ class App extends Component {
 						/>}
 				/>
 				<Route exact path="/signup" component={SignupForm} />
-				{/* <LoginForm _login={this._login} /> */}	
-				<Route exact path="/userpage" render={() => <UserPage user={this.state.user} />} />
+				{/* <LoginForm _login={this._login} /> */}
 
 				<Route exact path="/upcoming" render={() => <Upcoming user={this.state.user} />} />
 

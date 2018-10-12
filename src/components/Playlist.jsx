@@ -230,7 +230,7 @@ class Playlist extends Component {
                             onChange={this.handleChange}
                         />
                         {" "}
-                        <button onClick={this.handleNewPlaylist}>Create New Playlist</button>
+                        <button onClick={this.handleNewPlaylist} disabled={!this.state.newPlaylist}>Create New Playlist</button>
                     </form>
                 </div>
             )
