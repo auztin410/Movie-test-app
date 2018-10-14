@@ -14,10 +14,13 @@ class Voting extends Component {
             search: '',
             options: [],
             stage: 'select',
+            type: '',
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSearch = this.handleChange.bind(this);
+        this.handleNext = this.handleNext.bind(this);
+        this.handleNext2 = this.handleNext2.bind(this);
     }
 
     handleChange(event) {
@@ -27,8 +30,16 @@ class Voting extends Component {
     };
 
     handleNext(event) {
+        event.preventDefault();
         this.setState({
             stage: "select2"
+        });
+    };
+
+    handleNext2(event) {
+        event.preventDefault();
+        this.setState({
+            stage: "select3"
         });
     };
 
@@ -59,10 +70,11 @@ class Voting extends Component {
                     <br />
                     <h3>Do you wish to vote on one device or separate?</h3>
                     <form>
-                        <select>
+                        <select name="type" onChange={this.handleChange}>
                             <option value="one">Just this one</option>
                             <option value="multiple">Multiple</option>
                         </select>
+                        {" "}
                         <button onClick={this.handleNext}>Next</button>
                     </form>
                     
@@ -80,6 +92,8 @@ class Voting extends Component {
                             <option value="lottery">Lottery Vote</option>
                             <option value="random">Random</option>
                         </select>
+                        {" "}
+                        <button onClick={this.handleNext2}>Next</button>
                     </form>
                 </div>
             )
@@ -276,3 +290,5 @@ class Voting extends Component {
     }
     
 }
+
+export default Voting;
