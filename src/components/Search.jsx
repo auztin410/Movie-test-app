@@ -198,12 +198,6 @@ class Search extends Component {
                             onChange={e => this.setState({ value: e.target.value })}
                             onSelect={value => this.setState({ value })}
                         />
-                        {/* <input
-                            type="text"
-                            name="movie"
-                            value={this.state.movie}
-                            onChange={this.handleChange}
-                        /> */}
                         
                         <select name="year" onChange={this.handleChange}>
                             <option value="">N/A</option>

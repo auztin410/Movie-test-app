@@ -9,18 +9,32 @@ class Voting extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            suggestions: [],
             movie: '',
             year: '',
-            search: '',
+            value: '',
             options: [],
             stage: 'select',
             type: '',
+            style: '',
+            viewers: 0,
+            number: 0,
         }
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleSearch = this.handleChange.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
         this.handleNext = this.handleNext.bind(this);
         this.handleNext2 = this.handleNext2.bind(this);
+        this.handleNext3 = this.handleNext3.bind(this);
+        this.handleNext4 = this.handleNext4.bind(this);
+    }
+
+    componentDidMount() {
+        axios.get("/autocomplete/").then((res) => {
+            this.setState({
+                suggestions: res.data,
+            });
+        });
     }
 
     handleChange(event) {
@@ -43,12 +57,26 @@ class Voting extends Component {
         });
     };
 
+    handleNext3(event) {
+        event.preventDefault();
+        this.setState({
+            stage: "select4"
+        });
+    };
+
+    handleNext4(event) {
+        event.preventDefault();
+        this.setState({
+            stage: "movie-select"
+        });
+    };
+
     handleSearch(event) {
         event.preventDefault();
         this.setState({
-            search: '',
+            value: '',
         });
-        let queryUrl = `https://www.omdbapi.com/?t=${this.state.movie}&y=${this.state.year}&plot=short&apikey=trilogy`;
+        let queryUrl = `https://www.omdbapi.com/?t=${this.state.value}&y=${this.state.year}&plot=short&apikey=trilogy`;
         console.log("HTTPS is now active!");    
 
         axios.get(queryUrl).then((res) => {
@@ -87,7 +115,7 @@ class Voting extends Component {
                 <div>
                      <h3>How would you like decide the winner?</h3>
                     <form>
-                        <select>
+                        <select name="style" onChange={this.handleChange}>
                             <option value="majority">Majority Wins</option>
                             <option value="lottery">Lottery Vote</option>
                             <option value="random">Random</option>
@@ -103,7 +131,7 @@ class Voting extends Component {
                 <div>
                     <h3>Great and how many people will be voting?</h3>
                     <form>
-                        <select>
+                        <select name="viewers" onChange={this.handleChange}>
                             <option value="">None</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
@@ -114,26 +142,34 @@ class Voting extends Component {
                             <option value="9">9</option>
                             <option value="10">10</option>
                         </select>
+                        {" "}
+                        <button onClick={this.handleNext3}>Next</button>
                     </form>
                 </div>
             )
         }
         else if (this.state.stage === "select4") {
-            <div>
+            return (
+                <div>
                 <h3>How many movies are you in the running?</h3>
                     <form>
-                        <select>
+                        <select name="number" onChange={this.handleChange}>
                             <option value="">None</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
                             <option value="6">6</option>
                         </select>
+                        {" "}
+                        <button onClick={this.handleNext4}>Next</button>
                     </form>
             </div>
+            )
+            
         }
         else if (this.state.stage === "movie-select") {
-            <div>
+            return (
+                <div>
                 <h3>Search and select the movies you want in the running.</h3>
                 <br />
                 <form>
@@ -286,7 +322,10 @@ class Voting extends Component {
                         <button className="searchButton" onClick={this.handleSearch}><FontAwesomeIcon icon="search" /></button>
                     </form>
             </div>
+            )
+            
         }
+        
     }
     
 }
