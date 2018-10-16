@@ -28,6 +28,7 @@ class Voting extends Component {
         this.handleNext3 = this.handleNext3.bind(this);
         this.handleNext4 = this.handleNext4.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
+        this.handleVote = this.handleVote.bind(this);
     }
 
     componentDidMount() {
@@ -109,6 +110,16 @@ class Voting extends Component {
             })
         }
     };
+
+    handleVote(event) {
+        console.log("value");
+        console.log(event.target.value);
+        let movie = event.target.value;
+        let result = this.state.options.find(function (element) {
+            return element.title === movie
+        });
+        console.log(result);
+    }
 
     render() {
         if (this.state.stage === 'select') {
@@ -524,10 +535,10 @@ class Voting extends Component {
                 <div>
                     {this.state.options.map(item => (
                         <div key={item.title}>
-                            <img src={item.poster} alt={item.Title}/>
+                            <img src={item.poster} alt={item.title}/>
                             <h1>{item.title}</h1>
                             <br />
-                            <button>Vote</button>
+                            <button value={item.title} onClick={this.handleVote}>Vote</button>
                         </div>
                     ))}
                 </div>
