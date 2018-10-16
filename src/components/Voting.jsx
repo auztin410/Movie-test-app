@@ -27,6 +27,7 @@ class Voting extends Component {
         this.handleNext2 = this.handleNext2.bind(this);
         this.handleNext3 = this.handleNext3.bind(this);
         this.handleNext4 = this.handleNext4.bind(this);
+        this.handleAdd = this.handleAdd.bind(this);
     }
 
     componentDidMount() {
@@ -87,6 +88,26 @@ class Voting extends Component {
                 search: res,
             });
         });
+    };
+
+    handleAdd(event) {
+        let movie = 
+        {
+            title: this.state.search.data.Title,
+            poster: this.state.search.data.Poster,
+            votes: 0
+        }
+        this.setState({
+            options: [...this.state.options, movie],
+            search: '',
+        });
+        console.log(this.state.number);
+        console.log(this.state.options.length);
+        if (this.state.number == this.state.options.length) {
+            this.setState({
+                stage: "vote"
+            })
+        }
     };
 
     render() {
@@ -155,10 +176,10 @@ class Voting extends Component {
                     <form>
                         <select name="number" onChange={this.handleChange}>
                             <option value="">None</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
+                            <option value="2">3</option>
+                            <option value="3">4</option>
+                            <option value="4">5</option>
+                            <option value="5">6</option>
                         </select>
                         {" "}
                         <button onClick={this.handleNext4}>Next</button>
@@ -335,6 +356,7 @@ class Voting extends Component {
                         <p>MetaScore: {this.state.search.data.Metascore}</p>
                         <p>Imdb Rating: {this.state.search.data.imdbRating}</p>
                         <br />
+                        <button onClick={this.handleAdd}>Put in the running.</button>
                         </div>
             </div>
             )
@@ -497,8 +519,20 @@ class Voting extends Component {
             )
             
         }
-        
-        
+        else if (this.state.stage === "vote") {
+            return (
+                <div>
+                    {this.state.options.map(item => (
+                        <div key={item.title}>
+                            <img src={item.poster} alt={item.Title}/>
+                            <h1>{item.title}</h1>
+                            <br />
+                            <button>Vote</button>
+                        </div>
+                    ))}
+                </div>
+            )
+        }        
     }
     
 }
