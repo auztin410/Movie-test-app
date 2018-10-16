@@ -119,6 +119,14 @@ class Voting extends Component {
             return element.title === movie
         });
         console.log(result);
+        let array = [...this.state.options];
+        let index = array.indexOf(result);
+        array.splice(index, 1);
+        result.votes ++;
+        array.push(result);
+        this.setState({
+            options: array
+        });
     }
 
     render() {
