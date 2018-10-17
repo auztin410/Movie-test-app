@@ -30,6 +30,8 @@ class Voting extends Component {
         this.handleNext4 = this.handleNext4.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
         this.handleVote = this.handleVote.bind(this);
+        this.handleRecast = this.handleRecast.bind(this);
+        this.handleWinner = this.handleWinner.bind(this);
     }
 
     componentDidMount() {
@@ -147,6 +149,17 @@ class Voting extends Component {
                 });
             }
         }
+    }
+
+    handleRecast(event) {
+        this.setState({
+            stage: "vote",
+            votes: 0,
+        })
+    }
+
+    handleWinner(event) {
+
     }
 
     render() {
@@ -576,6 +589,7 @@ class Voting extends Component {
             return (
                 <div>
                     <h1>The Winner is!</h1>
+                    <button onClick={this.handleWinner}>Show Winner</button>
                 </div>
             )
         }
@@ -583,6 +597,7 @@ class Voting extends Component {
             return (
                 <div>
                 <h1>There was a tie...</h1>
+                <button onClick={this.handleRecast}>Recast Votes!</button>
                 </div>
             )
         }
