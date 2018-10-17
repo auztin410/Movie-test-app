@@ -20,6 +20,7 @@ class Voting extends Component {
             viewers: 0,
             number: 0,
             votes: 0,
+            winner: '',
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -107,10 +108,21 @@ class Voting extends Component {
         });
         console.log(this.state.number);
         console.log(this.state.options.length);
+        
         if (this.state.number == this.state.options.length) {
-            this.setState({
-                stage: "vote"
-            })
+            if (this.state.style === "random") {
+                let array = [...this.state.options];
+                var random = array[Math.floor(Math.random()*array.length)];
+                this.setState({
+                    stage: "result",
+                    winner: random,
+                });
+            }
+            else {
+                this.setState({
+                    stage: "vote"
+                });
+            }
         }
     };
 
@@ -132,22 +144,31 @@ class Voting extends Component {
             votes: this.state.votes +1
         });
         if (this.state.viewers == this.state.votes) {
-            this.setState({
-                stage: "result",
-            })
-            let array = [...this.state.options]
-            let winner = Math.max.apply(Math, array.map(function (o)
-            {return o.votes}
-            ));
-            let results = array.filter(item => item.votes == winner);
-            console.log("results");
-            console.log(results);
-            if (results.length > 1) {
+            if (this.state.style === "majority") {
                 this.setState({
-                    stage: "tie",
-                    options: results,
+                    stage: "result",
+                })
+                let array = [...this.state.options]
+                let winner = Math.max.apply(Math, array.map(function (o)
+                {return o.votes}
+                ));
+                let results = array.filter(item => item.votes == winner);
+                console.log("results");
+                console.log(results);
+                this.setState({
+                    winner: results
                 });
+                if (results.length > 1) {
+                    this.setState({
+                        stage: "tie",
+                        options: results,
+                    });
+                }
             }
+            else if (this.state.style === "lottery") {
+                
+            }
+            
         }
     }
 
