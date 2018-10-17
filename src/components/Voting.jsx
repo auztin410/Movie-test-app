@@ -19,6 +19,7 @@ class Voting extends Component {
             style: '',
             viewers: 0,
             number: 0,
+            votes: 0,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -125,8 +126,27 @@ class Voting extends Component {
         result.votes ++;
         array.push(result);
         this.setState({
-            options: array
+            options: array,
+            votes: this.state.votes +1
         });
+        if (this.state.viewers == this.state.votes) {
+            this.setState({
+                stage: "result",
+            })
+            let array = [...this.state.options]
+            let winner = Math.max.apply(Math, array.map(function (o)
+            {return o.votes}
+            ));
+            let results = array.filter(item => item.votes == winner);
+            console.log("results");
+            console.log(results);
+            if (results.length > 1) {
+                this.setState({
+                    stage: "tie",
+                    options: results,
+                });
+            }
+        }
     }
 
     render() {
@@ -173,14 +193,14 @@ class Voting extends Component {
                     <form>
                         <select name="viewers" onChange={this.handleChange}>
                             <option value="">None</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
+                            <option value="2">3</option>
+                            <option value="3">4</option>
+                            <option value="4">5</option>
+                            <option value="5">6</option>
+                            <option value="6">7</option>
+                            <option value="7">8</option>
+                            <option value="8">9</option>
+                            <option value="9">10</option>
                         </select>
                         {" "}
                         <button onClick={this.handleNext3}>Next</button>
@@ -551,7 +571,21 @@ class Voting extends Component {
                     ))}
                 </div>
             )
-        }        
+        }
+        else if (this.state.stage === "result")  {
+            return (
+                <div>
+                    <h1>The Winner is!</h1>
+                </div>
+            )
+        }
+        else if (this.state.stage === "tie") {
+            return (
+                <div>
+                <h1>There was a tie...</h1>
+                </div>
+            )
+        }
     }
     
 }
