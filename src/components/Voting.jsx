@@ -177,6 +177,7 @@ class Voting extends Component {
                 }
             }
             else if (this.state.style === "lottery") {
+                let options = [...this.state.options];
                 
             }
             
