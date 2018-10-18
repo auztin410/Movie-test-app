@@ -60,9 +60,16 @@ class Voting extends Component {
     handleNext2(event) {
         event.preventDefault();
         document.getElementById("form").reset();
-        this.setState({
-            stage: "select3"
-        });
+        if (this.state.style === "random") {
+            this.setState({
+                stage: "select4",
+            });
+        }
+        else {
+            this.setState({
+                stage: "select3"
+            });
+        }        
     };
 
     handleNext3(event) {
@@ -630,7 +637,7 @@ class Voting extends Component {
                 </div>
             )
         }
-        else if (this.state.stage === "winner") {
+        else if (this.state.stage === "winner" && this.state.style === "random") {
             return (
                 <div id="movie-display">
                 <br />
@@ -638,7 +645,15 @@ class Voting extends Component {
                 <h1>{this.state.winner.title}</h1>
             </div>
             )
-            
+        }
+        else if (this.state.stage === "winner" && this.state.style === "majority") {
+            return (
+                <div id="movie-display">
+                <br />
+                <img className="poster" src={this.state.winner[0].poster} alt="poster"/>
+                <h1>{this.state.winner[0].title}</h1>
+                </div>
+            )
         }
     }
     
