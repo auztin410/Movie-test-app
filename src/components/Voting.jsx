@@ -51,6 +51,7 @@ class Voting extends Component {
 
     handleNext(event) {
         event.preventDefault();
+        document.getElementById("form").reset();
         this.setState({
             stage: "select2"
         });
@@ -58,6 +59,7 @@ class Voting extends Component {
 
     handleNext2(event) {
         event.preventDefault();
+        document.getElementById("form").reset();
         this.setState({
             stage: "select3"
         });
@@ -65,6 +67,7 @@ class Voting extends Component {
 
     handleNext3(event) {
         event.preventDefault();
+        document.getElementById("form").reset();
         this.setState({
             stage: "select4"
         });
@@ -72,6 +75,7 @@ class Voting extends Component {
 
     handleNext4(event) {
         event.preventDefault();
+        document.getElementById("form").reset();
         this.setState({
             stage: "movie-select"
         });
@@ -180,7 +184,9 @@ class Voting extends Component {
     }
 
     handleWinner(event) {
-
+        this.setState({
+            stage: "winner",
+        })
     }
 
     render() {
@@ -191,8 +197,9 @@ class Voting extends Component {
                     <h2>Here let me help.</h2>
                     <br />
                     <h3>Do you wish to vote on one device or separate?</h3>
-                    <form>
+                    <form id="form">
                         <select name="type" onChange={this.handleChange}>
+                            <option value="" selected>Select One</option>
                             <option value="one">Just this one</option>
                             <option value="multiple">Multiple</option>
                         </select>
@@ -208,8 +215,9 @@ class Voting extends Component {
             return (
                 <div>
                      <h3>How would you like decide the winner?</h3>
-                    <form>
+                    <form id="form">
                         <select name="style" onChange={this.handleChange}>
+                            <option value="" selected>Select One</option>
                             <option value="majority">Majority Wins</option>
                             <option value="lottery">Lottery Vote</option>
                             <option value="random">Random</option>
@@ -224,9 +232,9 @@ class Voting extends Component {
             return (
                 <div>
                     <h3>Great and how many people will be voting?</h3>
-                    <form>
+                    <form id="form">
                         <select name="viewers" onChange={this.handleChange}>
-                            <option value="">None</option>
+                            <option value="" selected>Select One</option>
                             <option value="2">3</option>
                             <option value="3">4</option>
                             <option value="4">5</option>
@@ -246,9 +254,9 @@ class Voting extends Component {
             return (
                 <div>
                 <h3>How many movies are you in the running?</h3>
-                    <form>
+                    <form id="form">
                         <select name="number" onChange={this.handleChange}>
-                            <option value="">None</option>
+                            <option value="" selected>Select One</option>
                             <option value="2">3</option>
                             <option value="3">4</option>
                             <option value="4">5</option>
@@ -289,7 +297,7 @@ class Voting extends Component {
                         />
                         
                         <select name="year" onChange={this.handleChange}>
-                            <option value="">N/A</option>
+                            <option value="" selected="selected">N/A</option>
                             <option value="2025">2025</option>
                             <option value="2024">2024</option>
                             <option value="2023">2023</option>
@@ -417,7 +425,7 @@ class Voting extends Component {
                     </form>
                     <br />
                     <div id="movie-display">
-                        <img className="poster" src={this.state.search.data.Poster} />
+                        <img className="poster" src={this.state.search.data.Poster} alt="poster"/>
                         <h1>Title: {this.state.search.data.Title}</h1>
                         <p>Date of Release: {this.state.search.data.Released}</p>
                         <p>Rated: {this.state.search.data.Rated}</p>
@@ -462,7 +470,7 @@ class Voting extends Component {
                         />
                         
                         <select name="year" onChange={this.handleChange}>
-                            <option value="">N/A</option>
+                            <option value="" selected="selected">N/A</option>
                             <option value="2025">2025</option>
                             <option value="2024">2024</option>
                             <option value="2023">2023</option>
@@ -621,6 +629,16 @@ class Voting extends Component {
                 <button onClick={this.handleRecast}>Recast Votes!</button>
                 </div>
             )
+        }
+        else if (this.state.stage === "winner") {
+            return (
+                <div id="movie-display">
+                <br />
+                <img className="poster" src={this.state.winner.poster} alt="poster"/>
+                <h1>{this.state.winner.title}</h1>
+            </div>
+            )
+            
         }
     }
     
