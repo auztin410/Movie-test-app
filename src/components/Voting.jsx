@@ -123,7 +123,7 @@ class Voting extends Component {
         if (this.state.number == this.state.options.length) {
             if (this.state.style === "random") {
                 let array = [...this.state.options];
-                var random = array[Math.floor(Math.random()*array.length)];
+                let random = array[Math.floor(Math.random()*array.length)];
                 this.setState({
                     stage: "result",
                     winner: random,
@@ -178,7 +178,13 @@ class Voting extends Component {
             }
             else if (this.state.style === "lottery") {
                 let options = [...this.state.options];
-                
+                const result = options.reduce( (res, el) => res.concat( Array( el.votes ).fill( el.title ) ), [] );
+                let random = result[Math.floor(Math.random()*result.length)];
+                let found = options.find(options => options.title === random);
+                this.setState({
+                    stage: "winner",
+                    winner: found,
+                });
             }
             
         }
