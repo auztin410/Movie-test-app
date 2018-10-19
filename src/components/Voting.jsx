@@ -54,6 +54,10 @@ class Voting extends Component {
 
     };
 
+    handleCreate(event) {
+
+    }
+
     handleNext(event) {
         event.preventDefault();
         document.getElementById("form").reset();
@@ -229,7 +233,7 @@ class Voting extends Component {
     render() {
         if (this.state.stage === 'select') {
             return (
-                <div>
+                <div id="movie-display">
                     <h1>Have a group of friends and can't decide on a movie?</h1>
                     <h2>Here let me help.</h2>
                     <br />
@@ -250,7 +254,7 @@ class Voting extends Component {
         }
         else if (this.state.stage === "select2") {
             return (
-                <div>
+                <div id="movie-display">
                     <h3>How would you like decide the winner?</h3>
                     <form id="form">
                         <select name="style" onChange={this.handleChange}>
@@ -267,7 +271,7 @@ class Voting extends Component {
         }
         else if (this.state.stage === "select3") {
             return (
-                <div>
+                <div id="movie-display">
                     <h3>Great and how many people will be voting?</h3>
                     <form id="form">
                         <select name="viewers" onChange={this.handleChange}>
@@ -289,7 +293,7 @@ class Voting extends Component {
         }
         else if (this.state.stage === "select4") {
             return (
-                <div>
+                <div id="movie-display">
                     <h3>How many movies are you in the running?</h3>
                     <form id="form">
                         <select name="number" onChange={this.handleChange}>
@@ -309,7 +313,7 @@ class Voting extends Component {
         else if (this.state.stage === "movie-select" && this.state.search) {
             return (
                 <div>
-                    <h3>Search and select the movies you want in the running.</h3>
+                    <h3 id="movie-display">Search and select the movies you want in the running.</h3>
                     <br />
                     <form>
                         <ReactAutocomplete
@@ -485,7 +489,7 @@ class Voting extends Component {
         else if (this.state.stage === "movie-select") {
             return (
                 <div>
-                    <h3>Search and select the movies you want in the running.</h3>
+                    <h3 id="movie-display">Search and select the movies you want in the running.</h3>
                     <br />
                     <form>
                         <ReactAutocomplete
@@ -642,10 +646,10 @@ class Voting extends Component {
         }
         else if (this.state.stage === "vote") {
             return (
-                <div>
+                <div id="movie-display" className="float-contain">
                     {this.state.options.map(item => (
-                        <div key={item.title}>
-                            <img src={item.poster} alt={item.title} />
+                        <div key={item.title} className="float">
+                            <img src={item.poster} alt={item.title} className="optionPoster"/>
                             <h1>{item.title}</h1>
                             <br />
                             <button value={item.title} onClick={this.handleVote}>Vote</button>
@@ -656,7 +660,7 @@ class Voting extends Component {
         }
         else if (this.state.stage === "result") {
             return (
-                <div>
+                <div id="movie-display">
                     <h1>The Winner is!</h1>
                     <button onClick={this.handleWinner}>Show Winner</button>
                 </div>
@@ -664,7 +668,7 @@ class Voting extends Component {
         }
         else if (this.state.stage === "tie") {
             return (
-                <div>
+                <div id="movie-display">
                     <h1>There was a tie...</h1>
                     <button onClick={this.handleRecast}>Recast Votes!</button>
                 </div>
@@ -699,7 +703,7 @@ class Voting extends Component {
         }
         else if (this.state.stage === "mselect1") {
             return (
-                <div>
+                <div id="movie-display">
                     <h3>Open Voting!</h3>
                     <br />
                     <form>
@@ -716,7 +720,7 @@ class Voting extends Component {
         else if (this.state.stage === "mselect2" && this.state.search) {
             return (
                 <div>
-                    <h3>Search and select the movies you want in the running.</h3>
+                    <h3 id="movie-display">Search and select the movies you want in the running.</h3>
                     <br />
                     <form>
                         <ReactAutocomplete
@@ -892,7 +896,7 @@ class Voting extends Component {
         else if (this.state.stage === "mselect2") {
             return (
                 <div>
-                    <h3>Search and select the movies you want in the running.</h3>
+                    <h3 id="movie-display">Search and select the movies you want in the running.</h3>
                     <br />
                     <form>
                         <ReactAutocomplete

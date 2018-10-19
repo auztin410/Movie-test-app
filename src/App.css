@@ -77,6 +77,16 @@ body {
   text-shadow: 2px 2px black;
 }
 
+.float-contain {
+  padding-left: 20vw;
+  padding-right: 20vw;
+}
+
+.float {
+  float: left;
+  margin: 10px;
+}
+
 .contain-pie {
   height: 800px;
   width: 100vw;

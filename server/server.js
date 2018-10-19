@@ -333,6 +333,12 @@ app.post("voting/open", function (req, res) {
 	});
 });
 
+// Handle multi device vote
+
+// Handle closing the voting
+
+// Handle pulling the results
+
 // ==== Starting Server =====
 app.listen(PORT, () => {
 	console.log(`App listening on PORT: ${PORT}`)
