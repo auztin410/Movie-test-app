@@ -69,6 +69,7 @@ var Upcoming = require('./db/models/upcoming');
 var Playlist = require('./db/models/playlist');
 var PlaylistMovies = require('./db/models/playlist-movies');
 var Autocomplete = require('./db/models/autocomplete');
+var Voting = require('./db/models/voting');
 
 
 
@@ -284,14 +285,53 @@ app.post("/userlistcreate", function (req, res) {
 	});
 });
 
-// Catch All
-// app.get('/*', function(req, res) {
-// 	res.sendFile(path.join(__dirname, '../build/'), function(err) {
-// 	  if (err) {
-// 		res.status(500).send(err)
-// 	  }
-// 	});
-//   });
+// Create Voting for multi device
+app.post("/voting/create", function (req, res) {
+	Voting.create(
+		{
+			name: req.body.name,
+			code: req.body.code
+		}
+	).then(function (result) {
+		res.json(result);
+	}).catch(function (err) {
+		res.json(err);
+	});
+});
+
+// Add movie to multi device voting
+app.post("voting/add", function (req, res) {
+	Voting.findOneAndUpdate(
+		{ name: req.body.name },
+		{
+			$push: {
+				title: req.body.title,
+				poster: req.body.poster,
+				votes: 0
+			}
+		}
+	).then(function (result) {
+		res.json(result);
+	}).catch(function (err) {
+		res.json(err);
+	});
+});
+
+// Open multi device voting
+app.post("voting/open", function (req, res) {
+	Voting.findOneAndUpdate(
+		{ name: req.body.name },
+		{
+			$set: {
+				voting: true
+			}
+		}
+	).then(function (result) {
+		res.json(result);
+	}).catch(function (err) {
+		res.json(err);
+	});
+});
 
 // ==== Starting Server =====
 app.listen(PORT, () => {
