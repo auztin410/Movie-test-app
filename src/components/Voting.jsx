@@ -178,10 +178,10 @@ class Voting extends Component {
             else if (this.state.style === "lottery") {
                 let options = [...this.state.options];
                 const result = options.reduce((res, el) => res.concat(Array(el.votes).fill(el.title)), []);
+                console.log("lottery array");
+                console.log(result);
                 let random = result[Math.floor(Math.random() * result.length)];
                 let found = options.find(options => options.title === random);
-                console.log("found");
-                console.log(found);
                 this.setState({
                     stage: "result",
                     winner: found,
