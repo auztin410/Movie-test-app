@@ -69,7 +69,7 @@ class Voting extends Component {
             this.setState({
                 stage: "select3"
             });
-        }        
+        }
     };
 
     handleNext3(event) {
@@ -94,7 +94,7 @@ class Voting extends Component {
             value: '',
         });
         let queryUrl = `https://www.omdbapi.com/?t=${this.state.value}&y=${this.state.year}&plot=short&apikey=trilogy`;
-        console.log("HTTPS is now active!");    
+        console.log("HTTPS is now active!");
 
         axios.get(queryUrl).then((res) => {
             console.log(res);
@@ -107,7 +107,7 @@ class Voting extends Component {
     };
 
     handleAdd(event) {
-        let movie = 
+        let movie =
         {
             title: this.state.search.data.Title,
             poster: this.state.search.data.Poster,
@@ -119,11 +119,11 @@ class Voting extends Component {
         });
         console.log(this.state.number);
         console.log(this.state.options.length);
-        
+
         if (this.state.number == this.state.options.length) {
             if (this.state.style === "random") {
                 let array = [...this.state.options];
-                let random = array[Math.floor(Math.random()*array.length)];
+                let random = array[Math.floor(Math.random() * array.length)];
                 this.setState({
                     stage: "result",
                     winner: random,
@@ -148,11 +148,11 @@ class Voting extends Component {
         let array = [...this.state.options];
         let index = array.indexOf(result);
         array.splice(index, 1);
-        result.votes ++;
+        result.votes++;
         array.push(result);
         this.setState({
             options: array,
-            votes: this.state.votes +1
+            votes: this.state.votes + 1
         });
         if (this.state.viewers == this.state.votes) {
             if (this.state.style === "majority") {
@@ -160,8 +160,7 @@ class Voting extends Component {
                     stage: "result",
                 })
                 let array = [...this.state.options]
-                let winner = Math.max.apply(Math, array.map(function (o)
-                {return o.votes}
+                let winner = Math.max.apply(Math, array.map(function (o) { return o.votes }
                 ));
                 let results = array.filter(item => item.votes == winner);
                 console.log("results");
@@ -178,15 +177,17 @@ class Voting extends Component {
             }
             else if (this.state.style === "lottery") {
                 let options = [...this.state.options];
-                const result = options.reduce( (res, el) => res.concat( Array( el.votes ).fill( el.title ) ), [] );
-                let random = result[Math.floor(Math.random()*result.length)];
+                const result = options.reduce((res, el) => res.concat(Array(el.votes).fill(el.title)), []);
+                let random = result[Math.floor(Math.random() * result.length)];
                 let found = options.find(options => options.title === random);
+                console.log("found");
+                console.log(found);
                 this.setState({
-                    stage: "winner",
+                    stage: "result",
                     winner: found,
                 });
             }
-            
+
         }
     }
 
@@ -220,15 +221,15 @@ class Voting extends Component {
                         {" "}
                         <button onClick={this.handleNext}>Next</button>
                     </form>
-                    
-                   
+
+
                 </div>
             )
         }
-        else if (this.state.stage === "select2"){
+        else if (this.state.stage === "select2") {
             return (
                 <div>
-                     <h3>How would you like decide the winner?</h3>
+                    <h3>How would you like decide the winner?</h3>
                     <form id="form">
                         <select name="style" onChange={this.handleChange}>
                             <option value="" selected>Select One</option>
@@ -267,7 +268,7 @@ class Voting extends Component {
         else if (this.state.stage === "select4") {
             return (
                 <div>
-                <h3>How many movies are you in the running?</h3>
+                    <h3>How many movies are you in the running?</h3>
                     <form id="form">
                         <select name="number" onChange={this.handleChange}>
                             <option value="" selected>Select One</option>
@@ -279,20 +280,20 @@ class Voting extends Component {
                         {" "}
                         <button onClick={this.handleNext4}>Next</button>
                     </form>
-            </div>
+                </div>
             )
-            
+
         }
         else if (this.state.stage === "movie-select" && this.state.search) {
             return (
                 <div>
-                <h3>Search and select the movies you want in the running.</h3>
-                <br />
-                <form>
-                    <ReactAutocomplete
+                    <h3>Search and select the movies you want in the running.</h3>
+                    <br />
+                    <form>
+                        <ReactAutocomplete
                             items={
-                                this.state.suggestions.map(item =>(
-                                    { id: item.title, label: item.title}
+                                this.state.suggestions.map(item => (
+                                    { id: item.title, label: item.title }
                                 ))
                             }
                             shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
@@ -309,7 +310,7 @@ class Voting extends Component {
                             onChange={e => this.setState({ value: e.target.value })}
                             onSelect={value => this.setState({ value })}
                         />
-                        
+
                         <select name="year" onChange={this.handleChange}>
                             <option value="" selected="selected">N/A</option>
                             <option value="2025">2025</option>
@@ -439,8 +440,12 @@ class Voting extends Component {
                     </form>
                     <br />
                     <div id="movie-display">
-                        <img className="poster" src={this.state.search.data.Poster} alt="poster"/>
-                        <h1>Title: {this.state.search.data.Title}</h1>
+                        <br />
+                        <button onClick={this.handleAdd}>Put in the running.</button>
+                        <br />
+                        <br />
+                        <img className="poster" src={this.state.search.data.Poster} alt="poster" />
+                        <h1>{this.state.search.data.Title}</h1>
                         <p>Date of Release: {this.state.search.data.Released}</p>
                         <p>Rated: {this.state.search.data.Rated}</p>
                         <p>Runtime: {this.state.search.data.Runtime}</p>
@@ -450,22 +455,21 @@ class Voting extends Component {
                         <p>Awards: {this.state.search.data.Awards}</p>
                         <p>MetaScore: {this.state.search.data.Metascore}</p>
                         <p>Imdb Rating: {this.state.search.data.imdbRating}</p>
-                        <br />
-                        <button onClick={this.handleAdd}>Put in the running.</button>
-                        </div>
-            </div>
+                        
+                    </div>
+                </div>
             )
         }
         else if (this.state.stage === "movie-select") {
             return (
                 <div>
-                <h3>Search and select the movies you want in the running.</h3>
-                <br />
-                <form>
-                    <ReactAutocomplete
+                    <h3>Search and select the movies you want in the running.</h3>
+                    <br />
+                    <form>
+                        <ReactAutocomplete
                             items={
-                                this.state.suggestions.map(item =>(
-                                    { id: item.title, label: item.title}
+                                this.state.suggestions.map(item => (
+                                    { id: item.title, label: item.title }
                                 ))
                             }
                             shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
@@ -482,7 +486,7 @@ class Voting extends Component {
                             onChange={e => this.setState({ value: e.target.value })}
                             onSelect={value => this.setState({ value })}
                         />
-                        
+
                         <select name="year" onChange={this.handleChange}>
                             <option value="" selected="selected">N/A</option>
                             <option value="2025">2025</option>
@@ -610,16 +614,16 @@ class Voting extends Component {
                         {" "}
                         <button className="searchButton" onClick={this.handleSearch}><FontAwesomeIcon icon="search" /></button>
                     </form>
-            </div>
+                </div>
             )
-            
+
         }
         else if (this.state.stage === "vote") {
             return (
                 <div>
                     {this.state.options.map(item => (
                         <div key={item.title}>
-                            <img src={item.poster} alt={item.title}/>
+                            <img src={item.poster} alt={item.title} />
                             <h1>{item.title}</h1>
                             <br />
                             <button value={item.title} onClick={this.handleVote}>Vote</button>
@@ -628,7 +632,7 @@ class Voting extends Component {
                 </div>
             )
         }
-        else if (this.state.stage === "result")  {
+        else if (this.state.stage === "result") {
             return (
                 <div>
                     <h1>The Winner is!</h1>
@@ -639,31 +643,40 @@ class Voting extends Component {
         else if (this.state.stage === "tie") {
             return (
                 <div>
-                <h1>There was a tie...</h1>
-                <button onClick={this.handleRecast}>Recast Votes!</button>
+                    <h1>There was a tie...</h1>
+                    <button onClick={this.handleRecast}>Recast Votes!</button>
                 </div>
             )
         }
         else if (this.state.stage === "winner" && this.state.style === "random") {
             return (
                 <div id="movie-display">
-                <br />
-                <img className="poster" src={this.state.winner.poster} alt="poster"/>
-                <h1>{this.state.winner.title}</h1>
-            </div>
+                    <br />
+                    <img className="poster" src={this.state.winner.poster} alt="poster" />
+                    <h1>{this.state.winner.title}</h1>
+                </div>
             )
         }
         else if (this.state.stage === "winner" && this.state.style === "majority") {
             return (
                 <div id="movie-display">
-                <br />
-                <img className="poster" src={this.state.winner[0].poster} alt="poster"/>
-                <h1>{this.state.winner[0].title}</h1>
+                    <br />
+                    <img className="poster" src={this.state.winner[0].poster} alt="poster" />
+                    <h1>{this.state.winner[0].title}</h1>
+                </div>
+            )
+        }
+        else if (this.state.stage === "winner" && this.state.style === "lottery") {
+            return (
+                <div id="movie-display">
+                    <br />
+                    <img className="poster" src={this.state.winner.poster} alt="poster" />
+                    <h1>{this.state.winner.title}</h1>
                 </div>
             )
         }
     }
-    
+
 }
 
 export default Voting;

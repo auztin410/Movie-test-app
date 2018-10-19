@@ -820,7 +820,7 @@ class Search extends Component {
                     <br />
                     <div id="movie-display">
                         <img className="poster" src={this.state.search.data.Poster} />
-                        <h1>Title: {this.state.search.data.Title}</h1>
+                        <h1>{this.state.search.data.Title}</h1>
                         <p>Date of Release: {this.state.search.data.Released}</p>
                         <p>Rated: {this.state.search.data.Rated}</p>
                         <p>Runtime: {this.state.search.data.Runtime}</p>
@@ -997,7 +997,7 @@ class Search extends Component {
                     <br />
                     <div id="movie-display">
                         <img className="poster" src={this.state.search.data.Poster} />
-                        <h1>Title: {this.state.search.data.Title}</h1>
+                        <h1>{this.state.search.data.Title}</h1>
                         <p>Date of Release: {this.state.search.data.Released}</p>
                         <p>Rated: {this.state.search.data.Rated}</p>
                         <p>Runtime: {this.state.search.data.Runtime}</p>

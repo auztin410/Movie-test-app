@@ -35,7 +35,7 @@ class Home extends Component {
 				<div className="random">
 					<div id="movie-display">
 							<img className="poster" alt={this.state.search.title} src={this.state.search.poster} />
-							<h1>Title: {this.state.search.title}</h1>
+							<h1>{this.state.search.title}</h1>
 							<p>Date of Release: {this.state.search.release}</p>
 							<p>Rated: {this.state.search.rating} {" "} || {" "}  Runtime: {this.state.search.runtime}</p>
 							<p>Directed by: {this.state.search.directed} {" "} || {" "} Actors: {this.state.search.actors}</p>
