@@ -23,6 +23,7 @@ class Voting extends Component {
             winner: '',
             name: '',
             code: '',
+            viewer: 1,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -178,7 +179,8 @@ class Voting extends Component {
         array.push(result);
         this.setState({
             options: array,
-            votes: this.state.votes + 1
+            votes: this.state.votes + 1,
+            viewer: this.state.viewer +1
         });
         if (this.state.viewers == this.state.votes) {
             if (this.state.style === "majority") {
@@ -647,6 +649,7 @@ class Voting extends Component {
         else if (this.state.stage === "vote") {
             return (
                 <div id="movie-display" className="float-contain">
+                    <h3>Viewer {this.state.viewer} enter your vote.</h3>
                     {this.state.options.map(item => (
                         <div key={item.title} className="float">
                             <img src={item.poster} alt={item.title} className="optionPoster"/>
