@@ -9,7 +9,6 @@ import Home from './components/Home';
 import Search from './components/Search';
 import Upcoming from './components/Upcoming';
 import Playlist from './components/Playlist';
-import Vote from './components/Vote';
 import Voting from './components/Voting';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
