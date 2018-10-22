@@ -54,7 +54,8 @@ class Search extends Component {
                     } else {
                         this.setState({
                             loggedIn: false,
-                            user: null
+                            user: null,
+                            ready: true,
                         })
                     }
                     
