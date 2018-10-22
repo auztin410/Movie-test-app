@@ -18,6 +18,8 @@ class Search extends Component {
             suggestions: [],
             ready: false,
             selected: '',
+            loggedIn: false,
+            user: null,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -29,28 +31,37 @@ class Search extends Component {
     }
 
     componentDidMount() {
-        if (!this.props.user) {
-            console.log("No User!");
+        if (this.state.suggestions) {
             axios.get("/autocomplete/").then((res) => {
                 this.setState({
                     suggestions: res.data,
-                    ready: true,
                 });
-            });
+            }).catch((err) => console.log(err));
+        if (!this.props.user) {
+            axios.get('/auth/user').then(response => {
+                    if (!!response.data.user) {
+                        console.log('THERE IS A USER')
+                        this.setState({
+                            loggedIn: true,
+                            user: response.data.user
+                        });
+                        return axios.get(`/playlists/${this.state.user._id}`).then((res) => {
+                            this.setState({
+                                playlists: res.data,
+                                ready: true,
+                            });
+                        }).catch((err) => console.log(err));
+                    } else {
+                        this.setState({
+                            loggedIn: false,
+                            user: null
+                        })
+                    }
+                    
+                });
+            }
         }
-        else {
-            axios.get(`/playlists/${this.props.user._id}`).then((res) => {
-                this.setState({
-                    playlists: res.data,
-                });
-                return axios.get("/autocomplete/").then((res) => {
-                    this.setState({
-                        suggestions: res.data,
-                        ready: true,
-                    });
-                });
-            }).catch((err) => (console.log(err)));
-        }
+        
     }
 
     handleChange(event) {
@@ -174,7 +185,7 @@ class Search extends Component {
                     Loading...
                 </div>
             )
-        else if (!this.state.search && !this.props.user && this.state.suggestions) {
+        else if (!this.state.search && !this.state.user && this.state.suggestions) {
             return (
                 <div className="search">
                     <form>
@@ -331,7 +342,7 @@ class Search extends Component {
 
             )
         }
-        else if (!this.state.search && this.props.user) {
+        else if (!this.state.search && this.state.user) {
             return (
                 <div className="search">
                     <form>
@@ -658,7 +669,7 @@ class Search extends Component {
                 </div>
             )
         }
-        else if (this.state.search && !this.props.user) {
+        else if (this.state.search && !this.state.user) {
             return (
                 <div className="search">
                     {/* <p>Current User:</p>
