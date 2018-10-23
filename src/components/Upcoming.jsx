@@ -84,7 +84,7 @@ class Upcoming extends Component {
                     </div>
             )
         }
-        else if (this.state.ready === true && this.state._id === "5ba3e0f075e8890015c869ad") {
+        else if (this.state.ready === true && this.state.user._id === "5ba3e0f075e8890015c869ad") {
             return (
                 <div className="upcomingDisplay">
                 <br />
