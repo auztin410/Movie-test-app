@@ -9,6 +9,7 @@ class Upcoming extends Component {
         this.state = {
             upcoming: [],
             ready: false,
+            user: null,
         }
 
         this.Shuffle = this.Shuffle.bind(this);
@@ -22,6 +23,22 @@ class Upcoming extends Component {
     };
 
     componentDidMount() {
+        if (!this.state.user) {
+            axios.get('/auth/user').then(response => {
+                if (!!response.data.user) {
+                    console.log('THERE IS A USER')
+                    this.setState({
+                        loggedIn: true,
+                        user: response.data.user
+                    })
+                } else {
+                    this.setState({
+                        loggedIn: false,
+                        user: null
+                    })
+                }
+            })
+        }
         axios.get("/upcoming/list").then((res) => {
             this.setState({
                 upcoming: [...res.data]
@@ -49,14 +66,14 @@ class Upcoming extends Component {
 
     render() {
         
-        if (this.state.ready === false && !this.props.user) {
+        if (this.state.ready === false && !this.state.user) {
             return (
                 <div id="movie-display">
                     Loading...
                 </div>
             )
         }
-       else if (this.state.ready === false && this.props.user._id === "5ba3e0f075e8890015c869ad") {
+       else if (this.state.ready === false && this.state.user._id === "5ba3e0f075e8890015c869ad") {
             return (
                 <div id="movie-display">
                     Loading...
@@ -67,7 +84,7 @@ class Upcoming extends Component {
                     </div>
             )
         }
-        else if (!this.props.user && this.state.ready === true) {
+        else if (!this.state.user && this.state.ready === true) {
             return (
                 <div className="upcomingDisplay">
                     <div className="upcoming0">
@@ -89,7 +106,7 @@ class Upcoming extends Component {
                 </div>
             )
         }
-        else if (this.state.ready === true && this.props.user._id === "5ba3e0f075e8890015c869ad") {
+        else if (this.state.ready === true && this.state._id === "5ba3e0f075e8890015c869ad") {
             return (
                 <div className="upcomingDisplay">
                 <br />
