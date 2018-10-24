@@ -14,34 +14,43 @@ class Playlist extends Component {
             playlists: '',
             display: '',
             newPlaylist: '',
-            props: '',
             runTimes: {},
             ratings: {},
             directors: {},
             genres: {},
             result: '',
             selected: '',
+            user: null,
         };
 
         this.handlePlaylist = this.handlePlaylist.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleNewPlaylist = this.handleNewPlaylist.bind(this);
         console.log("user");
-        console.log(props);
     }
 
     componentDidMount() {
-        if (!this.props.user) {
-            console.log("No User");
-        }
-        else {
-            axios.get(`/playlists/${this.props.user._id}`)
+        axios.get('/auth/user').then(response => {
+			if (!!response.data.user) {
+				console.log('THERE IS A USER')
+				this.setState({
+					loggedIn: true,
+					user: response.data.user
+                });
+                return axios.get(`/playlists/${this.state.user._id}`)
                 .then((res) => {
                     this.setState({
                         playlists: res.data,
                     });
                 }).catch((err) => (console.log(err)));
-        }
+			} else {
+				this.setState({
+					loggedIn: false,
+					user: null
+				})
+			}
+		});
+        
     };
 
     handlePlaylist(event) {
@@ -147,13 +156,11 @@ class Playlist extends Component {
 
     handleNewPlaylist(event) {
         event.preventDefault();
-        console.log("props user");
-        console.log(this.props.user._id);
         axios.post("/playlist/", {
-            user: this.props.user._id,
+            user: this.state.user._id,
             name: this.state.newPlaylist,
         }).then((res) => {
-            axios.get(`/playlists/${this.props.user._id}`)
+            axios.get(`/playlists/${this.state.user._id}`)
                 .then((res) => {
                     this.setState({
                         playlists: res.data,

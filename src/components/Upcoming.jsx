@@ -73,6 +73,28 @@ class Upcoming extends Component {
                 </div>
             )
         }
+        else if (!this.state.user && this.state.ready === true) {
+            return (
+                <div className="upcomingDisplay">
+                    <div className="upcoming0">
+                        <img className="poster" src={this.state.upcoming[0].link} alt={this.state.upcoming[0].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[0].title}</h1>
+                    </div>
+                    <div className="upcoming1">
+                        <img className="poster" src={this.state.upcoming[1].link} alt={this.state.upcoming[1].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[1].title}</h1>
+                    </div>
+                    <div className="upcoming2">
+                        <img className="poster" src={this.state.upcoming[2].link} alt={this.state.upcoming[2].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[2].title}</h1>
+                    </div>
+                    <div className="upcoming3">
+                        <img className="poster" src={this.state.upcoming[3].link} alt={this.state.upcoming[3].title}/>
+                        <h1 className="upcomingTitle">{this.state.upcoming[3].title}</h1>
+                    </div>
+                </div>
+            )
+        }
        else if (this.state.ready === false && this.state.user._id === "5ba3e0f075e8890015c869ad") {
             return (
                 <div id="movie-display">
@@ -109,30 +131,7 @@ class Upcoming extends Component {
                     </div>
                 </div>
             )
-        }
-        else if (!this.state.user && this.state.ready === true) {
-            return (
-                <div className="upcomingDisplay">
-                    <div className="upcoming0">
-                        <img className="poster" src={this.state.upcoming[0].link} alt={this.state.upcoming[0].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[0].title}</h1>
-                    </div>
-                    <div className="upcoming1">
-                        <img className="poster" src={this.state.upcoming[1].link} alt={this.state.upcoming[1].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[1].title}</h1>
-                    </div>
-                    <div className="upcoming2">
-                        <img className="poster" src={this.state.upcoming[2].link} alt={this.state.upcoming[2].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[2].title}</h1>
-                    </div>
-                    <div className="upcoming3">
-                        <img className="poster" src={this.state.upcoming[3].link} alt={this.state.upcoming[3].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[3].title}</h1>
-                    </div>
-                </div>
-            )
-        }
-        
+        }        
         else if (this.state.ready === true) {
             return (
                 <div className="upcomingDisplay">

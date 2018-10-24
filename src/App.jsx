@@ -175,12 +175,11 @@ class App extends Component {
 						/>}
 				/>
 				<Route exact path="/signup" component={SignupForm} />
-				{/* <LoginForm _login={this._login} /> */}
-
-				{/* <Route exact path="/upcoming" render={() => <Upcoming user={this.state.user} />} /> */}
+				
 				<Route exact path="/upcoming" component={Upcoming} />
 
-				<Route exact path="/list" render={() => <Playlist user={this.state.user} />} />
+				{/* <Route exact path="/list" render={() => <Playlist user={this.state.user} />} /> */}
+				<Route exact path="/list" component={Playlist} />
 
 				<Route exact path="/vote" render={() => <Voting user={this.state.user} />} />
 				<br/>
