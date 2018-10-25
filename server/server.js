@@ -339,6 +339,11 @@ app.post("voting/open", function (req, res) {
 
 // Handle pulling the results
 
+// if no API routers are hit, send the React App
+app.use(function(req, res) {
+    res.sendFile(path.join(__dirname, "../src/index"));
+  });
+
 // ==== Starting Server =====
 app.listen(PORT, () => {
 	console.log(`App listening on PORT: ${PORT}`)
