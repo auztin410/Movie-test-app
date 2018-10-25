@@ -341,7 +341,7 @@ app.post("voting/open", function (req, res) {
 
 // if no API routers are hit, send the React App
 app.use(function(req, res) {
-    res.sendFile(path.join(__dirname, "../src/index"));
+    res.sendFile(path.join(__dirname, "../src/index.js"));
   });
 
 // ==== Starting Server =====
