@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, BrowserRouter as Router, Switch} from 'react-router-dom';
+
 import './App.css';
 import LoginForm from './components/Login/LoginForm';
 import SignupForm from './components/SignupForm';
@@ -155,12 +156,14 @@ class App extends Component {
 
 	render() {
 		return (
+			<Router>
 			<div className="App">
 				<Header user={this.state.user} />
 				{/* LINKS to our different 'pages' */}
 				<DisplayLinks _logout={this._logout} loggedIn={this.state.loggedIn} />
 				{/*  ROUTES */}
 				{/* <Route exact path="/" component={Home} /> */}
+				<Switch>
 				<Route exact path="/" render={() => <Home user={this.state.user} />} />
 				{/* <Route exact path="/search" render={() => <Search user={this.state.user} />} /> */}
 				{/* <Route exact path="/search" render={() => <Search user={this.state.user} />}  /> */}
@@ -181,9 +184,11 @@ class App extends Component {
 				<Route exact path="/list" component={Playlist} />
 
 				<Route exact path="/vote" component={Voting} />
+				</Switch>
 				<br/>
 				
 			</div>
+			</Router>
 		)
 	}
 }

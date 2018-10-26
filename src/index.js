@@ -10,8 +10,8 @@ import { faHome, faUser, faSignOutAlt, faUserPlus, faSearch, faUserCircle, faVid
 library.add(faHome, faUser, faSignOutAlt, faUserPlus, faSearch, faUserCircle, faVideo, faTable, faBalanceScale);
 
 ReactDOM.render(
-	<BrowserRouter>
-		<App />
-	</BrowserRouter>,
+	// <BrowserRouter>
+		<App />,
+	// </BrowserRouter>,
 	document.getElementById('root')
 )
