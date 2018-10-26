@@ -5,6 +5,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 require('dotenv').config()
 
+const path = require("path");
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
@@ -341,7 +342,7 @@ app.post("voting/open", function (req, res) {
 
 // if no API routers are hit, send the React App
 app.use(function(req, res) {
-    res.sendFile(path.join(__dirname, "../public"));
+    res.sendFile(path.join(__dirname, "../build/index.html"));
   });
 
 // ==== Starting Server =====
