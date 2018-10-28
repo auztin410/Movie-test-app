@@ -28,6 +28,7 @@ html,body
   animation: Header .8s forwards 0s ease-in;
   color: whitesmoke;
   text-shadow: 1px 1px rgba(143, 153, 247, 0.253);
+  font-family: 'Faster One', cursive;
 }
 
 .poster {
@@ -75,6 +76,17 @@ body {
 #movie-display {
   color: whitesmoke;
   text-shadow: 2px 2px black;
+  font-family: 'Alegreya SC', serif;
+  /* font-weight: bold; */
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 32px;
+}
+
+p {
+  font-size: 21px;
 }
 
 .float-contain {
