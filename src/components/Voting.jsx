@@ -473,16 +473,16 @@ class Voting extends Component {
                         <br />
                         <br />
                         <img className="poster" src={this.state.search.data.Poster} alt="poster" />
-                        <h1>{this.state.search.data.Title}</h1>
-                        <p>Date of Release: {this.state.search.data.Released}</p>
-                        <p>Rated: {this.state.search.data.Rated}</p>
-                        <p>Runtime: {this.state.search.data.Runtime}</p>
-                        <p>Directed by: {this.state.search.data.Director}</p>
-                        <p>Actors: {this.state.search.data.Actors}</p>
-                        <p>Plot: {this.state.search.data.Plot}</p>
-                        <p>Awards: {this.state.search.data.Awards}</p>
-                        <p>MetaScore: {this.state.search.data.Metascore}</p>
-                        <p>Imdb Rating: {this.state.search.data.imdbRating}</p>
+                        <h1 className="movie-info">{this.state.search.data.Title}</h1>
+                        <p className="movie-info">Date of Release: {this.state.search.data.Released}</p>
+                        <p className="movie-info">Rated: {this.state.search.data.Rated}</p>
+                        <p className="movie-info">Runtime: {this.state.search.data.Runtime}</p>
+                        <p className="movie-info">Directed by: {this.state.search.data.Director}</p>
+                        <p className="movie-info">Actors: {this.state.search.data.Actors}</p>
+                        <p className="movie-info">Plot: {this.state.search.data.Plot}</p>
+                        <p className="movie-info">Awards: {this.state.search.data.Awards}</p>
+                        <p className="movie-info">MetaScore: {this.state.search.data.Metascore}</p>
+                        <p className="movie-info">Imdb Rating: {this.state.search.data.imdbRating}</p>
 
                     </div>
                 </div>
@@ -881,16 +881,16 @@ class Voting extends Component {
                         <br />
                         <br />
                         <img className="poster" src={this.state.search.data.Poster} alt="poster" />
-                        <h1>{this.state.search.data.Title}</h1>
-                        <p>Date of Release: {this.state.search.data.Released}</p>
-                        <p>Rated: {this.state.search.data.Rated}</p>
-                        <p>Runtime: {this.state.search.data.Runtime}</p>
-                        <p>Directed by: {this.state.search.data.Director}</p>
-                        <p>Actors: {this.state.search.data.Actors}</p>
-                        <p>Plot: {this.state.search.data.Plot}</p>
-                        <p>Awards: {this.state.search.data.Awards}</p>
-                        <p>MetaScore: {this.state.search.data.Metascore}</p>
-                        <p>Imdb Rating: {this.state.search.data.imdbRating}</p>
+                        <h1 className="movie-info">{this.state.search.data.Title}</h1>
+                        <p className="movie-info">Date of Release: {this.state.search.data.Released}</p>
+                        <p className="movie-info">Rated: {this.state.search.data.Rated}</p>
+                        <p className="movie-info">Runtime: {this.state.search.data.Runtime}</p>
+                        <p className="movie-info">Directed by: {this.state.search.data.Director}</p>
+                        <p className="movie-info">Actors: {this.state.search.data.Actors}</p>
+                        <p className="movie-info">Plot: {this.state.search.data.Plot}</p>
+                        <p className="movie-info">Awards: {this.state.search.data.Awards}</p>
+                        <p className="movie-info">MetaScore: {this.state.search.data.Metascore}</p>
+                        <p className="movie-info">Imdb Rating: {this.state.search.data.imdbRating}</p>
 
                     </div>
                 </div>

@@ -78,19 +78,19 @@ class Upcoming extends Component {
                 <div className="upcomingDisplay">
                     <div className="upcoming0">
                         <img className="poster" src={this.state.upcoming[0].link} alt={this.state.upcoming[0].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[0].title}</h1>
+                        <h1 className="movie-info" id="upcomingTitle">{this.state.upcoming[0].title}</h1>
                     </div>
                     <div className="upcoming1">
                         <img className="poster" src={this.state.upcoming[1].link} alt={this.state.upcoming[1].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[1].title}</h1>
+                        <h1 className="movie-info" id="upcomingTitle">{this.state.upcoming[1].title}</h1>
                     </div>
                     <div className="upcoming2">
                         <img className="poster" src={this.state.upcoming[2].link} alt={this.state.upcoming[2].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[2].title}</h1>
+                        <h1 className="movie-info" id="upcomingTitle">{this.state.upcoming[2].title}</h1>
                     </div>
                     <div className="upcoming3">
                         <img className="poster" src={this.state.upcoming[3].link} alt={this.state.upcoming[3].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[3].title}</h1>
+                        <h1 className="movie-info" id="upcomingTitle">{this.state.upcoming[3].title}</h1>
                     </div>
                 </div>
             )
@@ -115,19 +115,19 @@ class Upcoming extends Component {
                 <button onClick={this.handleEmpty}>Empty</button>
                     <div className="upcoming0">
                         <img className="poster" src={this.state.upcoming[0].link} alt={this.state.upcoming[0].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[0].title}</h1>
+                        <h1 className="movie-info" id="upcomingTitle">{this.state.upcoming[0].title}</h1>
                     </div>
                     <div className="upcoming1">
                         <img className="poster" src={this.state.upcoming[1].link} alt={this.state.upcoming[1].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[1].title}</h1>
+                        <h1 className="movie-info" id="upcomingTitle">{this.state.upcoming[1].title}</h1>
                     </div>
                     <div className="upcoming2">
                         <img className="poster" src={this.state.upcoming[2].link} alt={this.state.upcoming[2].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[2].title}</h1>
+                        <h1 className="movie-info" id="upcomingTitle">{this.state.upcoming[2].title}</h1>
                     </div>
                     <div className="upcoming3">
                         <img className="poster" src={this.state.upcoming[3].link} alt={this.state.upcoming[3].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[3].title}</h1>
+                        <h1 className="movie-info" id="upcomingTitle">{this.state.upcoming[3].title}</h1>
                     </div>
                 </div>
             )
@@ -137,19 +137,19 @@ class Upcoming extends Component {
                 <div className="upcomingDisplay">
                     <div className="upcoming0">
                         <img className="poster" src={this.state.upcoming[0].link} alt={this.state.upcoming[0].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[0].title}</h1>
+                        <h1 className="movie-info" id="upcomingTitle">{this.state.upcoming[0].title}</h1>
                     </div>
                     <div className="upcoming1">
                         <img className="poster" src={this.state.upcoming[1].link} alt={this.state.upcoming[1].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[1].title}</h1>
+                        <h1 className="movie-info" id="upcomingTitle">{this.state.upcoming[1].title}</h1>
                     </div>
                     <div className="upcoming2">
                         <img className="poster" src={this.state.upcoming[2].link} alt={this.state.upcoming[2].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[2].title}</h1>
+                        <h1 className="movie-info" id="upcomingTitle">{this.state.upcoming[2].title}</h1>
                     </div>
                     <div className="upcoming3">
                         <img className="poster" src={this.state.upcoming[3].link} alt={this.state.upcoming[3].title}/>
-                        <h1 className="upcomingTitle">{this.state.upcoming[3].title}</h1>
+                        <h1 className="movie-info" id="upcomingTitle">{this.state.upcoming[3].title}</h1>
                     </div>
                 </div>
             )
