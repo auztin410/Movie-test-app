@@ -149,8 +149,10 @@ app.delete("/playlist/delete/:id/", function (req, res) {
 	console.log(req.params);
 	Playlist.findOneAndRemove(
 		{_id: req.params.id}
+	).then( PlaylistMovies.remove(
+		{playlist: req.params.id}
 	).then(dbItem => res.json(dbItem))
-		.catch((err) => res.json(err));
+		.catch((err) => res.json(err)));	
 });
 
 // Findoneandupdate for movielist.
