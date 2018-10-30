@@ -82,6 +82,7 @@ class Playlist extends Component {
         }).catch((err) => console.log(err)); 
         console.log("Test delete");
         console.log(this.state.selected);
+        window.location.reload();
     };
 
     handlePlaylist(event) {
