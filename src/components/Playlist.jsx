@@ -21,11 +21,15 @@ class Playlist extends Component {
             result: '',
             selected: '',
             user: null,
+            doubleCheck: false,
         };
 
         this.handlePlaylist = this.handlePlaylist.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleNewPlaylist = this.handleNewPlaylist.bind(this);
+        this.handleDoubleCheck = this.handleDoubleCheck.bind(this);
+        this.handleDeletePlaylist = this.handleDeletePlaylist.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
         console.log("user");
     }
 
@@ -51,6 +55,33 @@ class Playlist extends Component {
 			}
 		});
         
+    };
+
+    handleDoubleCheck(event) {
+        event.preventDefault();
+        this.setState({
+            doubleCheck: true,
+        });
+    };
+
+    handleCancel(event) {
+        event.preventDefault();
+        this.setState({
+            doubleCheck: false,
+        });
+    };
+
+    handleDeletePlaylist(event) {
+        event.preventDefault();
+        axios.delete(`playlist/delete/${this.state.selected}`,)
+        .then((res) => {
+            this.setState({
+                selected: '',
+                doubleCheck: false,
+            });
+        }).catch((err) => console.log(err)); 
+        console.log("Test delete");
+        console.log(this.state.selected);
     };
 
     handlePlaylist(event) {
@@ -215,6 +246,112 @@ class Playlist extends Component {
                 </div>
             )
         }
+        else if (!this.state.display && this.state.doubleCheck === true) {
+            return (
+                <div className="playlist">
+                    <form>
+                        <select name="selected" onChange={this.handleChange}>
+                        <option value="">None Selected</option>
+                    {this.state.playlists.map(item => (
+                        <option value={item._id}>{item.name}</option>
+                    ))}
+                    </select>
+                    {" "}
+                    <button onClick={this.handlePlaylist}>Load Playlist</button>
+                    <br/>
+                    <br/>
+                    <div id="movie-display">Are you sure you wish to delete this playlist?</div>
+                    {" "}
+                    <button onClick={this.handleDeletePlaylist}>Yes</button>
+                    {" "}
+                    <button onClick={this.handleCancel}>No</button>
+                    </form>
+                    <form>
+                        <p id="movie-display">Create a new playlist</p>
+                        <input
+                            type="text"
+                            name="newPlaylist"
+                            value={this.state.newPlaylist}
+                            onChange={this.handleChange}
+                        />
+                        {" "}
+                        <button onClick={this.handleNewPlaylist} disabled={!this.state.newPlaylist}>Create New Playlist</button>
+                    </form>
+                </div>
+            )
+        }
+        else if (this.state.display && this.state.doubleCheck === true) {
+            return (
+                <div className="playlist">
+                    <form>
+                        <select name="selected" onChange={this.handleChange}>
+                        <option value="">None Selected</option>
+                    {this.state.playlists.map(item => (
+                        <option value={item._id}>{item.name}</option>
+                    ))}
+                    </select>
+                    {" "}
+                    <button onClick={this.handlePlaylist}>Load Playlist</button>
+                    <br/>
+                    <br/>
+                    <div id="movie-display">Are you sure you wish to delete this playlist?</div>
+                    {" "}
+                    <button onClick={this.handleDeletePlaylist}>Yes</button>
+                    {" "}
+                    <button onClick={this.handleCancel}>No</button>
+                    </form>
+                    <form>
+                        <p id="movie-display">Create a new playlist</p>
+                        <input
+                            type="text"
+                            name="newPlaylist"
+                            value={this.state.newPlaylist}
+                            onChange={this.handleChange}
+                        />
+                        {" "}
+                        <button onClick={this.handleNewPlaylist}>Create New Playlist</button>
+                    </form>
+                    <ReactTable
+                        data={data}
+                        columns={columns}
+                    />
+                    <br />
+                    <div className="contain-pie">
+                        <VictoryPie
+                            responsive={false}
+                            height={150}
+                            width={150}
+                            data={this.state.directors}
+                            style={{ labels: { fill: "white", fontSize: 3 } }}
+                        />
+                        <br />
+                        <VictoryPie
+                            responsive={false}
+                            height={150}
+                            width={150}
+                            data={this.state.genres}
+                            style={{ labels: { fill: "white", fontSize: 3 } }}
+                        />
+                        <br />
+                        <VictoryPie
+                            responsive={false}
+                            height={150}
+                            width={150}
+                            data={this.state.runTimes}
+                            style={{ labels: { fill: "white", fontSize: 3 } }}
+                        />
+                        <br />
+                        <VictoryPie
+                            responsive={false}
+                            height={150}
+                            width={150}
+                            data={this.state.ratings}
+                            style={{ labels: { fill: "white", fontSize: 3 } }}
+                        />
+                    </div>
+                </div>
+            )
+        }
         else if (!this.state.display) {
             return (
                 <div className="playlist">
@@ -227,6 +364,8 @@ class Playlist extends Component {
                     </select>
                     {" "}
                     <button onClick={this.handlePlaylist}>Load Playlist</button>
+                    {" "}
+                    <button onClick={this.handleDoubleCheck}>Delete Playlist</button>
                     </form>
                     <form>
                         <p id="movie-display">Create a new playlist</p>
@@ -254,6 +393,8 @@ class Playlist extends Component {
                     </select>
                     {" "}
                     <button onClick={this.handlePlaylist}>Load Playlist</button>
+                    {" "}
+                    <button onClick={this.handleDoubleCheck}>Delete Playlist</button>
                     </form>
                     <form>
                         <p id="movie-display">Create a new playlist</p>
