@@ -155,6 +155,15 @@ app.delete("/playlist/delete/:id/", function (req, res) {
 		.catch((err) => res.json(err)));	
 });
 
+// Delete a movie from a playlist
+app.delete("playlist/movie/:id/", function (req, res) {
+	console.log(req.params);
+	PlaylistMovies.findOneAndRemove(
+		{_id: req.params.id}
+	).then(dbItem => res.json(dbItem))
+	.catch((err) => res.json(err));
+});
+
 // Findoneandupdate for movielist.
 app.post("/movie", function (req, res) {
 	console.log(req.body);

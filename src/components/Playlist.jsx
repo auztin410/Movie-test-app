@@ -30,6 +30,7 @@ class Playlist extends Component {
         this.handleDoubleCheck = this.handleDoubleCheck.bind(this);
         this.handleDeletePlaylist = this.handleDeletePlaylist.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
+        this.handleDeleteMovie = this.handleDeleteMovie.bind(this);
         console.log("user");
     }
 
@@ -82,6 +83,16 @@ class Playlist extends Component {
         }).catch((err) => console.log(err)); 
         console.log("Test delete");
         console.log(this.state.selected);
+        window.location.reload();
+    };
+
+    handleDeleteMovie(event) {
+        console.log("Delete Movie Button");
+        console.log(event._id);
+        axios.delete(`playlist/movie/${event._id}`,)
+        .then((res) => {
+            console.log("Deleted Movie from Playlist!");
+        }).catch((err) => console.log(err));
         window.location.reload();
     };
 
@@ -235,7 +246,14 @@ class Playlist extends Component {
                 {
                     Header: "Genres",
                     accessor: "genre"
-                }
+                },
+                {
+                    Header: "",
+                    Cell: row => (
+                        <div>
+                            <button onClick={() => this.handleDeleteMovie(row.original)}>Delete</button>
+                        </div> )
+                  }
             ]
 
         }]
@@ -360,7 +378,7 @@ class Playlist extends Component {
                         <select name="selected" onChange={this.handleChange}>
                         <option value="">None Selected</option>
                     {this.state.playlists.map(item => (
-                        <option value={item._id}>{item.name}</option>
+                        <option key={item._id} value={item._id}>{item.name}</option>
                     ))}
                     </select>
                     {" "}
@@ -389,7 +407,7 @@ class Playlist extends Component {
                         <select name="selected" onChange={this.handleChange}>
                         <option value="">None Selected</option>
                     {this.state.playlists.map(item => (
-                        <option value={item._id}>{item.name}</option>
+                        <option key={item._id} value={item._id}>{item.name}</option>
                     ))}
                     </select>
                     {" "}
