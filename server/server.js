@@ -146,7 +146,6 @@ app.get("/playlists/:user", function (req, res) {
 
 // Delete a playlist
 app.delete("/playlist/delete/:id/", function (req, res) {
-	console.log(req.params);
 	Playlist.findOneAndRemove(
 		{_id: req.params.id}
 	).then( PlaylistMovies.remove(
@@ -156,10 +155,9 @@ app.delete("/playlist/delete/:id/", function (req, res) {
 });
 
 // Delete a movie from a playlist
-app.delete("playlist/movie/:id/", function (req, res) {
-	console.log(req.params);
+app.delete("/movie/:movie/:id/", function (req, res) {
 	PlaylistMovies.findOneAndRemove(
-		{_id: req.params.id}
+		{playlist: req.params.id, movie: new mongoose.mongo.ObjectID(req.params.movie)}		
 	).then(dbItem => res.json(dbItem))
 	.catch((err) => res.json(err));
 });

@@ -80,19 +80,21 @@ class Playlist extends Component {
                 selected: '',
                 doubleCheck: false,
             });
+            console.log("Test delete");
+            console.log(res);
         }).catch((err) => console.log(err)); 
-        console.log("Test delete");
-        console.log(this.state.selected);
         window.location.reload();
     };
 
     handleDeleteMovie(event) {
         console.log("Delete Movie Button");
-        console.log(event._id);
-        axios.delete(`playlist/movie/${event._id}`,)
+        console.log(event);
+        axios.delete(`movie/${event._id}/${this.state.selected}`,)
         .then((res) => {
             console.log("Deleted Movie from Playlist!");
+            console.log(res);
         }).catch((err) => console.log(err));
+        window.location.reload();
     };
 
     handlePlaylist(event) {
@@ -305,7 +307,7 @@ class Playlist extends Component {
                         <select name="selected" onChange={this.handleChange}>
                         <option value="">None Selected</option>
                     {this.state.playlists.map(item => (
-                        <option value={item._id}>{item.name}</option>
+                        <option key={item._id} value={item._id}>{item.name}</option>
                     ))}
                     </select>
                     {" "}
