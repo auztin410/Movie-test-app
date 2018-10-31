@@ -93,7 +93,6 @@ class Playlist extends Component {
         .then((res) => {
             console.log("Deleted Movie from Playlist!");
         }).catch((err) => console.log(err));
-        window.location.reload();
     };
 
     handlePlaylist(event) {
