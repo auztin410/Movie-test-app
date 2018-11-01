@@ -50,8 +50,8 @@ class SignupForm extends Component {
 		}
 		return (
 			<div className="SignupForm">
-				<h1 id="movie-display" >Signup form</h1>
-				<label id="movie-display" htmlFor="username">Username: </label>
+				<h1 className="movie-display" >Signup form</h1>
+				<label className="movie-display" htmlFor="username">Username: </label>
 				<input
 					type="text"
 					name="username"
@@ -60,7 +60,7 @@ class SignupForm extends Component {
 				/>
 				<br />
 				<br />
-				<label id="movie-display" htmlFor="password">Password: </label>
+				<label className="movie-display" htmlFor="password">Password: </label>
 				<input
 					type="password"
 					name="password"
@@ -69,7 +69,7 @@ class SignupForm extends Component {
 				/>
 				<br />
 				<br />
-				<label  id="movie-display" htmlFor="confirmPassword">Confirm Password: </label>
+				<label  className="movie-display" htmlFor="confirmPassword">Confirm Password: </label>
 				<input
 					type="password"
 					name="confirmPassword"

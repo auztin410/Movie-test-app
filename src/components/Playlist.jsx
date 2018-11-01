@@ -262,7 +262,7 @@ class Playlist extends Component {
         if (!this.state.display && !this.state.playlists) {
             return (
                 <div className="playlist">
-                    <p id="movie-display">Loading...</p>
+                    <p className="movie-display">Loading...</p>
                 </div>
             )
         }
@@ -280,14 +280,14 @@ class Playlist extends Component {
                     <button onClick={this.handlePlaylist}>Load Playlist</button>
                     <br/>
                     <br/>
-                    <div id="movie-display">Are you sure you wish to delete this playlist?</div>
+                    <div className="movie-display">Are you sure you wish to delete this playlist?</div>
                     {" "}
                     <button onClick={this.handleDeletePlaylist}>Yes</button>
                     {" "}
                     <button onClick={this.handleCancel}>No</button>
                     </form>
                     <form>
-                        <p id="movie-display">Create a new playlist</p>
+                        <p className="movie-display">Create a new playlist</p>
                         <input
                             type="text"
                             name="newPlaylist"
@@ -314,14 +314,14 @@ class Playlist extends Component {
                     <button onClick={this.handlePlaylist}>Load Playlist</button>
                     <br/>
                     <br/>
-                    <div id="movie-display">Are you sure you wish to delete this playlist?</div>
+                    <div className="movie-display">Are you sure you wish to delete this playlist?</div>
                     {" "}
                     <button onClick={this.handleDeletePlaylist}>Yes</button>
                     {" "}
                     <button onClick={this.handleCancel}>No</button>
                     </form>
                     <form>
-                        <p id="movie-display">Create a new playlist</p>
+                        <p className="movie-display">Create a new playlist</p>
                         <input
                             type="text"
                             name="newPlaylist"
@@ -332,6 +332,7 @@ class Playlist extends Component {
                         <button onClick={this.handleNewPlaylist}>Create New Playlist</button>
                     </form>
                     <ReactTable
+                        className="table"
                         data={data}
                         columns={columns}
                     />
@@ -388,7 +389,7 @@ class Playlist extends Component {
                     <button onClick={this.handleDoubleCheck}>Delete Playlist</button>
                     </form>
                     <form>
-                        <p id="movie-display">Create a new playlist</p>
+                        <p className="movie-display">Create a new playlist</p>
                         <input
                             type="text"
                             name="newPlaylist"
@@ -417,7 +418,7 @@ class Playlist extends Component {
                     <button onClick={this.handleDoubleCheck}>Delete Playlist</button>
                     </form>
                     <form>
-                        <p id="movie-display">Create a new playlist</p>
+                        <p className="movie-display">Create a new playlist</p>
                         <input
                             type="text"
                             name="newPlaylist"
@@ -428,6 +429,7 @@ class Playlist extends Component {
                         <button onClick={this.handleNewPlaylist}>Create New Playlist</button>
                     </form>
                     <ReactTable
+                        className="table"
                         data={data}
                         columns={columns}
                     />

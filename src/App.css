@@ -77,6 +77,21 @@ body {
   color: whitesmoke;
   text-shadow: 2px 2px black;
   font-family: 'Alegreya SC', serif;
+  width: 80vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+.movie-display {
+  color: whitesmoke;
+  text-shadow: 2px 2px black;
+  font-family: 'Alegreya SC', serif;
+}
+
+.table {
+  width: 90wv;
+  margin-left: 5vw;
+  margin-right: 5vw;
 }
 
 h1 {

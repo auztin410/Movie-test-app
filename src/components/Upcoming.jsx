@@ -68,7 +68,7 @@ class Upcoming extends Component {
         
         if (this.state.ready === false && !this.state.user) {
             return (
-                <div id="movie-display">
+                <div className="movie-display">
                     Loading...
                 </div>
             )
@@ -97,7 +97,7 @@ class Upcoming extends Component {
         }
        else if (this.state.ready === false && this.state.user._id === "5ba3e0f075e8890015c869ad") {
             return (
-                <div id="movie-display">
+                <div className="movie-display">
                     Loading...
                     <br />
                 <button onClick={this.handleScrape}>Scrape</button>

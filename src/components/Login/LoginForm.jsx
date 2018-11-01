@@ -37,9 +37,9 @@ class LoginForm extends Component {
 		} else {
 			return (
 				<div className="LoginForm">
-					<h1 id="movie-display" >Login form</h1>
+					<h1 className="movie-display" >Login form</h1>
 					<form>
-						<label id="movie-display" htmlFor="username">Username: </label>
+						<label className="movie-display" htmlFor="username">Username: </label>
 						<input
 							type="text"
 							name="username"
@@ -49,7 +49,7 @@ class LoginForm extends Component {
 
 						<br />
 						<br />
-						<label id="movie-display" htmlFor="password">Password: </label>
+						<label className="movie-display" htmlFor="password">Password: </label>
 						<input
 							type="password"
 							name="password"
