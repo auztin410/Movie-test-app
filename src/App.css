@@ -65,6 +65,29 @@ body {
   margin: .2em;
 }
 
+#directorTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+}
+
+#directorTable td, #directorTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#directorTable tr:nth-child(even){background-color: #f2f2f2;}
+#directorTable tr:nth-child(odd){background-color: #b3acac;}
+
+#directorTable tr:hover {background-color: #ddd;}
+
+#directorTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: black;
+  color: whitesmoke;
+}
+
 .search {
   margin-top: 7vh;
 }

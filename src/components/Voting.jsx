@@ -156,7 +156,7 @@ class Voting extends Component {
     };
 
     handleMultipleAdd(event) {
-        let movie = 
+        let movie =
         {
             title: this.state.search.data.Title,
             poster: this.state.search.data.Poster,
@@ -180,7 +180,7 @@ class Voting extends Component {
         this.setState({
             options: array,
             votes: this.state.votes + 1,
-            viewer: this.state.viewer +1
+            viewer: this.state.viewer + 1
         });
         if (this.state.viewers == this.state.votes) {
             if (this.state.style === "majority") {
@@ -652,7 +652,7 @@ class Voting extends Component {
                     <h3>Viewer {this.state.viewer} enter your vote.</h3>
                     {this.state.options.map(item => (
                         <div key={item.title} className="float">
-                            <img src={item.poster} alt={item.title} className="optionPoster"/>
+                            <img src={item.poster} alt={item.title} className="optionPoster" />
                             <h1>{item.title}</h1>
                             <br />
                             <button value={item.title} onClick={this.handleVote}>Vote</button>
@@ -711,9 +711,9 @@ class Voting extends Component {
                     <br />
                     <form>
                         Give it a name: <br />
-                        <input type="text" name="name" onChange={this.handleChange} value={this.state.name}/>
+                        <input type="text" name="name" onChange={this.handleChange} value={this.state.name} />
                         Give it a code: <br />
-                        <input type="text" name="code" onChange={this.handleChange} value={this.state.code}/>
+                        <input type="text" name="code" onChange={this.handleChange} value={this.state.code} />
                         <br />
                         <button onClick={this.handleCreate}>Create</button>
                     </form>

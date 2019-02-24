@@ -1,4 +1,4 @@
-// Loading evnironmental variables here
+// Loading environmental variables here
 if (process.env.NODE_ENV !== 'production') {
 	console.log('loading dev environments')
 	require('dotenv').config()
@@ -6,10 +6,10 @@ if (process.env.NODE_ENV !== 'production') {
 require('dotenv').config()
 
 const path = require("path");
-const express = require('express')
-const bodyParser = require('body-parser')
-const morgan = require('morgan')
-const session = require('express-session')
+const express = require('express');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const session = require('express-session');
 const cheerio = require('cheerio');
 const axios = require('axios');
 const MongoStore = require('connect-mongo')(session)

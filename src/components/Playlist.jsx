@@ -22,6 +22,9 @@ class Playlist extends Component {
             selected: '',
             user: null,
             doubleCheck: false,
+            directorTop3: [],
+            genreTable: [],
+            ratingsTable: [],
         };
 
         this.handlePlaylist = this.handlePlaylist.bind(this);
@@ -177,15 +180,39 @@ class Playlist extends Component {
                 return forGraph
             }, []);
 
-        
-
-
             this.setState({
                 display: array,
                 directors: countDirectors,
                 genres: countGenres,
                 runTimes: countRunTimes,
                 ratings: countRatings,
+                rawRunTimes: runTimesArray,
+            }, () => {
+                let directorList = this.state.directors;
+                let directorTest = [];
+                directorTest = directorList.filter(item =>(item.y > 1));
+                console.log(directorTest);
+                if(directorTest.length > 0){
+                    let directorTable = directorList.sort(function(a, b){
+                        return b.y - a.y;
+                    });
+                    let directorTop = directorTable.slice(0,3);
+                    console.log("Top 3 Directors");
+                    console.log(directorTop);
+                    let genreList = this.state.genres;
+                    let genreTable = genreList.sort(function(a, b){
+                        return b.y - a.y;
+                    });
+                    let ratingsList = this.state.ratings;
+                    let ratingsTable = ratingsList.sort(function(a, b){
+                        return b.y - a.y;
+                    });
+                    this.setState({
+                        directorTop3: directorTop,
+                        genreTable,
+                        ratingsTable,
+                    });
+                }
             });
         }).catch((err) => (console.log(err)));
 
@@ -337,7 +364,23 @@ class Playlist extends Component {
                         columns={columns}
                     />
                     <br />
-                    <div className="contain-pie">
+                    <div>
+                        <table id="directorTable">
+                            <tbody>
+                                <tr>
+                                    <th>Director</th>
+                                    <th>Count</th>
+                                </tr>
+                                    {this.state.directorTop3.map(item =>(
+                                        <tr key={item.x}>
+                                            <th>{item.x}</th>
+                                            <th>{item.y}</th>
+                                        </tr>
+                                    ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    {/* <div className="contain-pie">
                         <VictoryPie
                             responsive={false}
                             height={150}
@@ -369,7 +412,7 @@ class Playlist extends Component {
                             data={this.state.ratings}
                             style={{ labels: { fill: "white", fontSize: 3 } }}
                         />
-                    </div>
+                    </div> */}
                 </div>
             )
         }
@@ -434,7 +477,55 @@ class Playlist extends Component {
                         columns={columns}
                     />
                     <br />
-                    <div className="contain-pie">
+                    <div>
+                        <table id="directorTable">
+                            <tbody>
+                                <tr>
+                                    <th>Director</th>
+                                    <th>Count</th>
+                                </tr>
+                                    {this.state.directorTop3.map(item =>(
+                                        <tr key={item.x}>
+                                            <td>{item.x}</td>
+                                            <td>{item.y}</td>
+                                        </tr>
+                                    ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <table id="directorTable">
+                            <tbody>
+                                <tr>
+                                    <th>Genre</th>
+                                    <th>Count</th>
+                                </tr>
+                                    {this.state.genreTable.map(item =>(
+                                        <tr key={item.x}>
+                                            <td>{item.x}</td>
+                                            <td>{item.y}</td>
+                                        </tr>
+                                    ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <table id="directorTable">
+                            <tbody>
+                                <tr>
+                                    <th>Rating</th>
+                                    <th>Count</th>
+                                </tr>
+                                    {this.state.ratingsTable.map(item =>(
+                                        <tr key={item.x}>
+                                            <td>{item.x}</td>
+                                            <td>{item.y}</td>
+                                        </tr>
+                                    ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    {/* <div className="contain-pie">
                         <VictoryPie
                             responsive={false}
                             height={150}
@@ -466,7 +557,7 @@ class Playlist extends Component {
                             data={this.state.ratings}
                             style={{ labels: { fill: "white", fontSize: 3 } }}
                         />
-                    </div>
+                    </div> */}
                 </div>
             )
         }
