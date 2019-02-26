@@ -42,6 +42,9 @@ var MovieListSchema = new Schema({
     },
     genre: {
         type: String
+    },
+    similar: {
+        type: Array
     }
 
 });

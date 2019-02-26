@@ -42,6 +42,25 @@ class Home extends Component {
 							<p className="movie-info">Plot: {this.state.search.plot}</p>
 							<p className="movie-info">Awards: {this.state.search.awards}</p>
 							<p className="movie-info">MetaScore: {this.state.search.metaScore} {" "} || {" "} Imdb Rating: {this.state.search.imdbRating}</p>
+							{(this.props.user)
+							?
+							<div>
+								<p>Test Area for Similar Movies</p>
+									{(this.state.search.similar.length > 0)
+									?
+									<div>
+										{this.state.search.similar.map(item => (
+											<span>
+											<h4>{item.movieId}</h4>
+											<p>Agree: {item.yes}{" "} Disagree: {item.no}</p>
+											</span>
+										))}
+									</div>
+									: null
+									}
+							</div>
+							: null
+							}
 						</div>
 				</div>
 			)
