@@ -1,7 +1,9 @@
 {
-  "main.css": "static/css/main.4b581689.css",
-  "main.css.map": "static/css/main.4b581689.css.map",
-  "main.js": "static/js/main.4dfd68eb.js",
-  "main.js.map": "static/js/main.4dfd68eb.js.map",
-  "static\\media\\movietheaterblur.jpg": "static/media/movietheaterblur.57000423.jpg"
+  "main.css": "static/css/main.986b7e39.css",
+  "main.css.map": "static/css/main.986b7e39.css.map",
+  "main.js": "static/js/main.38534037.js",
+  "main.js.map": "static/js/main.38534037.js.map",
+  "static\\media\\movietheaterblur.jpg": "static/media/movietheaterblur.57000423.jpg",
+  "static\\media\\thumbs-down.svg": "static/media/thumbs-down.a2f10ad0.svg",
+  "static\\media\\thumbs-up.svg": "static/media/thumbs-up.efb2edf0.svg"
 }

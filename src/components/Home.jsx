@@ -252,7 +252,7 @@ class Home extends Component {
 					:
 					<div>
 					<img height="100px" width="50px" src={this.state.search.data.Poster} />
-					<h1 className="movie-info">{this.state.search.data.Title}</h1>
+					<h4>{this.state.search.data.Title}</h4>
 					</div>
 					}
 
@@ -261,9 +261,8 @@ class Home extends Component {
 									?
 									<div>
 										{this.state.random.similar.map(item => (
-											<span>
-											<h4>{item.movieId}</h4>
-											<p>Agree: {item.yes}{" "} Disagree: {item.no}</p>
+											<span>											
+											<h4><img height="16px" width="16px" src={require('../assets/Icons/thumbs-up.svg')} alt="thumbs-up"/> {item.yes}{" | "}{item.movieId}{" | "} <img height="16px" width="16px" src={require('../assets/Icons/thumbs-down.svg')} alt="thumbs-down"/> {item.no}</h4>
 											</span>
 										))}
 									</div>

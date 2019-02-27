@@ -373,3 +373,9 @@ button:active {
       box-shadow: 10px 10px 5px 2px black;
       }
 }
+
+@media only screen and (max-width: 767px) {
+  .Header {
+    font-size: 12px;
+  }
+}
