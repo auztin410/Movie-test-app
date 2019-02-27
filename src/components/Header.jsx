@@ -5,16 +5,16 @@ import '../App.css'
 const Header = props => {
 	let Greeting
 	if (props.user === null) {
-		Greeting = <p>Welcome, to Cinephile Central</p>
+		Greeting = <p className="headerText">Welcome, to Cinephile Central</p>
 	} else if (props.user.firstName) {
 		Greeting = (
-			<p>
+			<p className="headerText">
 				Welcome back to Cinephile Central, {props.user.firstName}
 			</p>
 		)
 	} else if (props.user.local.username) {
 		Greeting = (
-			<p>
+			<p className="headerText">
 				Welcome to Cinephile Central, {props.user.local.username}
 			</p>
 		)

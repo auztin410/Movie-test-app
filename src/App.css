@@ -28,7 +28,7 @@ html,body
   animation: Header .8s forwards 0s ease-in;
   color: whitesmoke;
   text-shadow: 1px 1px rgba(143, 153, 247, 0.253);
-  font-family: 'Faster One', cursive;
+  font-family: 'Faster One', cursive
 }
 
 .poster {
@@ -311,8 +311,28 @@ button:active {
   animation: WinningMovie 1.5s forwards .2s ease-in;
 }
 
+
+
+@media screen and (max-width: 1300px){
+  .headerText {font-size: 18px;}
+}
+@media screen and (max-width: 1200px){
+  .headerText {font-size: 16px;}
+}
+@media screen and (max-width: 1100px){
+  .headerText {font-size: 14px;}
+}
+@media screen and (max-width: 1000px){
+  .headerText {font-size: 12px;}
+}
+@media screen and (max-width: 900px){
+  .headerText {font-size: 10px;}
+}
+@media screen and (max-width: 767px){
+  .headerText {font-size: 8px;}
+}
 @media screen and (max-width: 600px) {
-  .Header {font-size: 8px;}
+  .headerText{font-size: 6px;}
   .optionPoster {height: 75px; width: 50px;}
   .upcoming0 {grid-area: 1 / 1 / span 1 / span 4}
   .upcoming1 {grid-area: 2 / 1 / span 1 / span 4}
@@ -372,10 +392,4 @@ button:active {
       transform-origin: 50% 50%;
       box-shadow: 10px 10px 5px 2px black;
       }
-}
-
-@media only screen and (max-width: 767px) {
-  .Header {
-    font-size: 12px;
-  }
 }
