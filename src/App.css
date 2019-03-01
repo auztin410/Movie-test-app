@@ -311,6 +311,10 @@ button:active {
   animation: WinningMovie 1.5s forwards .2s ease-in;
 }
 
+.similarSection {
+  font-size: 21px;
+}
+
 
 
 @media screen and (max-width: 1300px){

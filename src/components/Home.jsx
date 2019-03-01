@@ -66,7 +66,15 @@ class Home extends Component {
                 });
             }
         });
-    };
+	};
+	
+	handleUpVote(movieId) {
+		console.log(`Up Voting: ${movieId}`);
+	};
+
+	handleDownVote(movieId) {
+		console.log(`Down Voting: ${movieId}`);
+	};
 
 	render() {
 		if(!this.state.random) {
@@ -251,7 +259,7 @@ class Home extends Component {
 					? null
 					:
 					<div>
-					<img height="100px" width="50px" src={this.state.search.data.Poster} />
+					<img height="100px" width="50px" src={this.state.search.data.Poster} alt="moviePoster"/>
 					<h4>{this.state.search.data.Title}</h4>
 					</div>
 					}
@@ -259,10 +267,10 @@ class Home extends Component {
                 </div>
 									{(this.state.random.similar.length > 0)
 									?
-									<div>
+									<div className="similarSection">
 										{this.state.random.similar.map(item => (
 											<span>											
-											<h4><img height="16px" width="16px" src={require('../assets/Icons/thumbs-up.svg')} alt="thumbs-up"/> {item.yes}{" | "}{item.movieId}{" | "} <img height="16px" width="16px" src={require('../assets/Icons/thumbs-down.svg')} alt="thumbs-down"/> {item.no}</h4>
+											<h4><img height="15px" width="20px" onClick={() => this.handleUpVote(item.movieId)} src={require('../assets/Icons/arrow-alt-up.svg')} alt="arrowUp"/> {item.yes}{" | "}{item.movieId}{" | "} <img height="15px" width="20px" onClick={() => this.handleDownVote(item.movieId)} src={require('../assets/Icons/arrow-alt-down.svg')} alt="arrowDown"/> {item.no}</h4>
 											</span>
 										))}
 									</div>
