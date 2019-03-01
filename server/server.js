@@ -162,6 +162,31 @@ app.delete("/movie/:movie/:id/", function (req, res) {
 	.catch((err) => res.json(err));
 });
 
+// Add a Similar Movie to a movie
+app.post("/add/similar", function (req, res) {
+	MovieList.find(
+		{ movieId: req.body.movieId, similar: req.body.similarId }
+	).then(function (result) {
+		console.log("Triggered result");
+		console.log(result);
+		if(result === []){
+			MovieList.findOneAndUpdate(
+				{ movieId: req.body.movieId },
+				{
+					$push: {
+						$movieId: req.body.similarId
+					}
+				},
+				options = { upsert: true, new: true, setDefaultsOnInsert: true },
+			).then(function(result) {
+				res.json(result);
+			}).catch(function(err) {
+				res.json(err);
+			});
+		}
+	});
+});
+
 // Findoneandupdate for movielist.
 app.post("/movie", function (req, res) {
 	console.log(req.body);

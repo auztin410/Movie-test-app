@@ -15,7 +15,8 @@ class Home extends Component {
 			year: '',
 		}
 		this.handleChange = this.handleChange.bind(this);
-		this.handleSearch = this.handleSearch.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
+        this.handleAddToSimilar = this.handleAddToSimilar.bind(this);
 	}
 
 	componentDidMount() {
@@ -66,7 +67,20 @@ class Home extends Component {
                 });
             }
         });
-	};
+    };
+    
+    handleAddToSimilar() {
+        axios.post("/add/similar/", {
+            movieId: this.state.random.movieId,
+            similarId: this.state.search.data.movieId,
+            userId: this.props.user._id,
+        }).catch((err) => {
+            console.log(err);
+        });
+        console.log(`Movie Id: ${this.state.random.movieId}`);
+        console.log(`Similar Id: ${this.state.search.data.imdbID}`);
+        console.log(`User Id: ${this.props.user._id}`);
+    };
 	
 	handleUpVote(movieId) {
 		console.log(`Up Voting: ${movieId}`);
@@ -74,7 +88,7 @@ class Home extends Component {
 
 	handleDownVote(movieId) {
 		console.log(`Down Voting: ${movieId}`);
-	};
+    };
 
 	render() {
 		if(!this.state.random) {
@@ -261,6 +275,7 @@ class Home extends Component {
 					<div>
 					<img height="100px" width="50px" src={this.state.search.data.Poster} alt="moviePoster"/>
 					<h4>{this.state.search.data.Title}</h4>
+                    <button onClick={this.handleAddToSimilar}>Add to Similar List</button>
 					</div>
 					}
 
