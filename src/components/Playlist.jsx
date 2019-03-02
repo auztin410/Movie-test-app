@@ -116,7 +116,7 @@ class Playlist extends Component {
             res.data.map(item => (
                 array.push(item.movie),
                 directorsArray.push(item.movie.directed),
-                genresArray.push(item.movie.genre.split(",")),
+                genresArray.push(item.movie.genre.split(",").map(item2 => item2.trim())),
                 runTimesArray.push(item.movie.runtime),
                 ratingsArray.push(item.movie.rating)
             ));
