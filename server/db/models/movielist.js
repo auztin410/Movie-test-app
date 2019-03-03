@@ -44,7 +44,7 @@ var MovieListSchema = new Schema({
         type: String
     },
     similar: {
-        type: Array
+        type: [{ type: Schema.Types.ObjectId, ref: "SimilarMovieList"}]
     }
 
 });
