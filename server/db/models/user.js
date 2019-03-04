@@ -11,20 +11,8 @@ const userSchema = new Schema({
 		username: { type: String, unique: false, required: false },
 		password: { type: String, unique: false, required: false }
 	},
-	// google: {
-	// 	googleId: { type: String, required: false }
-	// },
 	movieId: { type: Array},
-	// local: {
-	// 	email: { type: String, unique: true },
-	// 	password: { type: String }
-	// },
-	// google: {
-	// 	id: { type: String },
-	// 	photos: []
-	// },
-	// firstName: { type: String },
-	// lastName: { type: String }
+	rated: { type: Array},
 })
 
 // Define schema methods

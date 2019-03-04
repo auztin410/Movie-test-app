@@ -70,16 +70,33 @@ class Home extends Component {
     };
     
     handleAddToSimilar() {
-        axios.post("/add/similar/", {
-            movieId: this.state.random.movieId,
-            similarId: this.state.search.data.movieId,
-            userId: this.props.user._id,
-        }).catch((err) => {
-            console.log(err);
-        });
-        console.log(`Movie Id: ${this.state.random.movieId}`);
-        console.log(`Similar Id: ${this.state.search.data.imdbID}`);
-        console.log(`User Id: ${this.props.user._id}`);
+        console.log(this.props.user._id);
+        axios.post("/movie/", {
+            movieId: this.state.search.data.imdbID,
+            title: this.state.search.data.Title,
+            release: this.state.search.data.Released,
+            rating: this.state.search.data.Rated,
+            runtime: this.state.search.data.Runtime,
+            directed: this.state.search.data.Director,
+            actors: this.state.search.data.Actors,
+            plot: this.state.search.data.Plot,
+            awards: this.state.search.data.Awards,
+            metaScore: this.state.search.data.Metascore,
+            imdbRating: this.state.search.data.imdbRating,
+            poster: this.state.search.data.Poster,
+            genre: this.state.search.data.Genre,
+        }).then((res) => {
+            console.log("results from findoneandupdate")
+            console.log(res);
+            return axios.post("/add/similar/", {
+                movie: res.data._id,
+                similarId: this.state.random.movieId,
+                userId: this.props.user._id,
+            }).catch((err) => {
+                console.log(err);
+            });
+        })
+
     };
 	
 	handleUpVote(movieId) {

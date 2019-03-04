@@ -71,6 +71,7 @@ var Playlist = require('./db/models/playlist');
 var PlaylistMovies = require('./db/models/playlist-movies');
 var Autocomplete = require('./db/models/autocomplete');
 var Voting = require('./db/models/voting');
+var SimilarMovieList = require('./db/models/similar-movie-list');
 
 
 
@@ -164,27 +165,17 @@ app.delete("/movie/:movie/:id/", function (req, res) {
 
 // Add a Similar Movie to a movie
 app.post("/add/similar", function (req, res) {
-	MovieList.find(
-		{ movieId: req.body.movieId, similar: req.body.similarId }
-	).then(function (result) {
-		console.log("Triggered result");
-		console.log(result);
-		if(result === []){
-			MovieList.findOneAndUpdate(
-				{ movieId: req.body.movieId },
-				{
-					$push: {
-						$movieId: req.body.similarId
-					}
-				},
-				options = { upsert: true, new: true, setDefaultsOnInsert: true },
-			).then(function(result) {
-				res.json(result);
-			}).catch(function(err) {
-				res.json(err);
-			});
+	console.log(req.body.userId);
+	SimilarMovieList.create(
+		{
+			movie: new mongoose.mongo.ObjectID(req.body.movie),
+			similarId: req.body.similarId,
+			upVote: 1,
+			downVote: 0,
+			userIds: req.body.userId
 		}
-	});
+	).then(dbItem => res.json(dbItem))
+	.catch((err) => res.json(err));
 });
 
 // Findoneandupdate for movielist.
